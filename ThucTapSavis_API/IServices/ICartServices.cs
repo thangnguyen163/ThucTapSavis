@@ -1,6 +1,13 @@
-﻿namespace ThucTapSavis_API.IServices
+﻿using ThucTapSavis_Shared.Models;
+
+namespace ThucTapSavis_API.IServices
 {
     public interface ICartServices
     {
+        public Task<Cart> AddCart(Cart Cart);
+        public Task<Cart> UpdateCart(Cart Cart);
+        public Task<bool> DeleteCart(Guid Id);
+        public Task<List<Cart>> GetAllCart();
+       
     }
 }
