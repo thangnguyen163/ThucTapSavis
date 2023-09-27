@@ -4,8 +4,10 @@ namespace ThucTapSavis_API.IServices
 {
     public interface IBillItemServies
     {
-        // Thang an cut
-        Task<BillItem> AddBillItem (BillItem item); 
-        // Thang an cut x2
+        public Task<BillItem> AddBillItem (BillItem billItem); 
+        public Task<BillItem> UpdateBillItem (BillItem billItem); 
+        public Task<bool> DeleteBillItem (Guid Id); 
+        public Task<List<BillItem>> GetAllBillItem (); 
+        public Task<List<BillItem>> GetAllBillItemByBill (Guid Id); 
     }
 }
