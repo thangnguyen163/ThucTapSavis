@@ -9,5 +9,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<bool> DeleteUser(Guid Id);
 		public Task<List<User>> GetAllUser();
 		public Task<List<User>> GetAllUserById(Guid Id);
+		public Task<User> GetUserById(Guid Id);
 	}
 }

@@ -49,7 +49,11 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			var a = await context.Roles.ToListAsync();
 			return a;
 		}
-
+		public async Task<Role> GetRoleById(Guid Id)
+		{
+			var x = await context.Roles.FirstOrDefaultAsync(c => c.Id == Id);
+			return x;
+		}
 		public async Task<List<Role>> GetAllRoleById(Guid Id)
 		{
 			var x = await context.Roles.Where(c => c.Id == Id).ToListAsync();

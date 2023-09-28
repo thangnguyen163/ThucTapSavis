@@ -49,7 +49,11 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			var a = await context.Users.ToListAsync();
 			return a;
 		}
-
+		public async Task<User> GetUserById(Guid Id)
+		{
+			var x = await context.Users.FirstOrDefaultAsync(c => c.Id == Id);
+			return x;
+		}
 		public async Task<List<User>> GetAllUserById(Guid Id)
 		{
 			var x = await context.Users.Where(c => c.Id == Id).ToListAsync();
@@ -64,6 +68,10 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 		//public string NumberPhone { get; set; }
 		//public bool Sex { get; set; }
 		//public int Status { get; set; }
+		//public string Tinh { get; set; }
+		//public string Huyen { get; set; }
+		//public string Xa { get; set; }
+		//public string DiaChiCuThe { get; set; }
 		public async Task<User> UpdateUser(User User)
 		{
 			try
@@ -75,6 +83,10 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				a.Password = User.Password;
 				a.Email = User.Email;
 				a.NumberPhone = User.NumberPhone;
+				a.Tinh = User.Tinh;
+				a.Huyen = User.Huyen;
+				a.Xa = User.Xa;
+				a.DiaChiCuThe = User.DiaChiCuThe;
 				a.Sex = User.Sex;
 				a.Status = User.Status;
 				context.Users.Update(a);

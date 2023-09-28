@@ -55,6 +55,13 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			var x = await context.ProductItems.Where(c=>c.Id ==Id).ToListAsync();
 			return x;
 		}
+
+		public async Task<ProductItem> GetProductItemById(Guid Id)
+		{
+			var x = await context.ProductItems.FirstOrDefaultAsync(c=>c.Id == Id);
+			return x;
+		}
+
 		//public Guid Id { get; set; }
 		//public Guid ProductId { get; set; }
 		//public Guid ColorId { get; set; }
