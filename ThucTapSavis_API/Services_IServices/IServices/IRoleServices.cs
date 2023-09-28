@@ -9,5 +9,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<bool> DeleteRole(Guid Id);
 		public Task<List<Role>> GetAllRole();
 		public Task<List<Role>> GetAllRoleById(Guid Id);
+		public Task<Role> GetRoleById(Guid Id);
 	}
 }

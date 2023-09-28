@@ -9,5 +9,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<bool> DeletePromotionItem(Guid Id);
 		public Task<List<PromotionItem>> GetAllPromotionItem();
 		public Task<List<PromotionItem>> GetAllPromotionItemById(Guid Id);
+		public Task<PromotionItem> GetPromotionItemById(Guid Id);
 	}
 }

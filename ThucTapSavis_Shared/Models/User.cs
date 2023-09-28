@@ -16,7 +16,11 @@ namespace ThucTapSavis_Shared.Models
         public string Email { get; set; } 
         public string NumberPhone { get; set; } 
         public bool Sex { get; set; }
-        public int Status { get; set; }
+		public string Tinh { get; set; }
+		public string Huyen { get; set; }
+		public string Xa { get; set; }
+		public string DiaChiCuThe { get; set; }
+		public int Status { get; set; }
 
         public Cart Cart { get; set; }
         public virtual ICollection<Bill> Bills { get; set; }

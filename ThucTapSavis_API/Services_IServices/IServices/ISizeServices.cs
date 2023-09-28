@@ -9,5 +9,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<bool> DeleteSize(Guid Id);
 		public Task<List<Size>> GetAllSize();
 		public Task<List<Size>> GetAllSizeById(Guid Id);
+		public Task<Size> GetSizeById(Guid Id);
 	}
 }

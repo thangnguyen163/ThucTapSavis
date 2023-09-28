@@ -49,7 +49,11 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			var a = await context.Sizes.ToListAsync();
 			return a;
 		}
-
+		public async Task<Size> GetSizeById(Guid Id)
+		{
+			var x = await context.Sizes.FirstOrDefaultAsync(c => c.Id == Id);
+			return x;
+		}
 		public async Task<List<Size>> GetAllSizeById(Guid Id)
 		{
 			var x = await context.Sizes.Where(c => c.Id == Id).ToListAsync();
