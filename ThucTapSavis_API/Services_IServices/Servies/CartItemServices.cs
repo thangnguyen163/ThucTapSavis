@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ThucTapSavis_API.Data;
-using ThucTapSavis_API.IServices;
+using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
 
-namespace ThucTapSavis_API.Servies
+namespace ThucTapSavis_API.Services_IServices.Servies
 {
     public class CartItemServices : ICartItemServices
     {
