@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ThucTapSavis_Shared.ViewModel
 {
-    public class Bill_ViewModel
+    public class Bill_VM
     {
     }
 }
