@@ -59,6 +59,12 @@ namespace ThucTapSavis_API.Services_IServices.Servies
             throw new NotImplementedException();
         }
 
+        public async Task<CartItem> GetAllCartItemById(Guid Id)
+        {
+            var a = await context.CartItems.FirstOrDefaultAsync(a => Id == Id);
+            return a;
+        }
+
         public async Task<CartItem> UpdateCartItem(CartItem CartItem)
         {
             try

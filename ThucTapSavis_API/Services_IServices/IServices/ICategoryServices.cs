@@ -8,6 +8,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
         public Task<Category> UpdateCategory(Category Category);
         public Task<bool> DeleteCategory(Guid Id);
         public Task<List<Category>> GetAllCategory();
-        public Task<List<Category>> GetAllCategoryById(Guid Id);
+        public Task<Category> GetAllCategoryById(Guid Id);
     }
 }

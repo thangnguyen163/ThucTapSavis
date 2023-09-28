@@ -47,7 +47,13 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			return a;
 		}
 
-		public async Task<List<Bill>> GetAllBillByUser(Guid Id)
+        public async Task<Bill> GetAllBillById(Guid Id)
+        {
+			var a = await context.Bills.FirstOrDefaultAsync(a => Id == Id);
+			return a;
+		}
+
+        public async Task<List<Bill>> GetAllBillByUser(Guid Id)
 		{
 			var a = await context.Bills.Where(x => x.UserId == Id).ToListAsync();
 			return a;
@@ -62,6 +68,13 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				a.Note = bill.Note;
 				a.CreateDate = bill.CreateDate;
 				a.TotalAmount = bill.TotalAmount;
+				a.DiaChiCuThe= bill.DiaChiCuThe;
+				a.Tinh = bill.Tinh;
+				a.Huyen = bill.Huyen;
+				a.Xa = bill.Xa;
+				a.SDTNhan = bill.SDTNhan;
+				a.TenNguoiNhan= bill.TenNguoiNhan;
+				context.Bills.Update(a);
 				context.SaveChanges();
 				return a;
 			}

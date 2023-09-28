@@ -26,6 +26,12 @@ namespace ThucTapSavis_API.Controllers
             var a = await _billItemServies.GetAllBillItemByBill(Id);
             return Ok(a);
         }
+        [HttpGet("get_billitem_by_id")]
+        public async Task<IActionResult> GetBillItemById(Guid Id)
+        {
+            var a = await _billItemServies.GetAllBillItemById(Id);
+            return Ok(a);
+        }
         [HttpPost("add_billitem")]
         public async Task<IActionResult> AddBillItem(BillItem billItem)
         {

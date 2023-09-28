@@ -8,6 +8,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<Color> UpdateColor(Color color);
 		public Task<bool> DeleteColor(Guid Id);
 		public Task<List<Color>> GetAllColor();
-		public Task<List<Color>> GetAllColorById(Guid Id);
+		public Task<Color> GetAllColorById(Guid Id);
 	}
 }

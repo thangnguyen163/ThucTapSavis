@@ -20,6 +20,12 @@ namespace ThucTapSavis_API.Controllers
             var a = await colorServices.GetAllColor();
             return Ok(a);
         }
+        [HttpGet("get_color_by_id")]
+        public async Task<IActionResult> GetColorById(Guid Id)
+        {
+            var a = await colorServices.GetAllColorById(Id);
+            return Ok(a);
+        }
         [HttpPost("add_color")]
         public async Task<IActionResult> AddColor(Color color)
         {

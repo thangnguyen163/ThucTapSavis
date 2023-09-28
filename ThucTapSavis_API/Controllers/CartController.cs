@@ -20,6 +20,12 @@ namespace ThucTapSavis_API.Controllers
             var a = await cartServices.GetAllCart();
             return Ok(a);
         }
+        [HttpGet("get_cart_by_id")]
+        public async Task<IActionResult> GetCartById(Guid Id)
+        {
+            var a = await cartServices.GetCartById(Id);
+            return Ok(a);
+        }
         [HttpPost("add_cart")]
         public async Task<IActionResult> AddCart(Cart cart)
         {

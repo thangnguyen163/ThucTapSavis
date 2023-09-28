@@ -49,9 +49,10 @@ namespace ThucTapSavis_API.Services_IServices.Servies
             return a;
         }
 
-        public Task<List<Category>> GetAllCategoryById(Guid Id)
+        public async Task<Category> GetAllCategoryById(Guid Id)
         {
-            throw new NotImplementedException();
+            var a = await context.Categories.FirstOrDefaultAsync(a => Id == Id);
+            return a;
         }
 
         public async Task<Category> UpdateCategory(Category Category)
@@ -70,5 +71,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
                 return null;
             }
         }
+
+
     }
 }

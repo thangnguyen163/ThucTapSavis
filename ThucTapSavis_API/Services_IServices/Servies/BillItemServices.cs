@@ -56,6 +56,12 @@ namespace ThucTapSavis_API.Services_IServices.Servies
             return a;
         }
 
+        public async Task<BillItem>GetAllBillItemById(Guid Id)
+        {
+            var a = await context.BillItems.FirstOrDefaultAsync(a=>Id == Id);
+            return a;
+        }
+
         public async Task<BillItem> UpdateBillItem(BillItem billItem)
         {
             try
