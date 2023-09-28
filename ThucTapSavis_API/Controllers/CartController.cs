@@ -1,12 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ThucTapSavis_API.Services_IServices.IServices;
+using ThucTapSavis_Shared.Models;
 
 namespace ThucTapSavis_API.Controllers
 {
-    public class CartController : Controller
+    [Route("api/cart")]
+    [ApiController]
+    public class CartController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly ICartServices cartServices;
+        public CartController(ICartServices _cartServices)
         {
-            return View();
+            cartServices = _cartServices;
+        }
+        [HttpGet("get_cart")]
+        public async Task<IActionResult> Get()
+        {
+            var a = await cartServices.GetAllCart();
+            return Ok(a);
+        }
+        [HttpPost("add_cart")]
+        public async Task<IActionResult> AddCart(Cart cart)
+        {
+            var a = await cartServices.AddCart(cart);
+            return Ok(a);
+        }
+        [HttpPut("put_cart")]
+        public async Task<IActionResult> UpdateCart(Cart cart)
+        {
+            var a = await cartServices.UpdateCart(cart);
+            return Ok(a);
+        }
+        [HttpDelete("delete_cart")]
+        public async Task<IActionResult> DeleteCart(Guid Id)
+        {
+            var a = await cartServices.DeleteCart(Id);
+            return Ok();
         }
     }
 }
