@@ -1,12 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ThucTapSavis_API.Services_IServices.IServices;
+using ThucTapSavis_Shared.Models;
 
 namespace ThucTapSavis_API.Controllers
 {
-    public class ColorController : Controller
+    [Route("api/color")]
+    [ApiController]
+    public class ColorController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IColorServices colorServices;
+        public ColorController(IColorServices _colorServices)
         {
-            return View();
+            colorServices = _colorServices;
+        }
+        [HttpGet("get_color")]
+        public async Task<IActionResult> Get()
+        {
+            var a = await colorServices.GetAllColor();
+            return Ok(a);
+        }
+        [HttpPost("add_color")]
+        public async Task<IActionResult> AddColor(Color color)
+        {
+            var a = await colorServices.AddColor(color);
+            return Ok(a);
+        }
+        [HttpPut("put_color")]
+        public async Task<IActionResult> UpdateColor(Color color)
+        {
+            var a = await colorServices.UpdateColor(color);
+            return Ok(a);
+        }
+        [HttpDelete("delete_color")]
+        public async Task<IActionResult> DeleteColor(Guid Id)
+        {
+            var a = await colorServices.DeleteColor(Id);
+            return Ok();
         }
     }
 }

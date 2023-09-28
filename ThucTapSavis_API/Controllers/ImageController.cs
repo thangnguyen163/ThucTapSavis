@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ThucTapSavis_API.Controllers
 {
-    public class ImageController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ImageController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //[HttpGet("get_")]
+        //[HttpPost("add_")]
+        //[HttpPut("update_")]
+        //[HttpDelete("delete_")]
     }
 }

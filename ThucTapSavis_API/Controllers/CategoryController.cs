@@ -1,12 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ThucTapSavis_API.Services_IServices.IServices;
+using ThucTapSavis_Shared.Models;
 
 namespace ThucTapSavis_API.Controllers
 {
-    public class CategoryController : Controller
+    [Route("api/category")]
+    [ApiController]
+    public class CategoryController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly ICategoryServices CategoryServices;
+        public CategoryController(ICategoryServices _CategoryServices)
         {
-            return View();
+            CategoryServices = _CategoryServices;
         }
+        [HttpGet("get_category")]
+        public async Task<IActionResult> Get()
+        {
+            var a = await CategoryServices.GetAllCategory();
+            return Ok(a);
+        }
+        [HttpPost("add_category")]
+        public async Task<IActionResult> AddCategory(Category category)
+        {
+            var a = await CategoryServices.AddCategory(category);
+            return Ok(a);
+        }
+        [HttpPut("put_category")]
+        public async Task<IActionResult> UpdateCategory(Category category)
+        {
+            var a = await CategoryServices.UpdateCategory(category);
+            return Ok(a);
+        }
+        [HttpDelete("delete_category")]
+        public async Task<IActionResult> DeleteCategory(Guid Id)
+        {
+            var a = await CategoryServices.DeleteCategory(Id);
+            return Ok();
+        }   
     }
 }

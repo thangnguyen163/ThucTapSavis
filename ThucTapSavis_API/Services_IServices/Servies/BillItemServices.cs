@@ -50,9 +50,10 @@ namespace ThucTapSavis_API.Services_IServices.Servies
             return a;
         }
 
-        public Task<List<BillItem>> GetAllBillItemByBill(Guid Id)
+        public async Task<List<BillItem>> GetAllBillItemByBill(Guid Id)
         {
-            throw new NotImplementedException();
+            var a = await context.BillItems.Where(b => b.Id == Id).ToListAsync();
+            return a;
         }
 
         public async Task<BillItem> UpdateBillItem(BillItem billItem)
