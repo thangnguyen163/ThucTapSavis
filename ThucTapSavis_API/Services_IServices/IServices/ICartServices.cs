@@ -1,6 +1,6 @@
 ﻿using ThucTapSavis_Shared.Models;
 
-namespace ThucTapSavis_API.IServices
+namespace ThucTapSavis_API.Services_IServices.IServices
 {
     public interface ICartServices
     {
@@ -8,6 +8,6 @@ namespace ThucTapSavis_API.IServices
         public Task<Cart> UpdateCart(Cart Cart);
         public Task<bool> DeleteCart(Guid Id);
         public Task<List<Cart>> GetAllCart();
-       
+
     }
 }

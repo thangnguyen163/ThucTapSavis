@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ThucTapSavis_API.Data;
-using ThucTapSavis_API.IServices;
+using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
 
-namespace ThucTapSavis_API.Servies
+namespace ThucTapSavis_API.Services_IServices.Servies
 {
     public class BillItemServices : IBillItemServies
     {
@@ -60,10 +60,10 @@ namespace ThucTapSavis_API.Servies
             try
             {
                 var a = await context.BillItems.FindAsync(billItem.Id);
-                a.ProductItemsId=billItem.ProductItemsId;
-                a.BillId=billItem.BillId;
-                a.Quantity=billItem.Quantity;
-                a.Status=billItem.Status;
+                a.ProductItemsId = billItem.ProductItemsId;
+                a.BillId = billItem.BillId;
+                a.Quantity = billItem.Quantity;
+                a.Status = billItem.Status;
                 context.BillItems.Update(a);
                 context.SaveChanges();
                 return a;

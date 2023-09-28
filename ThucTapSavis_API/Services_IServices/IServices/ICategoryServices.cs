@@ -1,6 +1,6 @@
 ﻿using ThucTapSavis_Shared.Models;
 
-namespace ThucTapSavis_API.IServices
+namespace ThucTapSavis_API.Services_IServices.IServices
 {
     public interface ICategoryServices
     {
