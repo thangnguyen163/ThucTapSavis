@@ -1,4 +1,5 @@
-﻿using ThucTapSavis_API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ThucTapSavis_API.Data;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
 
@@ -46,7 +47,13 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			throw new NotImplementedException();
 		}
 
-		public async Task<Cart> UpdateCart(Cart Cart)
+        public async Task<Cart> GetCartById(Guid Id)
+        {
+			var a = await context.Carts.FirstOrDefaultAsync(a => Id == Id);
+			return a;
+		}
+
+        public async Task<Cart> UpdateCart(Cart Cart)
 		{
 			try
 			{

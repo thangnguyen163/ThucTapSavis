@@ -8,6 +8,7 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<Bill> UpdateBill(Bill bill);
 		public Task<bool> DeleteBill(Guid Id);
 		public Task<List<Bill>> GetAllBill();
+		public Task<Bill> GetAllBillById(Guid Id);
 		public Task<List<Bill>> GetAllBillByUser(Guid Id);
 	}
 }

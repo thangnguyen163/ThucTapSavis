@@ -8,6 +8,7 @@ namespace ThucTapSavis_API.Services_IServices.IServices
         public Task<Image> UpdateImage(Image image);
         public Task<bool> DeleteImage(Guid Id);
         public Task<List<Image>> GetAllImage();
-        public Task<List<Image>> GetAllImageById(Guid Id);
+        public Task<Image> GetAllImageById(Guid Id);
+        public Task<List<Image>> GetAllImageByProduct(Guid Id);
     }
 }

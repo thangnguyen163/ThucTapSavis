@@ -47,9 +47,16 @@ namespace ThucTapSavis_API.Services_IServices.Servies
             return a;
         }
 
-        public Task<List<Image>> GetAllImageById(Guid Id)
+        public async Task<Image> GetAllImageById(Guid Id)
         {
-            throw new NotImplementedException();
+            var a = await context.Images.FirstOrDefaultAsync(a => Id == Id);
+            return a;
+        }
+
+        public async Task<List<Image>> GetAllImageByProduct(Guid Id)
+        {
+            var a = await context.Images.Where(x => x.ProductItemId == Id).ToListAsync();
+            return a;
         }
 
         public async Task<Image> UpdateImage(Image image)
@@ -70,5 +77,6 @@ namespace ThucTapSavis_API.Services_IServices.Servies
                 return null;
             }
         }
+
     }
 }

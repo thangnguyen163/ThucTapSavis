@@ -48,9 +48,10 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			return a;
 		}
 
-		public Task<List<Color>> GetAllColorById(Guid Id)
+		public async Task<Color> GetAllColorById(Guid Id)
 		{
-			throw new NotImplementedException();
+			var a = await context.Colors.FirstOrDefaultAsync(a => Id == Id);
+			return a;
 		}
 
 		public async Task<Color> UpdateColor(Color color)
