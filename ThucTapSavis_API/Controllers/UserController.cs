@@ -17,7 +17,7 @@ namespace ThucTapSavis_API.Controllers
 			_User = User;
 		}
 
-		[HttpGet]
+		[HttpGet("get-user")]
 		public async Task<List<User>> GetAllUser()
 		{
 			var User = await _User.GetAllUser();
@@ -42,7 +42,7 @@ namespace ThucTapSavis_API.Controllers
 		//public string Huyen { get; set; }
 		//public string Xa { get; set; }
 		//public string DiaChiCuThe { get; set; }
-		[HttpPost("Add")]
+		[HttpPost("add-user")]
 		public async Task<ActionResult<User>> PostUser(User_VM rvm)
 		{
 			User User = new User();
@@ -62,7 +62,7 @@ namespace ThucTapSavis_API.Controllers
 			await _User.AddUser(User);
 			return Ok();
 		}
-		[HttpPut("update")]
+		[HttpPut("update-user")]
 		public async Task<ActionResult<User>> PutUser(User_VM rvm)
 		{
 			User User = await _User.GetUserById(rvm.Id);
@@ -81,7 +81,7 @@ namespace ThucTapSavis_API.Controllers
 			await _User.UpdateUser(User);
 			return Ok();
 		}
-		[HttpDelete("Id")]
+		[HttpDelete("delete-user")]
 		public async Task<ActionResult<User>> Delete(Guid id)
 		{
 			await _User.DeleteUser(id);
