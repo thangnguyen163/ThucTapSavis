@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThucTapSavis_Shared", "ThucTapSavis_Shared\ThucTapSavis_Shared.csproj", "{AF672F94-955E-4DB3-A0BD-EDD1209D86FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThucTapSavis_Shared", "ThucTapSavis_Shared\ThucTapSavis_Shared.csproj", "{AF672F94-955E-4DB3-A0BD-EDD1209D86FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThucTapSavis_API", "ThucTapSavis_API\ThucTapSavis_API.csproj", "{019EB58B-CF2C-4D96-B5BF-D35C6FD8254C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThucTapSavis_API", "ThucTapSavis_API\ThucTapSavis_API.csproj", "{019EB58B-CF2C-4D96-B5BF-D35C6FD8254C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThucTapSavis_Client", "ThucTapSavis_Client\ThucTapSavis_Client.csproj", "{C2C38396-3DE7-4E25-880F-E533895F7F0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThucTapSavis_Client", "ThucTapSavis_Client\ThucTapSavis_Client.csproj", "{C2C38396-3DE7-4E25-880F-E533895F7F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
