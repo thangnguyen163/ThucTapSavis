@@ -32,7 +32,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await CategoryServices.AddCategory(category);
             return Ok(a);
         }
-        [HttpPut("put_category")]
+        [HttpPut("update_category")]
         public async Task<IActionResult> UpdateCategory(Category category)
         {
             var a = await CategoryServices.UpdateCategory(category);

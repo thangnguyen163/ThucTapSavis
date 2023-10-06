@@ -32,7 +32,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await colorServices.AddColor(color);
             return Ok(a);
         }
-        [HttpPut("put_color")]
+        [HttpPut("update_color")]
         public async Task<IActionResult> UpdateColor(Color color)
         {
             var a = await colorServices.UpdateColor(color);

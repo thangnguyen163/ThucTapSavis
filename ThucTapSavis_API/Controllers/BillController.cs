@@ -38,7 +38,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await _billServices.AddBill(bill);
             return Ok(a);
         }
-        [HttpPut("put_bill")]
+        [HttpPut("update_bill")]
         public async Task<IActionResult> UpdateBill(Bill bill)
         {
             var a = await _billServices.UpdateBill(bill);

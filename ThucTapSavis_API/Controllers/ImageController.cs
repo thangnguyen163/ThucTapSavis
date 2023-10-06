@@ -38,7 +38,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await ImageServices.AddImage(Image);
             return Ok(a);
         }
-        [HttpPut("put_Image")]
+        [HttpPut("update_Image")]
         public async Task<IActionResult> UpdateImage(Image Image)
         {
             var a = await ImageServices.UpdateImage(Image);
