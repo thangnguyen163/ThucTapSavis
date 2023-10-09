@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Controllers
 {
@@ -33,15 +34,27 @@ namespace ThucTapSavis_API.Controllers
             return Ok(a);
         }
         [HttpPost("add_Image")]
-        public async Task<IActionResult> AddImage(Image Image)
+        public async Task<IActionResult> AddImage(Image_VM Image)
         {
-            var a = await ImageServices.AddImage(Image);
+            Image image = new Image();
+            image.Id=Image.Id;
+            image.Name=Image.Name;
+            image.Status=Image.Status;
+            image.PathImage=Image.PathImage;
+            image.ProductItemId=Image.ProductItemId;
+            
+            var a = await ImageServices.AddImage(image);
             return Ok(a);
         }
         [HttpPut("update_Image")]
-        public async Task<IActionResult> UpdateImage(Image Image)
+        public async Task<IActionResult> UpdateImage(Image_VM Image)
         {
-            var a = await ImageServices.UpdateImage(Image);
+            Image image = new Image();
+            image.Name = Image.Name;
+            image.Status = Image.Status;
+            image.PathImage = Image.PathImage;
+            image.ProductItemId = Image.ProductItemId;
+            var a = await ImageServices.UpdateImage(image);
             return Ok(a);
         }
         [HttpDelete("delete_Image")]

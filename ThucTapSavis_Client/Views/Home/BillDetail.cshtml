@@ -1,0 +1,74 @@
+﻿@*@model IEnumerable<Assignment_NET105_Nhom3_Shared.ViewModels.BillDetailsViewModels_Show>*@
+
+<div class="table-wrapper" style="max-height: 500px; overflow-y: scroll;">
+    <div style="margin-top:30px">
+        <h2>Chi tiết hoá đơn </h2>
+    </div>
+
+    <table class="table tablePR" style="font-size: 10pt; text-align: center; overflow-y: scroll; max-height: 700px;">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Size</th>
+                <th scope="col">Color</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody style="font-size: 10pt; text-align: center;line-height: 100px;">
+            @{
+                int count = 1;             
+                decimal total = 0;
+            }
+            @foreach (var a in ViewBag.BillDetails)
+            {
+                <tr>
+                    <th>@(count++)</th>
+
+                    <th>
+                        <a @*href="@Url.Action("Details","Management",new{Id=a.Id})"*@ style="text-decoration:none; color: white">
+                            @*<img style="width:100px;height: 100px;" src="~/images/@a.ProductDetails.Products.Image"  />*@
+                        </a>
+                    </th>
+                    @{
+                        if (@a.ProductName == null || @a.ProductName == ""||@a.ProductName==string.Empty)
+                                {
+                            <th>@a.ComboName</th>
+                        }
+                        else
+                        {
+                            <th>@a.ProductName</th>
+                        }       
+                    }
+                    <th>@a.Size</th>
+                    <th>@a.Color</th>
+                    <th>@a.Quantity</th>
+                    <th>@a.Price</th>
+                    <th>
+                        <a href="@Url.Action("DeleteProduct","Management",new{Id=a.Id})" style="text-decoration:none; color: white">
+                            <button type="button" class="btn btn-danger" style="font-size: 10pt;float: right;margin-top: 40px; ">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </a>
+                        <a href="@Url.Action("EditProduct","Management",new{Id=a.Id})" style="text-decoration:none; color: white">
+                            <button type="button" class="btn btn-warning" style="font-size: 10pt;float: right; margin: 40px 5px;">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </a>
+
+                    </th>
+                    @{
+                            //total+=(a.ProductDetails.Products.Price * a.Quantity);
+                        }
+
+                </tr>
+
+
+            }
+
+        </tbody>
+    </table>
+</div>
