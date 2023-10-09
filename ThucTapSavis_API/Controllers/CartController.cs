@@ -32,7 +32,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await cartServices.AddCart(cart);
             return Ok(a);
         }
-        [HttpPut("put_cart")]
+        [HttpPut("update_cart")]
         public async Task<IActionResult> UpdateCart(Cart cart)
         {
             var a = await cartServices.UpdateCart(cart);
