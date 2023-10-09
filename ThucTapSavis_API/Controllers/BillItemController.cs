@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Controllers
 {
@@ -33,15 +34,28 @@ namespace ThucTapSavis_API.Controllers
             return Ok(a);
         }
         [HttpPost("add_billitem")]
-        public async Task<IActionResult> AddBillItem(BillItem billItem)
+        public async Task<IActionResult> AddBillItem(BillItem_VM billItem)
         {
-            var a = await _billItemServies.AddBillItem(billItem);
+            BillItem billItem1 = new BillItem();
+            billItem1.Id = billItem.Id;
+            billItem1.BillId = billItem.BillId;
+            billItem1.ProductItemsId = billItem.ProductItemsId;
+            billItem1.Status = billItem.Status;
+            billItem1.Quantity = billItem.Quantity;
+            billItem1.Price = billItem.Price;
+            var a = await _billItemServies.AddBillItem(billItem1);
             return Ok(a);
         }
         [HttpPut("update_billitem")]
-        public async Task<IActionResult> UpdateBillItem(BillItem billItem)
+        public async Task<IActionResult> UpdateBillItem(BillItem_VM billItem)
         {
-            var a = await _billItemServies.UpdateBillItem(billItem);
+            BillItem billItem1 = new BillItem();
+            billItem1.BillId = billItem.BillId;
+            billItem1.ProductItemsId = billItem.ProductItemsId;
+            billItem1.Status = billItem.Status;
+            billItem1.Quantity = billItem.Quantity;
+            billItem1.Price = billItem.Price;
+            var a = await _billItemServies.UpdateBillItem(billItem1);
             return Ok(a);
         }
         [HttpDelete("delete_billitem")]
