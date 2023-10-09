@@ -9,7 +9,7 @@ namespace ThucTapSavis_Shared.ViewModel
     public class Bill_VM
     {
         public Guid Id { get; set; }
-        public string NguoiDat { get; set; }
+        public Guid UserId { get; set; }
         public string CreateDate { get; set; }
         public int TotalAmount { get; set; }
         public string Note { get; set; }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Controllers
 {
@@ -27,15 +28,22 @@ namespace ThucTapSavis_API.Controllers
             return Ok(a);
         }
         [HttpPost("add_color")]
-        public async Task<IActionResult> AddColor(Color color)
+        public async Task<IActionResult> AddColor(Color_VM color)
         {
-            var a = await colorServices.AddColor(color);
+            Color color1 = new Color();
+            color1.Id = color.Id;
+            color1.Name = color.Name;
+            color1.Status = color.Status;
+            var a = await colorServices.AddColor(color1);
             return Ok(a);
         }
         [HttpPut("update_color")]
-        public async Task<IActionResult> UpdateColor(Color color)
+        public async Task<IActionResult> UpdateColor(Color_VM color)
         {
-            var a = await colorServices.UpdateColor(color);
+            Color color1 = new Color();
+            color1.Name = color.Name;
+            color1.Status = color.Status;
+            var a = await colorServices.UpdateColor(color1);
             return Ok(a);
         }
         [HttpDelete("delete_color")]

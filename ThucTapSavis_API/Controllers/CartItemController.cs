@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Controllers
 {
@@ -33,15 +34,28 @@ namespace ThucTapSavis_API.Controllers
             return Ok(a);
         }
         [HttpPost("add_cartitem")]
-        public async Task<IActionResult> AddCartItem(CartItem CartItem)
+        public async Task<IActionResult> AddCartItem(CartItem_VM CartItem)
         {
-            var a = await cartItemServies.AddCartItem(CartItem);
+            CartItem cartItem1=new CartItem();
+            cartItem1.Id = CartItem.Id;
+            cartItem1.ProductItemId = CartItem.ProductItemId;
+            cartItem1.UserId= CartItem.UserId;
+            cartItem1.Price = CartItem.Price;
+            cartItem1.Quantity = CartItem.Quantity;
+            cartItem1.Status = CartItem.Status;
+            var a = await cartItemServies.AddCartItem(cartItem1);
             return Ok(a);
         }
         [HttpPut("update_cartitem")]
         public async Task<IActionResult> UpdateCartItem(CartItem CartItem)
         {
-            var a = await cartItemServies.UpdateCartItem(CartItem);
+            CartItem cartItem1 = new CartItem();
+            cartItem1.ProductItemId = CartItem.ProductItemId;
+            cartItem1.UserId = CartItem.UserId;
+            cartItem1.Price = CartItem.Price;
+            cartItem1.Quantity = CartItem.Quantity;
+            cartItem1.Status = CartItem.Status;
+            var a = await cartItemServies.UpdateCartItem(cartItem1);
             return Ok(a);
         }
         [HttpDelete("delete_cartitem")]
