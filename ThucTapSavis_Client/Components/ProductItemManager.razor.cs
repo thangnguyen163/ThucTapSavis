@@ -71,6 +71,7 @@ namespace ThucTapSavis_Client.Components
 				imgTam.PathImage = _file.Name;
 				_pathImg = _file.Name;
 				imgTam.Id = Guid.NewGuid();
+				_idImg_Tam = imgTam.Id;
 				imgTam.Name = "";
 				if (_idPI.ToString() == "00000000-0000-0000-0000-000000000000") imgTam.ProductItemId = _idPI_Tam;
 				else imgTam.ProductItemId = _idPI;
@@ -153,20 +154,30 @@ namespace ThucTapSavis_Client.Components
 		public async Task LoadAnh(Guid id)
 		{
 			_idImg_Tam = id;
-			_pathImg = _lstImg.FirstOrDefault(c => c.Id == id).PathImage;
+			_pathImg = _lstImg_Tam.FirstOrDefault(c => c.Id == id).PathImage;
 			
 		}
-        public string _pop { get; set; }
         public async Task Delete_Img_Tam()
 		{
 			Image_VM imgTam = new Image_VM();
 			//imgTam.Id
-			_lstImg_Tam_Xoa.Add(_lstImg.FirstOrDefault(c => c.Id == _idImg_Tam));
-			_lstImg_Tam.Remove(_lstImg.FirstOrDefault(c => c.Id == _idImg_Tam));
-			_lstImg_Tam_Them.Remove(_lstImg.FirstOrDefault(c => c.Id == _idImg_Tam));
+			if (true)
+			{
+
+			}
+			var imgVuaXoa = _lstImg_Tam.FirstOrDefault(c => c.Id == _idImg_Tam);
+			_lstImg_Tam_Xoa.Add(imgVuaXoa);
+			_lstImg_Tam.Remove(imgVuaXoa);
+			_lstImg_Tam_Them.Remove(imgVuaXoa);
 			_idImg_Tam = _lstImg_Tam.Select(c => c.Id).FirstOrDefault();
-			_pop = _lstImg.Where(c => c.ProductItemId == _idPI).Select(c => c.PathImage).FirstOrDefault();//
-			_pathImg = _lstImg_Tam.Where(c => c.ProductItemId == _idPI).Select(c => c.PathImage).FirstOrDefault();// chưa load ảnh khi xóa tạm
+			if (_idPI.ToString()!= "00000000-0000-0000-0000-000000000000")
+			{
+				_pathImg = _lstImg_Tam.Where(c => c.ProductItemId == _idPI).Select(c => c.PathImage).FirstOrDefault();
+			}
+			else {
+				_pathImg = _lstImg_Tam.Select(c=>c.PathImage).FirstOrDefault();
+			}
+			// chưa load ảnh khi xóa tạm
 		}
 	}
 }

@@ -160,6 +160,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-md-5">
 		<div class="row">
@@ -170,7 +171,7 @@
 					{
 						foreach (var x in _lstImg_Tam)
 						{
-							<div style="margin-bottom:30px">
+							<div style="margin-bottom:30px;margin-top:30px">
 								<a @onclick="()=>LoadAnh(x.Id)">
 									<img src="/images/@x.PathImage" alt="" style="width: 100px;height: 110px;" />
 								</a>
@@ -183,7 +184,7 @@
 					{
 						foreach (var x in _lstImg_Tam)
 						{
-							<div style="margin-bottom:30px">
+							<div style="margin-bottom:30px;margin-top:30px">
 								<a @onclick="()=>LoadAnh(x.Id)">
 									<img src="/images/@x.PathImage" alt="" style="width: 100px;height: 110px;" />
 								</a>
@@ -194,21 +195,15 @@
 			</div>
 			<div class="col-md-10">
 				<center>
-					@if (_pathImg == null && _idPI.ToString() == "00000000-0000-0000-0000-000000000000")
+					@* @if (_pathImg == null && _idPI.ToString() == "00000000-0000-0000-0000-000000000000")
 					{
-					}
-					else if (_pathImg != null)
-					{
-						<a data-toggle="modal" data-target="#Delete_Img_Tam">
-							<img src="/images/@_pathImg" alt="" style="width:378px;height:416px" />
-						</a>
-					}
-					@* else if (_idPI.ToString() != "00000000-0000-0000-0000-000000000000" && _pop != null)
-					{
-						<a data-toggle="modal" data-target="#Delete_Img_Tam">
-							<img src="/images/@_pop" alt="" style="width:378px;height:416px" />
-						</a>
 					} *@
+					@if (_pathImg != null)
+					{
+						<a data-toggle="modal" data-target="#Delete_Img_Tam">
+							<img src="/images/@_pathImg" alt="" style="width:393.6px;height:433px;margin-top:8.5px" />
+						</a>
+					}
 					else
 					{
 					}
@@ -220,6 +215,7 @@
 	<div class="col-md-7">
 		<EditForm Model="_PI_VM">
 			<div>
+
 				<input @bind-value="_PI_VM.Id" style="display:none" />
 				<h4>Tên sản phẩm</h4>
 				<div style="display:flex">
@@ -297,13 +293,15 @@
 
 
 			</div>
-			<button type="submit" class="btn btn-primary" @onclick="Add_PI">Add</button>
-			<button type="submit" class="btn btn-primary" @onclick="Update_PI">Update</button>
+			<center>
+				<div style="margin-bottom:16.83px">
+					<button type="submit" class="btn btn-primary" @onclick="Add_PI">Add</button>
+					<button type="submit" class="btn btn-primary" @onclick="Update_PI">Update</button>
+				</div>
+			</center>
 		</EditForm>
 	</div>
 </div>
-
-
 
 @if (_lstPrI_show_VM == null)
 {
@@ -330,6 +328,7 @@ else
 			@foreach (var x in _lstPrI_show_VM)
 			{
 				<tr>
+
 					@{
 						var img = _lstImg.Where(c => c.ProductItemId == x.Id).Select(c => c.PathImage).FirstOrDefault();
 						// var img2 = _lstImg.FirstOrDefault(c => c.ProductItemId == x.Id).PathImage;
