@@ -57,7 +57,7 @@
 				<!-- Phần chân của popup -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-					<button type="button" class="btn btn-primary" @onclick="Add_P">Thêm</button>
+					<button type="button" class="btn btn-primary" @onclick="Add_P" data-dismiss="modal">Thêm</button>
 				</div>
 			</EditForm>
 
@@ -85,7 +85,7 @@
 				<!-- Phần chân của popup -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-					<button type="button" class="btn btn-primary" @onclick="Add_Cate">Thêm</button>
+					<button type="button" class="btn btn-primary" @onclick="Add_Cate" data-dismiss="modal">Thêm</button>
 				</div>
 			</EditForm>
 		</div>
@@ -110,7 +110,7 @@
 				<!-- Phần chân của popup -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-					<button type="button" class="btn btn-primary" @onclick="Add_C">Thêm</button>
+					<button type="button" class="btn btn-primary" @onclick="Add_C" data-dismiss="modal">Thêm</button>
 				</div>
 			</EditForm>
 		</div>
@@ -135,7 +135,7 @@
 				<!-- Phần chân của popup -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-					<button type="button" class="btn btn-primary" @onclick="Add_S">Thêm</button>
+					<button type="button" class="btn btn-primary" @onclick="Add_S" data-dismiss="modal">Thêm</button>
 				</div>
 			</EditForm>
 		</div>
@@ -160,7 +160,6 @@
 		</div>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-md-5">
 		<div class="row">
@@ -299,6 +298,58 @@
 					<button type="submit" class="btn btn-primary" @onclick="Update_PI">Update</button>
 				</div>
 			</center>
+		</EditForm>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-9">
+		<EditForm Model="_PM_S_VM">
+			<div class="row">
+				<div class="col-md-3">
+					<InputSelect class="form-select" @bind-Value="_PM_S_VM.CategoryName">
+						<option value="0" selected>--Chọn--</option>
+						@foreach (var x in _lstCate)
+						{
+							<option value="@x.Name">@x.Name</option>
+						}
+					</InputSelect>
+				</div>
+				<div class="col-md-3">
+					<InputSelect class="form-select" @bind-Value="_PM_S_VM.ColorName">
+						<option value="0" selected>--Chọn--</option>
+						@foreach (var x in _lstC)
+						{
+							<option value="@x.Name">@x.Name</option>
+						}
+					</InputSelect>
+				</div>
+				<div class="col-md-3">
+					<InputSelect class="form-select" @bind-Value="_PM_S_VM.SizeName">
+						<option value="0" selected>--Chọn--</option>
+						@foreach (var x in _lstS)
+						{
+							<option value="@x.Name">@x.Name</option>
+						}
+					</InputSelect>
+				</div>
+				<div class="col-md-3">
+					<button type="submit" class="btn btn-primary" @onclick="LocHangLoat">Lọc</button>
+				</div>
+			</div>
+		</EditForm>
+	</div>
+	<div class="col-md-3">
+		<EditForm Model="_PM_S_VM">
+			<div class="row">
+				<div class="col-md-8">
+					<InputText class="form-control" @bind-Value="_PM_S_VM.Name" placeholder="Tìm kiếm theo tên" />
+				</div>
+				<div class="col-md-4">
+					<button type="submit" class="btn btn-primary" @onclick="TimKiem">Tìm kiếm</button>
+				</div>
+			</div>
 		</EditForm>
 	</div>
 </div>

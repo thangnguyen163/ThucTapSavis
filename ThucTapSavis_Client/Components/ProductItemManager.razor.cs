@@ -33,17 +33,18 @@ namespace ThucTapSavis_Client.Components
 		List<Image_VM> _lstImg_Tam = new List<Image_VM>();
 		List<Image_VM> _lstImg_Tam_Them = new List<Image_VM>();
 		List<Image_VM> _lstImg_Tam_Xoa = new List<Image_VM>();
-        public Guid _idPI_Tam { get; set; }
-        public Guid _idImg_Tam { get; set; }
-        //public Guid Id { get; set; }
-        //public Guid ProductId { get; set; }
-        //public Guid ColorId { get; set; }
-        //public Guid SizeId { get; set; }
-        //public int AvaiableQuantity { get; set; }
-        //public int PurchasePrice { get; set; }
-        //public int CostPrice { get; set; }
-        //public int Status { get; set; }
-        protected override async Task OnInitializedAsync()
+		public Guid _idPI_Tam { get; set; }
+		public Guid _idImg_Tam { get; set; }
+		ProductItem_Show_VM _PM_S_VM = new ProductItem_Show_VM();
+		//public Guid Id { get; set; }
+		//public Guid ProductId { get; set; }
+		//public Guid ColorId { get; set; }
+		//public Guid SizeId { get; set; }
+		//public int AvaiableQuantity { get; set; }
+		//public int PurchasePrice { get; set; }
+		//public int CostPrice { get; set; }
+		//public int Status { get; set; }
+		protected override async Task OnInitializedAsync()
 		{
 			_lstP = await _client.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
 			_lstCate = await _client.GetFromJsonAsync<List<Category_VM>>("https://localhost:7264/api/category/get_category");
@@ -78,12 +79,12 @@ namespace ThucTapSavis_Client.Components
 				imgTam.Status = 1;
 				_lstImg_Tam_Them.Add(imgTam);
 				_lstImg_Tam.Add(imgTam);
-			}	
+			}
 		}
 		public async Task Add_PI()
 		{
 			_PI_VM.Id = _idPI_Tam;
-			
+
 
 			await _client.PostAsJsonAsync("https://localhost:7264/api/ProductItem/Add", _PI_VM);
 			foreach (var x in _lstImg_Tam)
@@ -94,7 +95,7 @@ namespace ThucTapSavis_Client.Components
 		}
 		public async Task Update_PI()
 		{
-			var lstbd = _lstImg.Where(c => c.ProductItemId == _idPI).ToList();	
+			var lstbd = _lstImg.Where(c => c.ProductItemId == _idPI).ToList();
 			if (_lstImg_Tam_Them.Count > 0)
 			{
 				foreach (var x in _lstImg_Tam)
@@ -125,7 +126,7 @@ namespace ThucTapSavis_Client.Components
 			_PI_VM.PurchasePrice = pi.PurchasePrice;
 			_PI_VM.CostPrice = pi.CostPrice;
 			_PI_VM.Status = pi.Status;
-			_lstImg_Tam= _lstImg.Where(c => c.ProductItemId == _idPI).ToList();
+			_lstImg_Tam = _lstImg.Where(c => c.ProductItemId == _idPI).ToList();
 			_idImg_Tam = _lstImg_Tam.Select(c => c.Id).FirstOrDefault();
 			_pathImg = _lstImg.Where(c => c.ProductItemId == pi.Id).Select(c => c.PathImage).FirstOrDefault();
 			await JsRuntime.InvokeVoidAsync("OnScrollEvent");
@@ -133,51 +134,70 @@ namespace ThucTapSavis_Client.Components
 		public async Task Add_P()
 		{
 			var x = await _client.PostAsJsonAsync("https://localhost:7264/api/Product/Add", _P_VM);
-			_navigation.NavigateTo("https://localhost:7022/", true);
+			_lstP = await _client.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
 		}
 		public async Task Add_Cate()
 		{
 			var x = await _client.PostAsJsonAsync("https://localhost:7264/api/category/add_category", _Cate_VM);
-			_navigation.NavigateTo("https://localhost:7022/", true);
+			_lstCate = await _client.GetFromJsonAsync<List<Category_VM>>("https://localhost:7264/api/category/get_category");
 		}
 		public async Task Add_C()
 		{
 			var x = await _client.PostAsJsonAsync("https://localhost:7264/api/color/add_color", _C_VM);
-			_navigation.NavigateTo("https://localhost:7022/", true);
+			_lstC = await _client.GetFromJsonAsync<List<Color_VM>>("https://localhost:7264/api/color/get_color");
 		}
 		public async Task Add_S()
 		{
 			var x = await _client.PostAsJsonAsync("https://localhost:7264/api/Size/Add", _S_VM);
-			_navigation.NavigateTo("https://localhost:7022/", true);
+			_lstS = await _client.GetFromJsonAsync<List<Size_VM>>("https://localhost:7264/api/Size/get_size");
 		}
-		
+
 		public async Task LoadAnh(Guid id)
 		{
 			_idImg_Tam = id;
 			_pathImg = _lstImg_Tam.FirstOrDefault(c => c.Id == id).PathImage;
-			
+
 		}
-        public async Task Delete_Img_Tam()
+		public async Task Delete_Img_Tam()
 		{
 			Image_VM imgTam = new Image_VM();
-			//imgTam.Id
-			if (true)
-			{
-
-			}
 			var imgVuaXoa = _lstImg_Tam.FirstOrDefault(c => c.Id == _idImg_Tam);
 			_lstImg_Tam_Xoa.Add(imgVuaXoa);
 			_lstImg_Tam.Remove(imgVuaXoa);
 			_lstImg_Tam_Them.Remove(imgVuaXoa);
 			_idImg_Tam = _lstImg_Tam.Select(c => c.Id).FirstOrDefault();
-			if (_idPI.ToString()!= "00000000-0000-0000-0000-000000000000")
+			if (_idPI.ToString() != "00000000-0000-0000-0000-000000000000")
 			{
 				_pathImg = _lstImg_Tam.Where(c => c.ProductItemId == _idPI).Select(c => c.PathImage).FirstOrDefault();
 			}
-			else {
-				_pathImg = _lstImg_Tam.Select(c=>c.PathImage).FirstOrDefault();
+			else
+			{
+				_pathImg = _lstImg_Tam.Select(c => c.PathImage).FirstOrDefault();
 			}
-			// chưa load ảnh khi xóa tạm
+		}
+		public async Task LocHangLoat()
+		{
+			_lstPrI_show_VM = await _client.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
+
+			_lstPrI_show_VM = _lstPrI_show_VM.Where(c =>
+								(_PM_S_VM.CategoryName == null ||
+								_PM_S_VM.CategoryName == "0" ||
+								c.CategoryName == _PM_S_VM.CategoryName) &&
+								(_PM_S_VM.SizeName == null ||
+								_PM_S_VM.SizeName == "0" ||
+								c.SizeName == _PM_S_VM.SizeName) &&
+								(_PM_S_VM.ColorName == null ||
+								_PM_S_VM.ColorName == "0" ||
+								c.ColorName == _PM_S_VM.ColorName)).ToList();
+		}
+		public async Task TimKiem()
+		{
+			_lstPrI_show_VM = await _client.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
+
+			_lstPrI_show_VM = _lstPrI_show_VM.Where(c =>
+								_PM_S_VM.Name == null ||
+								_PM_S_VM.Name == string.Empty ||
+								c.Name.Trim().ToLower().Contains(_PM_S_VM.Name.Trim().ToLower())).ToList();
 		}
 	}
 }
