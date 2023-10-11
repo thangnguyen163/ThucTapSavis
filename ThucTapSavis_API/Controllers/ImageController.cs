@@ -6,7 +6,7 @@ using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/image")]
     [ApiController]
     public class ImageController : ControllerBase
     {
@@ -57,7 +57,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await ImageServices.UpdateImage(image);
             return Ok(a);
         }
-        [HttpDelete("delete_Image")]
+        [HttpDelete("delete_Image/{Id}")]
         public async Task<IActionResult> DeleteImage(Guid Id)
         {
             var a = await ImageServices.DeleteImage(Id);

@@ -16,7 +16,7 @@ namespace ThucTapSavis_API.Controllers
 			_Size = Size;
 		}
 
-		[HttpGet]
+		[HttpGet("get_size")]
 		public async Task<List<Size>> GetAllSize()
 		{
 			var Size = await _Size.GetAllSize();

@@ -25,4 +25,8 @@
     <ProjectReference Include="..\ThucTapSavis_Shared\ThucTapSavis_Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
