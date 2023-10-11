@@ -22,7 +22,13 @@ namespace ThucTapSavis_API.Controllers
 			var ProductItem = await _ProductItem.GetAllProductItem();
 			return ProductItem;
 		}
-		[HttpGet("{Id}")]
+        [HttpGet("show")]
+        public async Task<List<ProductItem_Show_VM>> GetAllProductItem_Show()
+        {
+            var ProductItem = await _ProductItem.GetAllProductItem_Show();
+            return ProductItem;
+        }
+        [HttpGet("{Id}")]
 		public async Task<ProductItem> GetProductItemById(Guid Id)
 		{
 			var x = await _ProductItem.GetProductItemById(Id);
@@ -40,7 +46,7 @@ namespace ThucTapSavis_API.Controllers
 		public async Task<ActionResult<ProductItem>> PostProductItem(ProductItem_VM rvm)
 		{
 			ProductItem ProductItem = new ProductItem();
-			ProductItem.Id = Guid.NewGuid();
+			ProductItem.Id = rvm.Id;
 			ProductItem.ProductId = rvm.ProductId;
 			ProductItem.ColorId = rvm.ColorId;
 			ProductItem.SizeId = rvm.SizeId;

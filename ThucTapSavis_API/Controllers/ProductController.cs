@@ -16,7 +16,7 @@ namespace ThucTapSavis_API.Controllers
 			_Product = Product;
 		}
 
-		[HttpGet]
+		[HttpGet("get_product")]
 		public async Task<List<Product>> GetAllProduct()
 		{
 			var Product = await _Product.GetAllProduct();

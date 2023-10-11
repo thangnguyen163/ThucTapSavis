@@ -1,4 +1,5 @@
 ﻿using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Services_IServices.IServices
 {
@@ -10,5 +11,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<List<ProductItem>> GetAllProductItem();
 		public Task<List<ProductItem>> GetAllProductItemById(Guid Id);
 		public Task<ProductItem> GetProductItemById(Guid Id);
-	}
+        public Task<List<ProductItem_Show_VM>> GetAllProductItem_Show();
+    }
 }

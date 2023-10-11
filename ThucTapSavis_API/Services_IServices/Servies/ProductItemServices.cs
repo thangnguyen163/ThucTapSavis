@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Net.WebSockets;
 using ThucTapSavis_API.Data;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Services_IServices.Servies
 {
@@ -56,7 +58,46 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			return x;
 		}
 
-		public async Task<ProductItem> GetProductItemById(Guid Id)
+        //public Guid Id { get; set; }
+        //public Guid ProductId { get; set; }
+        //public string Name { get; set; }
+        //public Guid ColorId { get; set; }
+        //public string ColorName { get; set; }
+        //public Guid SizeId { get; set; }
+        //public string SizeName { get; set; }
+        //public Guid CategoryID { get; set; }
+        //public string CategoryName { get; set; }
+        //public int AvaiableQuantity { get; set; }
+        //public int PurchasePrice { get; set; }
+        //public int CostPrice { get; set; }
+        //public int Status { get; set; }
+        public async Task<List<ProductItem_Show_VM>> GetAllProductItem_Show()
+        {
+			var list =  (from prI in await context.ProductItems.ToListAsync()
+						join pr in await context.Products.ToListAsync() on prI.ProductId equals pr.Id
+						join s in await context.Sizes.ToListAsync() on prI.SizeId equals s.Id
+						join c in await context.Colors.ToListAsync() on prI.ColorId equals c.Id
+						join cate in await context.Categories.ToListAsync() on pr.CategoryId equals cate.Id
+						select new ProductItem_Show_VM()
+						{
+							Id = prI.Id,
+							ProductId = prI.ProductId,
+							Name = pr.Name,
+							ColorId = prI.ColorId,
+							ColorName = c.Name,
+							SizeId = prI.SizeId,
+							SizeName = s.Name,
+							CategoryID = pr.CategoryId,
+							CategoryName = cate.Name,
+							AvaiableQuantity = prI.AvaiableQuantity,
+							PurchasePrice = prI.PurchasePrice,
+							CostPrice = prI.CostPrice,
+							Status = prI.Status,
+						}).ToList();
+			return list;
+        }
+
+        public async Task<ProductItem> GetProductItemById(Guid Id)
 		{
 			var x = await context.ProductItems.FirstOrDefaultAsync(c=>c.Id == Id);
 			return x;
