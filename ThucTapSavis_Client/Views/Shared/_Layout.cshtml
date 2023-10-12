@@ -80,5 +80,12 @@
     <base href="~/" />
     <script src="_framework/blazor.server.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+
+	function OnScrollEvent() {
+		document.documentElement.scrollTop = 0;
+	}
+</script>
 </body>
 </html>
