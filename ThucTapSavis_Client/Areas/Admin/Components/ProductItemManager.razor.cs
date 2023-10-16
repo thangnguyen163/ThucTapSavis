@@ -9,7 +9,7 @@ using Microsoft.JSInterop;
 using System;
 using ThucTapSavis_Shared.ViewModel;
 
-namespace ThucTapSavis_Client.Components
+namespace ThucTapSavis_Client.Areas.Admin.Components
 {
 	public partial class ProductItemManager
 	{
@@ -86,33 +86,38 @@ namespace ThucTapSavis_Client.Components
 			_PI_VM.Id = _idPI_Tam;
 
 
-			await _client.PostAsJsonAsync("https://localhost:7264/api/ProductItem/Add", _PI_VM);
-			foreach (var x in _lstImg_Tam)
+			var a = await _client.PostAsJsonAsync("https://localhost:7264/api/ProductItem/Add", _PI_VM);
+			if (a.IsSuccessStatusCode)
 			{
-				await _client.PostAsJsonAsync("https://localhost:7264/api/image/add_Image", x);
-			}
-			_navigation.NavigateTo("https://localhost:7022/", true);
-		}
-		public async Task Update_PI()
-		{
-			var lstbd = _lstImg.Where(c => c.ProductItemId == _idPI).ToList();
-			if (_lstImg_Tam_Them.Count > 0)
-			{
-				foreach (var x in _lstImg_Tam)
+				foreach (var x in _lstImg_Tam_Them)
 				{
 					await _client.PostAsJsonAsync("https://localhost:7264/api/image/add_Image", x);
 				}
+				_navigation.NavigateTo("https://localhost:7022/", true);
 			}
-			if (_lstImg_Tam_Xoa.Count > 0)
+		}
+		public async Task Update_PI()
+		{
+			var a = await _client.PutAsJsonAsync("https://localhost:7264/api/ProductItem/update", _PI_VM);
+			if (a.IsSuccessStatusCode)
 			{
-				foreach (var x in _lstImg_Tam_Xoa)
+				var lstbd = _lstImg.Where(c => c.ProductItemId == _idPI).ToList();
+				if (_lstImg_Tam_Them.Count > 0)
 				{
-					await _client.DeleteAsync($"https://localhost:7264/api/image/delete_Image/{x.Id}");
+					foreach (var x in _lstImg_Tam_Them)
+					{
+						await _client.PostAsJsonAsync("https://localhost:7264/api/image/add_Image", x);
+					}
 				}
+				if (_lstImg_Tam_Xoa.Count > 0)
+				{
+					foreach (var x in _lstImg_Tam_Xoa)
+					{
+						await _client.DeleteAsync($"https://localhost:7264/api/image/delete_Image/{x.Id}");
+					}
+				}
+				_navigation.NavigateTo("https://localhost:7022/", true);
 			}
-
-			await _client.PutAsJsonAsync("https://localhost:7264/api/ProductItem/update", _PI_VM);
-			_navigation.NavigateTo("https://localhost:7022/", true);
 		}
 		public async Task LoadUpdate(ProductItem_Show_VM pi)
 		{
