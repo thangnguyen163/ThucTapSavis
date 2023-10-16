@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
+using ThucTapSavis_Client.Areas.Admin.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<PromotionController, PromotionController>();
 
 var app = builder.Build();
 
@@ -26,6 +28,22 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+
+    endpoints.MapAreaControllerRoute(
+      name: "Admin",
+      areaName: "Admin",
+      pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+    );
+    endpoints.MapAreaControllerRoute(
+      name: "Customer",
+      areaName: "Customer",
+      pattern: "Customer/{controller=Home}/{action=Index}/{id?}"
+    );
+
+
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
