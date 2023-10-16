@@ -28,6 +28,13 @@ namespace ThucTapSavis_API.Controllers
 			var x = await _PromotionItem.GetPromotionItemById(Id);
 			return x;
 		}
+
+		[HttpGet("PromotionItem_By_Promotion/{Id}")]
+		public async Task<List<PromotionItem>> GetAllPromotionItemById(Guid Id)
+		{
+			var x = await _PromotionItem.GetAllPromotionItemById(Id);
+			return x;
+		}
 		//public Guid Id { get; set; }
 		//public Guid PromotionsId { get; set; }
 		//public Guid ProductItemsId { get; set; }
@@ -36,7 +43,7 @@ namespace ThucTapSavis_API.Controllers
 		public async Task<ActionResult<PromotionItem>> PostPromotionItem(PromotionItem_VM rvm)
 		{
 			PromotionItem PromotionItem = new PromotionItem();
-			PromotionItem.Id = Guid.NewGuid();
+			PromotionItem.Id = rvm.Id;
 			PromotionItem.PromotionsId = rvm.PromotionsId;
 			PromotionItem.ProductItemsId = rvm.ProductItemsId;
 			PromotionItem.Status = rvm.Status;

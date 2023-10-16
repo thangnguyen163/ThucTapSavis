@@ -42,15 +42,13 @@ namespace ThucTapSavis_API.Controllers
 		public async Task<ActionResult<Promotion>> PostPromotion(Promotion_VM rvm)
 		{
 			Promotion Promotion = new Promotion();
-			Promotion.Id = Guid.NewGuid();
+			Promotion.Id = rvm.Id;
 			Promotion.Name = rvm.Name;
-			Promotion.Code = rvm.Code;
 			Promotion.Percent = rvm.Percent;
 			Promotion.Quantity = rvm.Quantity;
 			Promotion.StartDate = rvm.StartDate;
 			Promotion.EndDate = rvm.EndDate;
 			Promotion.Description = rvm.Description;
-			Promotion.Discount_Conditions = rvm.Discount_Conditions;
 			Promotion.Status = rvm.Status;
 			await _Promotion.AddPromotion(Promotion);
 			return Ok();
@@ -60,13 +58,11 @@ namespace ThucTapSavis_API.Controllers
 		{
 			Promotion Promotion = await _Promotion.GetPromotionById(rvm.Id);
 			Promotion.Name = rvm.Name;
-			Promotion.Code = rvm.Code;
 			Promotion.Percent = rvm.Percent;
 			Promotion.Quantity = rvm.Quantity;
 			Promotion.StartDate = rvm.StartDate;
 			Promotion.EndDate = rvm.EndDate;
 			Promotion.Description = rvm.Description;
-			Promotion.Discount_Conditions = rvm.Discount_Conditions;
 			Promotion.Status = rvm.Status;
 			await _Promotion.UpdatePromotion(Promotion);
 			return Ok();

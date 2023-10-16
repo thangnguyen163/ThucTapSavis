@@ -75,13 +75,11 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			{
 				var a = await context.Promotions.FindAsync(Promotion.Id);
 				a.Name = Promotion.Name;
-				a.Code = Promotion.Code;
 				a.Percent = Promotion.Percent;
 				a.Quantity = Promotion.Quantity;
 				a.StartDate = Promotion.StartDate;
 				a.EndDate = Promotion.EndDate;
 				a.Description = Promotion.Description;
-				a.Discount_Conditions = Promotion.Discount_Conditions;
 				a.Status = Promotion.Status;
 				context.Promotions.Update(a);
 				context.SaveChanges();
