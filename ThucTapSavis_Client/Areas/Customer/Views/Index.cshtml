@@ -1,10 +1,9 @@
-﻿@using ThucTapSavis_Client.Components;
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
     Layout = @"~/Areas/Admin/Views/Shared/_CustomerLayout.cshtml";
 
 }
-<p>@(await Html.RenderComponentAsync<Test>(RenderMode.Server))</p>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
