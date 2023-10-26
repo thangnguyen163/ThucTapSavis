@@ -12,5 +12,7 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<List<ProductItem>> GetAllProductItemById(Guid Id);
 		public Task<ProductItem> GetProductItemById(Guid Id);
         public Task<List<ProductItem_Show_VM>> GetAllProductItem_Show();
-    }
+		public Task<List<ProductItem_Show_VM>> GetAllProductItemPromotionItem_Show(Guid Id);
+
+	}
 }

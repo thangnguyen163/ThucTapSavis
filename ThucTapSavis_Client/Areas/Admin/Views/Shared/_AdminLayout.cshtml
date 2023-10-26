@@ -1,9 +1,4 @@
-﻿@*@using DATN_Client.Components;
-
-    @(await Html.RenderComponentAsync<Test>(RenderMode.Server))*@
-
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,10 +27,10 @@
     <link href="~/vendor/simple-datatables/style.css" rel="stylesheet">
     
     <link href="~/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/DATN_Client.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/DATN_Client.styles.css" asp-append-version="true" />*@
 
 
 

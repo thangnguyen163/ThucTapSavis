@@ -76,7 +76,6 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				var a = await context.Promotions.FindAsync(Promotion.Id);
 				a.Name = Promotion.Name;
 				a.Percent = Promotion.Percent;
-				a.Quantity = Promotion.Quantity;
 				a.StartDate = Promotion.StartDate;
 				a.EndDate = Promotion.EndDate;
 				a.Description = Promotion.Description;

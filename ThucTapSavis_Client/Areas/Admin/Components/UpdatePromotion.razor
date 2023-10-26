@@ -26,10 +26,12 @@
 
                     <!-- General Form Elements -->
                     <EditForm Model="_promotion">
+                                                <DataAnnotationsValidator/>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-4 col-form-label">Tên khuyến mãi</label>
                             <div class="col-sm-8">
                                 <InputText class="form-control" @bind-Value="_promotion.Name" />
+                                <ValidationMessage  For="()=>_promotion.Name" />
                             </div>
                         </div>
 
@@ -38,20 +40,14 @@
                             <label for="inputNumber" class="col-sm-4 col-form-label">Phần trăm giảm</label>
                             <div class="col-sm-8">
                                 <InputNumber class="form-control" @bind-Value="_promotion.Percent" />
+                                <ValidationMessage  For="()=>_promotion.Percent" />
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="inputNumber" class="col-sm-4 col-form-label">Số lượng</label>
-                            <div class="col-sm-8">
-                                <InputNumber class="form-control" @bind-Value="@_promotion.Quantity" />
-                            </div>
-                        </div>
-
-
                         <div class="row mb-3">
                             <label for="inputDate" class="col-sm-4 col-form-label">Ngày bắt đầu</label>
                             <div class="col-sm-8">
                                 <input type="datetime-local" class="form-control" @bind-value="@_promotion.StartDate" />
+                                <ValidationMessage  For="()=>_promotion.StartDate" />
                             </div>
                         </div>
 
@@ -60,6 +56,7 @@
                             <label for="inputDate" class="col-sm-4 col-form-label">Ngày kết thúc</label>
                             <div class="col-sm-8">
                                 <input type="datetime-local" class="form-control" @bind-value="@_promotion.EndDate">
+                                <ValidationMessage  For="()=>_promotion.EndDate" />
                             </div>
                         </div>
 
@@ -67,14 +64,14 @@
 
 
                         <div class="row mb-3">
-                            <label for="inputPassword" class="col-sm-4 col-form-label" style="font-size:14px">Mô tả</label>
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Mô tả</label>
                             <div class="col-sm-8">
                                 <InputTextArea class="form-control" style="height: 50px" @bind-Value="@_promotion.Description" />
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Mô tả </label>
+                            <label class="col-sm-4 col-form-label">Tình trạng</label>
                             <div class="col-sm-8">
                                 <div class="row">
                                     <InputRadioGroup @bind-Value="@_promotion.Status" class="form-control">
@@ -85,10 +82,10 @@
                                             <InputRadio Value="0" /> Ngừng hoạt động
                                         </div>
                                     </InputRadioGroup>
+                                    <ValidationMessage  For="()=>_promotion.Status" />
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Submit </label>
@@ -122,7 +119,7 @@
                                                             <thead>
                                                                 <tr style="position: sticky;top:0">
                                                                     <th scope="col">
-                                                                        <input type="checkbox" />
+                                                                        <input type="checkbox" style="transform: scale(1.5);" />
                                                                     </th>
                                                                     <th>Ảnh minh họa</th>
                                                                     <th>Tên</th>
@@ -141,7 +138,7 @@
                                                                 {
                                                                     <tr>
                                                                         <th scope="col">
-                                                                            <input type="checkbox" @onchange="()=>ToggleProductItemSelection(x.Id)" />
+                                                                            <input type="checkbox" style="transform: scale(1.5);" @onchange="()=>ToggleProductItemSelection(x.Id)" />
                                                                         </th>
 
                                                                         @{
@@ -207,7 +204,7 @@
                                 <thead>
                                     <tr style="position: sticky;top:0">
                                         <th scope="col">
-                                            <input type="checkbox" @IsChecked=() />
+                                            <input type="checkbox" style="transform: scale(1.5);"  @IsChecked=() />
                                         </th>
                                         <th scope="col">#</th>
                                         <th scope="col">Image</th>
@@ -220,7 +217,7 @@
                                     {
                                         <tr>
                                             <th scope="col">
-                                                <input type="checkbox" value="@a.Id" checked="@_lstProductSelect.Contains(a.Id)" @onchange="()=>ToggleProductSelection(a.Id)" />
+                                                <input type="checkbox" style="transform: scale(1.5);" value="@a.Id" checked="@_lstProductSelect.Contains(a.Id)" @onchange="()=>ToggleProductSelection(a.Id)" />
                                             </th>
                                             <td>@(count++)</td>
                                             <td>Designe</td>
@@ -253,7 +250,7 @@
                             <thead>
                                 <tr style="position: sticky;top:0">
                                     <th scope="col">
-                                        <input type="checkbox" />
+                                        <input type="checkbox" style="transform: scale(1.5);" @onchange="ToggleAllItems" checked="@SelectAllChangedProductItem" />
                                     </th>
                                     <th>Ảnh minh họa</th>
                                     <th>Tên</th>
@@ -272,7 +269,7 @@
                                 {
                                     <tr>
                                         <th scope="col">
-                                            <input type="checkbox" value="@x.Id" checked="@_lstProductItemSelect.Contains(x.Id)" @onchange="()=>ToggleProductItemSelection(x.Id)" />
+                                            <input type="checkbox" value="@x.Id" style="transform: scale(1.5);" checked="@_lstProductItemSelect.Contains(x.Id)" @onchange="()=>ToggleProductItemSelection(x.Id)" />
                                         </th>
 
                                         @{

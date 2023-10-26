@@ -15,7 +15,7 @@ namespace ThucTapSavis_Client.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Home", new {Area="Customer"});
         }
 
         public IActionResult Privacy()

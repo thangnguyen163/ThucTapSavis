@@ -1,13 +1,88 @@
-﻿<!DOCTYPE html>
-
-<html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ThucTapSavis_Client</title>
+    <link rel="stylesheet" href="~/css/TrangChu.css" />
+    <link rel="stylesheet" href="~/css/product.css" />
+    <link rel="stylesheet" href="~/css/detail.css" />
+    <link rel="stylesheet" href="~/css/gioithieu.css" />
+    <link rel="stylesheet" href="~/js/login.css" />
+    <link rel="stylesheet" href="~/css/giohang.css" />
+    <link rel="stylesheet" href="~/js/CongTru.js" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/Assignment_ThangNVPH25980.styles.css" asp-append-version="true" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div>
-        @RenderBody()
+   <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid container">
+                    <a class="navbar-brand"><img src="https://file.hstatic.net/200000312481/file/2222_1790556c641f404aab8dfb038b47eb0e.png" style="width:60%"></a>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item font">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item font">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Promotion" asp-action="Index">Admin</a>
+                            </li>
+
+                            <li class="nav-item font">
+                                <a class="nav-link text-dark">SignUp</a>
+                            </li>
+                            <li class="nav-item font">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Promotion" asp-action="Add">AddPromotion</a>
+                            </li>
+                            <li class="nav-item font" style="margin-left: 300px; font-size: 23px;">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                            </li>
+
+                            <li class="nav-item font dropdown" style="margin-left: 30px; font-size: 23px;">
+                                <a class="nav-link text-dark dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                    <i class="fa-solid fa-circle-user"></i>
+                                    <span class="font">User</span>
+                                </a>
+                   
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Logout">LogOut</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+
+        </header> 
+    <div style="width:80%;margin:auto">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - ThucTapSavis_Client - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <base href="~/" />
+    <script src="_framework/blazor.server.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+
+	function OnScrollEvent() {
+		document.documentElement.scrollTop = 0;
+	}
+</script>
 </body>
 </html>

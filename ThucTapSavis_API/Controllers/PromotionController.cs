@@ -6,7 +6,7 @@ using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Controllers
 {
-	[Route("api/Promotion")]
+	[Route("api/promotion")]
 	[ApiController]
 	public class PromotionController : ControllerBase
 	{
@@ -45,7 +45,6 @@ namespace ThucTapSavis_API.Controllers
 			Promotion.Id = rvm.Id;
 			Promotion.Name = rvm.Name;
 			Promotion.Percent = rvm.Percent;
-			Promotion.Quantity = rvm.Quantity;
 			Promotion.StartDate = rvm.StartDate;
 			Promotion.EndDate = rvm.EndDate;
 			Promotion.Description = rvm.Description;
@@ -59,7 +58,6 @@ namespace ThucTapSavis_API.Controllers
 			Promotion Promotion = await _Promotion.GetPromotionById(rvm.Id);
 			Promotion.Name = rvm.Name;
 			Promotion.Percent = rvm.Percent;
-			Promotion.Quantity = rvm.Quantity;
 			Promotion.StartDate = rvm.StartDate;
 			Promotion.EndDate = rvm.EndDate;
 			Promotion.Description = rvm.Description;
