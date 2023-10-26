@@ -79,5 +79,35 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				return null;
 			}
 		}
-	}
+
+		public async Task<bool> DeletePromotionItemByProductItemId(Guid ProductItemId)
+		{
+            try
+            {
+				var a = await context.PromotionsItem.FirstOrDefaultAsync(x => x.ProductItemsId == ProductItemId);
+				context.PromotionsItem.Remove(a);
+				context.SaveChanges();
+				return true;
+			}
+            catch (Exception)
+            {
+				return false;
+            }
+		}
+
+        public async Task<bool> DeletePromotionItemByPomotionId(Guid Id)
+        {
+			try
+			{
+				var a = await context.PromotionsItem.FirstOrDefaultAsync(x => x.PromotionsId == Id);
+				context.PromotionsItem.Remove(a);
+				context.SaveChanges();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+    }
 }

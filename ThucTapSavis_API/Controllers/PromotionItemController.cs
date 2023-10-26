@@ -66,5 +66,19 @@ namespace ThucTapSavis_API.Controllers
 			await _PromotionItem.DeletePromotionItem(id);
 			return Ok();
 		}
+		[HttpDelete("PromotionItemByProductItem/{Id}")]
+		public async Task<ActionResult<PromotionItem>> DeletePromotionItemByProductItemId(Guid Id)
+		{
+			await _PromotionItem.DeletePromotionItemByProductItemId(Id);
+			return Ok();
+		}
+
+
+		[HttpDelete("PromotionItemByPromotionId/{Id}")]
+		public async Task<ActionResult<PromotionItem>> DeletePromotionItemByPomotionId(Guid Id)
+		{
+			await _PromotionItem.DeletePromotionItemByPomotionId(Id);
+			return Ok();
+		}
 	}
 }

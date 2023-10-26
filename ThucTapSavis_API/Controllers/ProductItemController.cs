@@ -34,6 +34,13 @@ namespace ThucTapSavis_API.Controllers
 			var x = await _ProductItem.GetProductItemById(Id);
 			return x;
 		}
+
+		[HttpGet("ProductItem_By_PromotionId/{Id}")]
+		public async Task<List<ProductItem_Show_VM>> GetAllProductItemPromotionItem_Show(Guid Id)
+		{
+			var x = await _ProductItem.GetAllProductItemPromotionItem_Show(Id);
+			return x;
+		}
 		//public Guid Id { get; set; }
 		//public Guid ProductId { get; set; }
 		//public Guid ColorId { get; set; }
@@ -77,5 +84,7 @@ namespace ThucTapSavis_API.Controllers
 			await _ProductItem.DeleteProductItem(id);
 			return Ok();
 		}
+
+
 	}
 }
