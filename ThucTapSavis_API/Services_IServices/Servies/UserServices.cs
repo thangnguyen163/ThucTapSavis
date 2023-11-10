@@ -77,8 +77,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			try
 			{
 				var a = await context.Users.FindAsync(User.Id);
-				a.FirstName = User.FirstName;
-				a.LastName = User.LastName;
+				a.FullName = User.FullName;
 				a.UserName = User.UserName;
 				a.Password = User.Password;
 				a.Email = User.Email;
@@ -87,7 +86,6 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				a.Huyen = User.Huyen;
 				a.Xa = User.Xa;
 				a.DiaChiCuThe = User.DiaChiCuThe;
-				a.Sex = User.Sex;
 				a.Status = User.Status;
 				context.Users.Update(a);
 				context.SaveChanges();

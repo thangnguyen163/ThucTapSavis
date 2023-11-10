@@ -16,6 +16,8 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CS"));
 });
+
+
 // Add DI
 builder.Services.AddScoped<IBillItemServies, BillItemServices>();
 builder.Services.AddScoped<IBillServices, BillServices>();
@@ -50,5 +52,4 @@ app.UseCors(options =>
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

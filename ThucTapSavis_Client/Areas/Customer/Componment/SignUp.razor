@@ -1,45 +1,39 @@
-﻿@using ThucTapSavis_Client.Areas.Customer.Componment
-@{
-    ViewData["Title"] = "SignUp";
-    Layout = "~/Areas/Customer/Views/Shared/_CustomerLayout.cshtml";
-}
-@(await Html.RenderComponentAsync<SignUp>(RenderMode.Server))
-
-    @*using ThucTapSavis_Shared.ViewModel.User_VM;*@
-@*<div class="Login full fullsign" style="width:600px;margin: 0 auto;  margin-top: 250px;
+﻿@*using ThucTapSavis_Shared.ViewModel.User_VM;*@
+<div class="Login full fullsign" style="width:600px;margin: 0 auto;  margin-top: 250px;
   margin-bottom: 170px;">
     <div class="container container1">
         <div class="form login">
             <span class="title">Sign Up</span>
 
-            <form asp-action="Add" method="post" >
+            <EditForm Model="user">
                 <DataAnnotationsValidator />
                 <div class="input-field">
-                    <input type="text" placeholder="Tên người dùng" asp-for="FullName" name="FullName">
+                    <InputText placeholder="Họ và tên" @bind-Value="user.FullName"  />
                     <i class="fa-regular fa-user"></i>
-                    <ValidationMessage For="()=>FullName" />
+                    <ValidationMessage style="color:red;" For="()=>user.FullName"></ValidationMessage>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="UserName" asp-for="UserName" name="UserName">
+                    <InputText placeholder="UserName" @bind-Value="user.UserName" />
                     <i class="fa-regular fa-user"></i>
-                    <ValidationMessage For="()=>UserName" />
+                    <ValidationMessage For="()=>user.UserName" />
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Email" asp-for="Email" name="Email">
+                    <InputText placeholder="Email" asp-for="Email"@bind-Value="user.Email"/>
                     <i class="fa-regular fa-envelope icon"></i>
-                    <ValidationMessage For="()=>Email" />
+                    <ValidationMessage For="()=>user.Email" />
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Số điện thoại" asp-for="NumberPhone" name="NumberPhone">
+                    <InputText placeholder="Số điện thoại" @bind-Value="user.NumberPhone" />
                     <i class="fa-regular fa-envelope icon"></i>
-                    <ValidationMessage For="()=>NumberPhone" />
+                    <ValidationMessage For="()=>user.NumberPhone" />
+
                 </div>
 
                 <div class="input-field">
-                    <input type="password" placeholder="Mật khẩu" asp-for="Password" name="Password">
+                    <input type="password" placeholder="Mật khẩu" @bind-value="user.Password" required />
                     <i class="fa-solid fa-lock icon"></i>
                     <i class="fa-regular fa-eye-slash showHidePW"></i>
-                    <ValidationMessage For="()=>Password" />
+                    <ValidationMessage For="()=>user.Password" />
                 </div>
                 <div class="input-field">
                     <input type="password" placeholder="Xác nhận mật khẩu">
@@ -56,10 +50,10 @@
                 </div>
 
                 <div class="input-field button">
-                    <input type="submit" value="Đăng ký">
+                    <input type="submit" @onclick="Add" value="Đăng ký">
                 </div>
 
-            </form>
+            </EditForm>
 
             <div class="login-signup">
                 <span class="text">
@@ -70,4 +64,4 @@
 
         </div>
     </div>
-</div>*@
+</div>

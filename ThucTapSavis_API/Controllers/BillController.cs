@@ -15,7 +15,7 @@ namespace ThucTapSavis_API.Controllers
         {
             _billServices = billServices;
         }
-        [HttpGet("get_bill")]
+        [HttpGet("get_all_bill")]
         public async Task<IActionResult> Get()
         {
             var a = await _billServices.GetAllBill();
@@ -48,6 +48,9 @@ namespace ThucTapSavis_API.Controllers
             bill1.Huyen = bill1.Huyen;
             bill1.DiaChiCuThe= bill1.DiaChiCuThe;
             bill1.Status = bill1.Status;
+            bill1.BillCode = bill1.BillCode;
+            bill1.CompletionDate = bill.CompletionDate;
+            bill1.ConfirmationDate = bill.ConfirmationDate;
             var a = await _billServices.AddBill(bill1);
             return Ok(a);
         }
@@ -65,6 +68,9 @@ namespace ThucTapSavis_API.Controllers
             bill1.Huyen = bill1.Huyen;
             bill1.DiaChiCuThe = bill1.DiaChiCuThe;
             bill1.Status = bill1.Status;
+            bill1.BillCode = bill1.BillCode;
+            bill1.CompletionDate = bill.CompletionDate;
+            bill1.ConfirmationDate = bill.ConfirmationDate;
             var a = await _billServices.UpdateBill(bill1);
             return Ok(a);
         }

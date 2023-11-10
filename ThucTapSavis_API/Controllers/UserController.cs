@@ -43,12 +43,11 @@ namespace ThucTapSavis_API.Controllers
 		//public string Xa { get; set; }
 		//public string DiaChiCuThe { get; set; }
 		[HttpPost("add-user")]
-		public async Task<ActionResult<User>> PostUser(User_VM rvm)
+		public async Task<ActionResult> PostUser(User_VM rvm)
 		{
 			User User = new User();
-			User.Id = Guid.NewGuid();
-			User.FirstName = rvm.FirstName;
-			User.LastName = rvm.LastName;
+			User.Id = rvm.Id;
+			User.FullName = rvm.FullName;
 			User.UserName = rvm.UserName;
 			User.Password = rvm.Password;
 			User.Email = rvm.Email;
@@ -57,7 +56,6 @@ namespace ThucTapSavis_API.Controllers
 			User.Huyen = rvm.Huyen;
 			User.Xa = rvm.Xa;
 			User.DiaChiCuThe = rvm.DiaChiCuThe;
-			User.Sex = rvm.Sex;
 			User.Status = rvm.Status;
 			await _User.AddUser(User);
 			return Ok();
@@ -66,8 +64,7 @@ namespace ThucTapSavis_API.Controllers
 		public async Task<ActionResult<User>> PutUser(User_VM rvm)
 		{
 			User User = await _User.GetUserById(rvm.Id);
-			User.FirstName = rvm.FirstName;
-			User.LastName = rvm.LastName;
+			User.FullName = rvm.FullName;
 			User.UserName = rvm.UserName;
 			User.Password = rvm.Password;
 			User.Email = rvm.Email;
@@ -76,7 +73,6 @@ namespace ThucTapSavis_API.Controllers
 			User.Huyen = rvm.Huyen;
 			User.Xa = rvm.Xa;
 			User.DiaChiCuThe = rvm.DiaChiCuThe;
-			User.Sex = rvm.Sex;
 			User.Status = rvm.Status;
 			await _User.UpdateUser(User);
 			return Ok();

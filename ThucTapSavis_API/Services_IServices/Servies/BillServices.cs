@@ -2,6 +2,7 @@
 using ThucTapSavis_API.Data;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Services_IServices.Servies
 {
@@ -41,10 +42,30 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			}
 		}
 
-		public async Task<List<Bill>> GetAllBill()
+		public async Task<List<Bill_ShowModel>> GetAllBill()
 		{
-			var a = await context.Bills.ToListAsync();
-			return a;
+			var lst = (from a in context.Bills
+					   join b in context.Users on a.UserId equals b.Id
+					   select new Bill_ShowModel
+					   {
+						   Id = a.Id,
+						   UserId = a.UserId,
+						   UserName = b.UserName,
+						   BillCode = a.BillCode,
+						   TotalAmount = a.TotalAmount,
+						   CreateDate = a.CreateDate,
+						   ConfirmationDate = a.ConfirmationDate,
+						   CompletionDate = a.CompletionDate,
+						   Note = a.Note,
+						   Status = a.Status,
+						   Tinh=a.Tinh,
+						   Huyen=a.Huyen,
+						   Xa=a.Xa,
+						   DiaChiCuThe= a.DiaChiCuThe,
+						   TenNguoiNhan	=a.TenNguoiNhan,
+						   SDTNhan=a.SDTNhan,
+					   }).ToList();
+			return lst;
 		}
 
         public async Task<Bill> GetAllBillById(Guid Id)
@@ -83,5 +104,6 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				return null;
 			}
 		}
-	}
+
+    }
 }
