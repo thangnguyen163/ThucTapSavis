@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ThucTapSavis_Shared.Models
+namespace ThucTapSavis_Shared.ViewModel
 {
-    public class Bill
+    public class Bill_ShowModel
     {
+
         public Guid Id { get; set; }
         public string BillCode { get; set; }
         public Guid UserId { get; set; }
+        public string UserName { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? ConfirmationDate { get; set; }
         public DateTime? CompletionDate { get; set; }
@@ -24,8 +26,5 @@ namespace ThucTapSavis_Shared.Models
         public string DiaChiCuThe { get; set; }
         public int Status { get; set; }
 
-
-        public User Users { get; set; }
-        public virtual ICollection<BillItem> BillItems { get; set; }
     }
 }

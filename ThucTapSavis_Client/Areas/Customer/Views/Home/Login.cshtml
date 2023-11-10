@@ -1,7 +1,8 @@
-﻿
+﻿@model ThucTapSavis_Shared.ViewModel.User_VM;
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Areas/Customer/Views/Shared/_CustomerLayout.cshtml";
+    
 }
 
       <div class="Login full" style="width:600px;margin: 0 auto;  margin-top: 120px;
@@ -9,13 +10,14 @@
         <div class="container container1">
           <div class="form login">
             <span class="title">Login</span>
-              <form action="#">
+
+              <form asp-action="Login" method="post">
                 <div class="input-field">
-                  <input type="text" placeholder="Email">
+                  <input type="text" placeholder="Email" asp-for="Username" name="Username">
                   <i class="fa-regular fa-envelope icon"></i>
                 </div>
                 <div class="input-field">
-                  <input type="password" placeholder="Password">
+                  <input type="password" placeholder="Password" asp-for="Password" name="Password"> 
                   <i class="fa-solid fa-lock icon"></i>
                   <i class="fa-regular fa-eye-slash showHidePW"></i>
                 </div>
@@ -29,7 +31,7 @@
                 </div>
 
                 <div class="input-field button">
-                  <input type="button" value="Đăng nhập">
+                  <input type="submit" value="Đăng nhập">
                 </div>
               </form>
 
