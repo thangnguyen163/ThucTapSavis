@@ -21,7 +21,13 @@ namespace ThucTapSavis_API.Controllers
             var a = await ImageServices.GetAllImage();
             return Ok(a);
         }
-        [HttpGet("get_Image_By_Product_Item")]
+		[HttpGet("get_Image_Join_PI")]
+		public async Task<IActionResult> Get_Image_Join_PI()
+		{
+            var a = await ImageServices.GetAllImage_PrductItem();
+            return Ok(a);
+        }
+		[HttpGet("get_Image_By_Product_Item")]
         public async Task<IActionResult> GetAllImageByProductItem(Guid Id)
         {
             var a = await ImageServices.GetAllImageById(Id);

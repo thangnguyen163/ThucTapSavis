@@ -1,0 +1,9 @@
+﻿@using ThucTapSavis_Client.Areas.Customer.Component;
+@using ThucTapSavis_Shared.ViewModel;
+
+@model Product_VM
+@{
+	ViewData["Title"] = "Index";
+	Layout = @"~/Areas/Customer/Views/Shared/_CustomerLayout.cshtml";
+}
+@(await Html.RenderComponentAsync<ProductDetail>(RenderMode.Server))

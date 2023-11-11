@@ -8,7 +8,7 @@ namespace ThucTapSavis_API.Services_IServices.IServices
         public Task<CartItem> UpdateCartItem(CartItem CartItem);
         public Task<bool> DeleteCartItem(Guid Id);
         public Task<List<CartItem>> GetAllCartItem();
-        public Task<CartItem> GetAllCartItemById(Guid Id);
+        public Task<List<CartItem>> GetAllCartItemById(Guid Id);
         public Task<List<CartItem>> GetAllCartItemByCart(Guid Id);
     }
 }

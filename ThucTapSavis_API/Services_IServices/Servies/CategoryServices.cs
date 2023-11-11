@@ -51,11 +51,11 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 
         public async Task<Category> GetAllCategoryById(Guid Id)
         {
-            var a = await context.Categories.FirstOrDefaultAsync(a => Id == Id);
+            var a = await context.Categories.FirstOrDefaultAsync(a => a.Id == Id);
             return a;
         }
 
-        public async Task<Category> UpdateCategory(Category Category)
+		public async Task<Category> UpdateCategory(Category Category)
         {
             try
             {

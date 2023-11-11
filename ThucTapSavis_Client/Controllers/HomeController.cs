@@ -18,10 +18,6 @@ namespace ThucTapSavis_Client.Controllers
             return RedirectToAction("Index", "Home", new {Area="Customer"});
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
