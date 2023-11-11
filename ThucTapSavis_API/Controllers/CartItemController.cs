@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.Intrinsics.Arm;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
 using ThucTapSavis_Shared.ViewModel;
@@ -27,7 +28,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await cartItemServies.GetAllCartItemByCart(Id);
             return Ok(a);
         }
-        [HttpGet("get_cartitem_by_id")]
+        [HttpGet("get_cartitem_by_userid/{Id}")]
         public async Task<IActionResult> GetCartItemById(Guid Id)
         {
             var a = await cartItemServies.GetAllCartItemById(Id);
@@ -47,9 +48,10 @@ namespace ThucTapSavis_API.Controllers
             return Ok(a);
         }
         [HttpPut("update_cartitem")]
-        public async Task<IActionResult> UpdateCartItem(CartItem CartItem)
+        public async Task<IActionResult> UpdateCartItem(CartItem_VM CartItem)
         {
             CartItem cartItem1 = new CartItem();
+            cartItem1.Id = CartItem.Id;
             cartItem1.ProductItemId = CartItem.ProductItemId;
             cartItem1.UserId = CartItem.UserId;
             cartItem1.Price = CartItem.Price;
@@ -58,7 +60,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await cartItemServies.UpdateCartItem(cartItem1);
             return Ok(a);
         }
-        [HttpDelete("delete_cartitem")]
+        [HttpDelete("delete_cartitem/{id}")]
         public async Task<IActionResult> DeleteCartItem(Guid id)
         {
             var a = await cartItemServies.DeleteCartItem(id);

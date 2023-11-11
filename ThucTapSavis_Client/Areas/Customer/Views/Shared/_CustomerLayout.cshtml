@@ -1,4 +1,6 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using ThucTapSavis_Client.Areas.Customer.Controllers;
+@using ThucTapSavis_Client.SessionService;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +12,17 @@
     <link rel="stylesheet" href="~/css/detail.css" />
     <link rel="stylesheet" href="~/css/gioithieu.css" />
     <link rel="stylesheet" href="~/css/login.css" />
-    <link rel="stylesheet" href="~/css/giohang.css" />
-    <link rel="stylesheet" href="~/js/CongTru.js" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @* <link rel="stylesheet" href="~/css/ShowInfoUser.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/ThucTapSavis_Client.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-    <link rel="stylesheet" href="~/Assignment_ThangNVPH25980.styles.css" asp-append-version="true" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" integrity="sha512-ZnR2wlLbSbr8/c9AgLg3jQPAattCUImNsae6NHYnS9KrIwRdcY9DxFotXhNAKIKbAXlRnujIqUWoXXwqyFOeIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="~/css/login.css" />
+
+    <link href="~/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
@@ -33,7 +39,7 @@
                         </li>
 
                         <li class="nav-item font">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="ShowAllProduct">Product</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="BanOnline" asp-action="ShowProduct">Product</a>
                         </li>
 
                         <li class="nav-item font">
@@ -43,13 +49,13 @@
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item font" style="margin-left: 300px; font-size: 23px;">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="BanOnline" asp-action="ShowCart"><i class="fa-solid fa-cart-shopping"></i></a>
                         </li>
 
                         <li class="nav-item font dropdown" style="margin-left: 30px; font-size: 23px;">
                             <a class="nav-link text-dark dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                 <i class="fa-solid fa-circle-user"></i>
-                                <span class="font">User</span>
+                                <span class="font">@HomeController._nameUser</span>
                             </a>
 
                             <ul class="dropdown-menu">

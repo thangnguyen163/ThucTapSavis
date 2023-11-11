@@ -1,5 +1,11 @@
 ﻿@inject IJSRuntime JsRuntime
-
+@using Blazored.Toast.Configuration
+<BlazoredToasts Position="ToastPosition.BottomRight"
+				Timeout="10"
+				IconType="IconType.FontAwesome"
+				SuccessClass="success-toast-override"
+				SuccessIcon="fa-solid fa-check"
+				ErrorIcon="fa-solid fa-triangle-exclamation" />
 <style>
 	.a1 {
 		width: 100px;
@@ -19,6 +25,24 @@
 		color: #fff;
 		cursor: pointer;
 	}
+
+	.custom-file-upload {
+		display: inline-block;
+		padding: 6px 12px;
+		cursor: pointer;
+		background-color: #337ab7;
+		color: #fff;
+		border-radius: 4px;
+		border: none;
+	}
+
+		.custom-file-upload:hover {
+			background-color: #286090;
+		}
+
+		.custom-file-upload i {
+			margin-right: 5px;
+		}
 </style>
 
 <h1>Quản lý sản phẩm</h1>
@@ -27,7 +51,6 @@
 <div class="modal fade" id="Add_P">
 	<div class="modal-dialog">
 		<div class="modal-content">
-
 			<!-- Phần tiêu đề của popup -->
 			<div class="modal-header">
 				<h4 class="modal-title">Thêm sản phẩm</h4>
@@ -154,6 +177,10 @@
 			<!-- Phần chân của popup -->
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+				<label for="file-upload" class="custom-file-upload">
+					<i class="fa fa-cloud-upload"></i> Thay đổi
+				</label>
+				<InputFile id="file-upload" style="display:none;" OnChange="ChangeImg" />
 				<button type="button" class="btn btn-danger" @onclick="Delete_Img_Tam" data-dismiss="modal">Xóa</button>
 			</div>
 		</div>
@@ -165,7 +192,7 @@
 			<div class="col-md-2">
 				@{
 					<div style="height: 500px; overflow-y: auto;width:120px">
-						@foreach (var x in _lstImg_Tam)
+						@foreach (var x in _lstImg_Tam.OrderBy(c => c.STT))
 						{
 							<div style="margin-bottom:30px;margin-top:30px">
 								<a @onclick="()=>LoadAnh(x.Id)">
@@ -217,13 +244,10 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4">
-						<h4>Thể loại</h4>
-					</div>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<h4>Màu sắc</h4>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<h4>Size</h4>
 					</div>
 				</div>
@@ -339,7 +363,7 @@
 		<EditForm Model="_PM_S_VM">
 			<div class="row">
 				<div class="col-md-3">
-					<InputSelect class="form-select" @bind-Value="_PM_S_VM.CategoryName">
+					<InputSelect class="form-select" @bind-Value="_PM_S_VM.CategoryName" @onclick="LocHangLoat">
 						<option value="0" selected>--Chọn--</option>
 						@foreach (var x in _lstCate)
 						{
@@ -348,7 +372,7 @@
 					</InputSelect>
 				</div>
 				<div class="col-md-3">
-					<InputSelect class="form-select" @bind-Value="_PM_S_VM.ColorName">
+					<InputSelect class="form-select" @bind-Value="_PM_S_VM.ColorName" @onclick="LocHangLoat">
 						<option value="0" selected>--Chọn--</option>
 						@foreach (var x in _lstC)
 						{
@@ -357,16 +381,13 @@
 					</InputSelect>
 				</div>
 				<div class="col-md-3">
-					<InputSelect class="form-select" @bind-Value="_PM_S_VM.SizeName">
+					<InputSelect class="form-select" @bind-Value="_PM_S_VM.SizeName" @onclick="LocHangLoat">
 						<option value="0" selected>--Chọn--</option>
 						@foreach (var x in _lstS)
 						{
 							<option value="@x.Name">@x.Name</option>
 						}
 					</InputSelect>
-				</div>
-				<div class="col-md-3">
-					<button type="submit" class="btn btn-primary" @onclick="LocHangLoat">Lọc</button>
 				</div>
 			</div>
 		</EditForm>
@@ -412,15 +433,22 @@ else
 				<tr>
 
 					@{
-						var img = _lstImg.Where(c => c.ProductItemId == x.Id).Select(c => c.PathImage).FirstOrDefault();
-						// var img2 = _lstImg.FirstOrDefault(c => c.ProductItemId == x.Id).PathImage;
-						if (img == null)
+						var lst_chonmau = _lstPrI_show_VM.Where(c => c.ColorId == x.ColorId).ToList();
+						_lstImg_PI_tam.Clear();
+						foreach (var mau in lst_chonmau)
+						{
+							var a = _lstImg_PI.Where(c => c.ProductItemId == mau.Id);
+							_lstImg_PI_tam.AddRange(a);
+						}
+
+						var img1 = _lstImg_PI_tam.Where(c => c.ProductId == x.ProductId).OrderBy(c => c.STT).Select(c => c.PathImage).FirstOrDefault();
+						if (img1 == null)
 						{
 							<td style="text-align:center">Chưa có ảnh</td>
 						}
 						else
 						{
-							<td style="text-align:center"><img src="/images/@img" alt="" style="width:100px;height: 110px;"></td>
+							<td style="text-align:center"><img src="/images/@img1" alt="" style="width:100px;height: 110px;"></td>
 						}
 					}
 					<td style="vertical-align:middle">@x.Name</td>

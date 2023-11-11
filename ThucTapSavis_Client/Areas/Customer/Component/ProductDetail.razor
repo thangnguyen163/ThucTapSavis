@@ -1,0 +1,163 @@
+﻿@using Blazored.Toast.Configuration
+<BlazoredToasts Position="ToastPosition.BottomRight"
+				Timeout="10"
+				IconType="IconType.FontAwesome"
+				SuccessClass="success-toast-override"
+				SuccessIcon="fa-solid fa-check"
+				ErrorIcon="fa-solid fa-triangle-exclamation" />
+<style>
+	.number-input {
+		display: flex;
+		align-items: center;
+	}
+
+	.input-wrapper {
+		display: flex;
+		align-items: center;
+		border: 1px solid #ccc;
+		border-radius: 20px;
+		padding: 5px;
+	}
+
+	.input-field {
+		margin-left: 10px;
+		width: 50px;
+		text-align: center;
+		border: none;
+		background-color: transparent;
+		pointer-events: none;
+	}
+
+	.minus-button,
+	.plus-button {
+		width: 30px;
+		height: 30px;
+		border: none;
+		background-color: transparent;
+		color: #337ab7;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+		.minus-button:hover,
+		.plus-button:hover {
+			color: #286090;
+		}
+</style>
+
+<h1>ProductDetail</h1>
+
+
+<h6>Trang chủ > @_nameCate > @_p_vm.Name>></h6>
+<hr style="border: 2px solid orangered;">
+
+@*<form action="@Url.Action("Cart","Home",new{ IdPro = @Model.Id})" method="post">*@
+
+
+<div style="margin-top: 50px;">
+	<div style="display:flex">
+		<div class="col-md-7" style="display:flex">
+			<div class="col-md-4" style="height: 550px; overflow-y: auto;width:120px">
+				@foreach (var x in _lstImg_PI_tam.OrderBy(c => c.STT))
+				{
+					<div style="margin-bottom:30px;margin-top:30px">
+						<a @onclick="()=>LoadAnh(x.Id)">
+							<img src="/images/@x.PathImage" alt="" style="width: 100px;height: 110px;" />
+						</a>
+					</div>
+				}
+			</div>
+			<div class="col-md-10">
+				<center>
+					<a data-toggle="modal" data-target="#Add_P">
+						<img src="/images/@_path_Tam" alt="" style="width:500px;height:650px;margin-top:8.5px" />
+					</a>
+				</center>
+			</div>
+		</div>
+		<div class="col-md-5 ">
+			<div class="content1_detail">
+				<h2>@_p_vm.Name</h2>
+				@* <div class="row">
+				<div class="col-md-3"><img src="Image/rating.png" alt=""></div>
+				<div class="col-md-3"> <h5>400 Đánh giá</h5></div>
+				<div class="col-md-3"><h5>2K Đã bán </h5></div>
+				</div> *@
+				<div style="display:flex">
+					<div class="col-md-3">
+						<h5>Giá bán</h5>
+					</div>
+					<div class="col-md-9">
+						<h5>@_gia</h5>
+					</div>
+				</div>
+				<br />
+				<div style="display:flex">
+					<div class="col-md-3">
+						<h5>Màu sắc</h5>
+					</div>
+					<div class="col-md-9">
+						<div class="radio-input">
+							@foreach (var x in _lstColor)
+							{
+								<label>
+									<input type="radio" id="value-1" name="value-radio-1" value="value-1" @onclick="()=>ChonMau(x)">
+									<span>@x</span>
+								</label>
+							}
+							<span class="selection"></span>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div style="display:flex">
+					<div class="col-md-3">
+						<h5>Size</h5>
+					</div>
+					<div class="col-md-9">
+						<div class="radio-input">
+							@foreach (var x in _lstSize)
+							{
+								<label>
+									<input type="radio" id="value-2" name="value-radio-2" value="value-2" @onclick="()=>ChonSize(x)">
+									<span>@x</span>
+								</label>
+							}
+							<span class="selection"></span>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div style="display:flex">
+					<div class="col-md-3">
+						<h5>Số lượng</h5>
+					</div>
+					<div class="col-md-9">
+						<div class="number-input">
+							<div class="input-wrapper">
+								<button class="minus-button" @onclick="SL_Tru">-</button>
+								<input type="number" class="input-field" readonly @bind-value="@_soLuong">
+								<button class="plus-button" @onclick="SL_Cong">+</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div>
+					<button type="submit" class="btn btn-warning btn_size2" @onclick="ThemVaoGiohang">Add to Cart</button>
+
+					<button type="button" class="btn btn-success btn_size2">Buy Now</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="Add_P">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- Nội dung của popup -->
+			<img src="/images/@_path_Tam" style="width:600px;height:850px" />
+		</div>
+	</div>
+</div>

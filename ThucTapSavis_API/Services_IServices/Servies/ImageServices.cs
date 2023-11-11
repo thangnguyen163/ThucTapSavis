@@ -2,6 +2,7 @@
 using ThucTapSavis_API.Data;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Services_IServices.Servies
 {
@@ -57,6 +58,38 @@ namespace ThucTapSavis_API.Services_IServices.Servies
         {
             var a = await context.Images.Where(x => x.ProductItemId == Id).ToListAsync();
             return a;
+        }
+
+        public async Task<List<Image_Join_ProductItem>> GetAllImage_PrductItem()
+        {
+            //public Guid Id { get; set; }
+            //public Guid ProductId { get; set; }
+            //public Guid? ColorId { get; set; }
+            //public Guid? SizeId { get; set; }
+            //public int? AvaiableQuantity { get; set; }
+            //public int? PurchasePrice { get; set; }
+            //public int? CostPrice { get; set; }
+            //public int Status { get; set; }
+            // img
+            //public Guid Id { get; set; }
+            //public string Name { get; set; }
+            //public int STT { get; set; }
+            //public string PathImage { get; set; }
+            //public Guid ProductItemId { get; set; }
+            //public int Status { get; set; }
+            var list = (from img in await context.Images.ToListAsync()
+                        join prI in await context.ProductItems.ToListAsync() on img.ProductItemId equals prI.Id
+                        select new Image_Join_ProductItem()
+                        {
+                            Id = img.Id,
+                            Name = img.Name,
+                            STT = img.STT,
+                            PathImage = img.PathImage,
+                            ProductItemId = img.ProductItemId,
+                            Status = img.Status,
+                            ProductId = prI.ProductId
+                        }).ToList();
+            return list;
         }
 
         public async Task<Image> UpdateImage(Image image)

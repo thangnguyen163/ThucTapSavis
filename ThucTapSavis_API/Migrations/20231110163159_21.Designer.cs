@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ThucTapSavis_API.Data;
 
@@ -11,9 +12,10 @@ using ThucTapSavis_API.Data;
 namespace ThucTapSavis_API.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231110163159_21")]
+    partial class _21
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +44,7 @@ namespace ThucTapSavis_API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DiaChiCuThe")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Huyen")
@@ -49,9 +52,6 @@ namespace ThucTapSavis_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhuongThucTT")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -70,7 +70,7 @@ namespace ThucTapSavis_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TotalAmount")
+                    b.Property<int>("TotalAmount")
                         .HasColumnType("int");
 
                     b.Property<Guid>("UserId")

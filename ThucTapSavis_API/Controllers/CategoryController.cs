@@ -21,7 +21,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await CategoryServices.GetAllCategory();
             return Ok(a);
         }
-        [HttpGet("get_category_by_id")]
+        [HttpGet("get_category_by_id/{Id}")]
         public async Task<IActionResult> GetCategoryById(Guid Id)
         {
             var a = await CategoryServices.GetAllCategoryById(Id);

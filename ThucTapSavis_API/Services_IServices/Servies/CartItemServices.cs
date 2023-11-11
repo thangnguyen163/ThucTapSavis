@@ -31,6 +31,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
             try
             {
                 var a = await context.CartItems.FindAsync(Id);
+                context.Remove(a);
                 context.SaveChanges();
                 return true;
             }
@@ -59,9 +60,9 @@ namespace ThucTapSavis_API.Services_IServices.Servies
             throw new NotImplementedException();
         }
 
-        public async Task<CartItem> GetAllCartItemById(Guid Id)
+        public async Task<List<CartItem>> GetAllCartItemById(Guid Id)
         {
-            var a = await context.CartItems.FirstOrDefaultAsync(a => Id == Id);
+            var a = await context.CartItems.Where(a => a.UserId == Id).ToListAsync();
             return a;
         }
 

@@ -1,3 +1,4 @@
+using Blazored.Toast;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using ThucTapSavis_Client.Areas.Admin.Controllers;
@@ -16,6 +17,7 @@ builder.Services.AddSession(option =>
 {
     option.IdleTimeout = TimeSpan.FromMinutes(5);
 });
+builder.Services.AddBlazoredToast();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
