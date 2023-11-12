@@ -36,21 +36,40 @@ namespace ThucTapSavis_API.Controllers
         [HttpPost("add_bill")]
         public async Task<IActionResult> AddBill(Bill_VM bill)
         {
-            Bill bill1 = new Bill();
+
+		//	public Guid Id { get; set; }
+		//public string BillCode { get; set; }
+		//public Guid UserId { get; set; }
+		//public DateTime? CreateDate { get; set; }
+		//public DateTime? ConfirmationDate { get; set; }
+		//public DateTime? CompletionDate { get; set; }
+		//public int? TotalAmount { get; set; }
+		//public string PhuongThucTT { get; set; }
+		//public string Note { get; set; }
+		//public string TenNguoiNhan { get; set; }
+		//public string SDTNhan { get; set; }
+		//public string Tinh { get; set; }
+		//public string Huyen { get; set; }
+		//public string Xa { get; set; }
+		//public string? DiaChiCuThe { get; set; }
+		//public int Status { get; set; }
+		Bill bill1 = new Bill();
             bill1.Id = bill.Id;
-            bill1.UserId = bill.UserId;
+			bill1.BillCode = bill.BillCode;
+			bill1.UserId = bill.UserId;
             bill1.CreateDate = bill.CreateDate;
-            bill1.TotalAmount = bill.TotalAmount;
+			bill1.CompletionDate = bill.CompletionDate;
+			bill1.ConfirmationDate = bill.ConfirmationDate;
+			bill1.TotalAmount = bill.TotalAmount;
+			bill1.PhuongThucTT = bill.PhuongThucTT;
             bill1.Note = bill.Note;
+            bill1.SDTNhan = bill.SDTNhan;
             bill1.TenNguoiNhan = bill.TenNguoiNhan;
             bill1.Tinh = bill.Tinh;
-            bill1.Xa = bill1.Xa;
-            bill1.Huyen = bill1.Huyen;
-            bill1.DiaChiCuThe= bill1.DiaChiCuThe;
-            bill1.Status = bill1.Status;
-            bill1.BillCode = bill1.BillCode;
-            bill1.CompletionDate = bill.CompletionDate;
-            bill1.ConfirmationDate = bill.ConfirmationDate;
+            bill1.Xa = bill.Xa;
+            bill1.Huyen = bill.Huyen;
+            bill1.DiaChiCuThe= bill.DiaChiCuThe;
+            bill.Status = bill.Status;
             var a = await _billServices.AddBill(bill1);
             return Ok(a);
         }
@@ -58,20 +77,22 @@ namespace ThucTapSavis_API.Controllers
         public async Task<IActionResult> UpdateBill(Bill_VM bill)
         {
             Bill bill1 = new Bill();
-            bill1.UserId = bill.UserId;
-            bill1.CreateDate = bill.CreateDate;
-            bill1.TotalAmount = bill.TotalAmount;
-            bill1.Note = bill.Note;
-            bill1.TenNguoiNhan = bill.TenNguoiNhan;
-            bill1.Tinh = bill.Tinh;
-            bill1.Xa = bill1.Xa;
-            bill1.Huyen = bill1.Huyen;
-            bill1.DiaChiCuThe = bill1.DiaChiCuThe;
-            bill1.Status = bill1.Status;
-            bill1.BillCode = bill1.BillCode;
-            bill1.CompletionDate = bill.CompletionDate;
-            bill1.ConfirmationDate = bill.ConfirmationDate;
-            var a = await _billServices.UpdateBill(bill1);
+			bill1.BillCode = bill.BillCode;
+			bill1.UserId = bill.UserId;
+			bill1.CreateDate = bill.CreateDate;
+			bill1.CompletionDate = bill.CompletionDate;
+			bill1.ConfirmationDate = bill.ConfirmationDate;
+			bill1.TotalAmount = bill.TotalAmount;
+			bill1.PhuongThucTT = bill.PhuongThucTT;
+			bill1.Note = bill.Note;
+			bill1.SDTNhan = bill.SDTNhan;
+			bill1.TenNguoiNhan = bill.TenNguoiNhan;
+			bill1.Tinh = bill.Tinh;
+			bill1.Xa = bill.Xa;
+			bill1.Huyen = bill.Huyen;
+			bill1.DiaChiCuThe = bill.DiaChiCuThe;
+			bill1.Status = bill.Status;
+			var a = await _billServices.UpdateBill(bill1);
             return Ok(a);
         }
         [HttpDelete("delete_bill")]

@@ -114,7 +114,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				_toastService.ShowError("Giỏ hàng không có sản phẩm nào vui lòng chọn thêm sản phẩm");
 				return;
 			}
-			_navi.NavigateTo("https://localhost:7075/bill-info", true);
+			_navi.NavigateTo("https://localhost:7022/bill-info", true);
 		}
 
 		public async Task MuaHang()

@@ -50,10 +50,10 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
         {
             return View();
         }
-        [HttpPost]
+		[Route("login")]
+		[HttpPost]
         public async Task<IActionResult> Login(User_VM user)
         {
-
             List<User> a = await _client.GetFromJsonAsync<List<User>>("https://localhost:7264/api/User/get-user");
             User b = a.FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
             _nameUser = b.FullName;

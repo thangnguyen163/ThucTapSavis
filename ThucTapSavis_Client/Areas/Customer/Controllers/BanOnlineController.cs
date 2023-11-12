@@ -61,5 +61,23 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 		{
 			return View();
 		}
+
+		[Route("bill-info")]
+		public async Task<IActionResult> Create_Bill_With_Info()
+		{
+			return View();
+		}
+
+		[Route("results-after-payment")]
+		public IActionResult CallBackAfterPayment()
+		{
+			var collection = HttpContext.Request.Query;
+			_momoExecuteResponseModel.Amount = collection.First(s => s.Key == "amount").Value;
+			_momoExecuteResponseModel.OrderInfo = collection.First(s => s.Key == "orderInfo").Value;
+			_momoExecuteResponseModel.OrderId = collection.First(s => s.Key == "orderId").Value;
+			_momoExecuteResponseModel.Message = collection.First(s => s.Key == "message").Value;
+			_momoExecuteResponseModel.MessageLocal = collection.First(s => s.Key == "localMessage").Value;
+			return View(_momoExecuteResponseModel);
+		}
 	}
 }
