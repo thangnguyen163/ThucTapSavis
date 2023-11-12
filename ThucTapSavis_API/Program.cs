@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ThucTapSavis_API.Data;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_API.Services_IServices.Servies;
+using ThucTapSavis_Shared.ViewModel.Momo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,8 @@ builder.Services.AddScoped<IPromotionServices, PromotionServices>();
 builder.Services.AddScoped<IRoleServices, RoleServices>();
 builder.Services.AddScoped<ISizeServices, SizeServices>();
 builder.Services.AddScoped<IUserServices, UserServices>();
-
+builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
+builder.Services.AddScoped<IMomoService, MomoService>();
 
 var app = builder.Build();
 
