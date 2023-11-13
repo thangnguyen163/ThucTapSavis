@@ -45,9 +45,6 @@
 		}
 </style>
 
-<h1>ProductDetail</h1>
-
-
 <h6>Trang chủ > @_nameCate > @_p_vm.Name>></h6>
 <hr style="border: 2px solid orangered;">
 
@@ -62,7 +59,7 @@
 				{
 					<div style="margin-bottom:30px;margin-top:30px">
 						<a @onclick="()=>LoadAnh(x.Id)">
-							<img src="/images/@x.PathImage" alt="" style="width: 100px;height: 110px;" />
+							<img class="img-thumbnail" src="/images/@x.PathImage" alt="" style="width: 100px;height: 110px;" />
 						</a>
 					</div>
 				}
@@ -70,7 +67,7 @@
 			<div class="col-md-10">
 				<center>
 					<a data-toggle="modal" data-target="#Add_P">
-						<img src="/images/@_path_Tam" alt="" style="width:500px;height:650px;margin-top:8.5px" />
+						<img class="img-thumbnail" src="/images/@_path_Tam" alt="" style="width:500px;height:650px;margin-top:8.5px" />
 					</a>
 				</center>
 			</div>
@@ -97,15 +94,13 @@
 						<h5>Màu sắc</h5>
 					</div>
 					<div class="col-md-9">
-						<div class="radio-input">
+						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 							@foreach (var x in _lstColor)
 							{
-								<label>
-									<input type="radio" id="value-1" name="value-radio-1" value="value-1" @onclick="()=>ChonMau(x)">
-									<span>@x</span>
-								</label>
+								_sttMau++;
+								<input type="radio" class="btn-check" name="btnradio mau" id="btnradio@_sttMau mau" autocomplete="off" @onclick="()=>ChonMau(x)">
+								<label class="btn btn-outline-primary" for="btnradio@_sttMau mau">@x</label>
 							}
-							<span class="selection"></span>
 						</div>
 					</div>
 				</div>
@@ -115,15 +110,13 @@
 						<h5>Size</h5>
 					</div>
 					<div class="col-md-9">
-						<div class="radio-input">
+						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 							@foreach (var x in _lstSize)
 							{
-								<label>
-									<input type="radio" id="value-2" name="value-radio-2" value="value-2" @onclick="()=>ChonSize(x)">
-									<span>@x</span>
-								</label>
+								_sttSize++;
+								<input type="radio" class="btn-check" name="btnradio size" id="btnradio@_sttSize size" autocomplete="off" @onclick="()=>ChonSize(x)">
+								<label class="btn btn-outline-primary" for="btnradio@_sttSize size">@x</label>
 							}
-							<span class="selection"></span>
 						</div>
 					</div>
 				</div>
@@ -144,9 +137,11 @@
 				</div>
 				<br />
 				<div>
-					<button type="submit" class="btn btn-warning btn_size2" @onclick="ThemVaoGiohang">Add to Cart</button>
-
-					<button type="button" class="btn btn-success btn_size2">Buy Now</button>
+					<center>
+						<button type="submit" class="btn btn-warning btn_size2" @onclick="ThemVaoGiohang">
+							<span style="font-size:25px">Thêm vào giỏ hàng</span>
+						</button>
+					</center>
 				</div>
 			</div>
 		</div>

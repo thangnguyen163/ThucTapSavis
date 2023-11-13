@@ -186,7 +186,8 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 					}
 					_ihttpcontextaccessor.HttpContext.Session.Remove("_lstCI_Vanglai");
 					_toastService.ShowSuccess("Đơn hàng đã được tạo thành công, để theo dõi đơn hàng hãy vào mục Lịch sử đơn hàng");
-					_navi.NavigateTo("https://localhost:7022/home");
+					return;
+					//_navi.NavigateTo("https://localhost:7022/home",true);
 				}
 				_toastService.ShowError("Tạo đơn hàng thất bại");
 			}

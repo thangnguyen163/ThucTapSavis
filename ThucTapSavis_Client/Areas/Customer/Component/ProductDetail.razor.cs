@@ -32,10 +32,16 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 		private User_VM? _user_vm { get; set; }
 		public string? _iduser { get; set; }
 		[Inject] Blazored.Toast.Services.IToastService _toastService { get; set; } // Khai báo khi cần gọi ở code-behind
+		private ISession? _ss { get; set; }
+		public int _sttSize { get; set; }
+		public int _sttMau { get; set; }
 
 		protected override async Task OnInitializedAsync()
 		{
-			_user_vm = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
+			_sttMau = 0;
+			_sttSize = 0;
+			_ss = _ihttpcontextaccessor.HttpContext.Session;
+			_user_vm = SessionServices.GetUserFromSession_User_VM(_ss, "User");
 			_iduser = _user_vm.Id.ToString();
 			if (_iduser == "00000000-0000-0000-0000-000000000000") _iduser = null;
 			_lstPrI_show_VM = (await _client.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show")).Where(c => c.ProductId == BanOnlineController._idP).ToList();
@@ -82,6 +88,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			_path_Tam = _lstImg_PI_tam.OrderBy(c => c.STT).Select(c => c.PathImage).FirstOrDefault();
 			_gia = _giaMin < _giaMax ? _giaMin?.ToString("#,##0") + "đ - " + _giaMax?.ToString("#,##0") + "đ" : _giaMax?.ToString("#,##0") + "đ";
 			_chonSize = string.Empty;
+			_lstSize.Clear();
 			_lstSize = lst_chonmau.Select(c => c.SizeName).Distinct().ToList();
 		}
 
@@ -94,7 +101,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 
 		public async Task ThemVaoGiohang()
 		{
-			var ss = _ihttpcontextaccessor.HttpContext.Session;
+			
 			if (_iduser != null)
 			{
 				_lstCI = await _client.GetFromJsonAsync<List<CartItem_VM>>($"https://localhost:7264/api/cartitem/get_cartitem_by_userid/{_iduser}");
@@ -118,15 +125,13 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			}
 			if (_iduser == null)
 			{
-				_lstCI = SessionServices.GetLstFromSession_LstCI(ss, "_lstCI_Vanglai");
+				_lstCI = SessionServices.GetLstFromSession_LstCI(_ss, "_lstCI_Vanglai");
 				var x = _pi_S_VM; // debug
 				if (_lstCI.Any(c => c.ProductItemId == _pi_S_VM.Id))
 				{
 					CartItem_VM ci = _lstCI.FirstOrDefault(c => c.ProductItemId == _pi_S_VM.Id);
-					_lstCI.Remove(ci);
 					ci.Quantity += _soLuong;
-					_lstCI.Add(ci);
-					var luuss1 = SessionServices.SetLstFromSession_LstCI(ss, "_lstCI_Vanglai", _lstCI);
+					var luuss1 = SessionServices.SetLstFromSession_LstCI(_ss, "_lstCI_Vanglai", _lstCI);
 					if (luuss1 == true)
 					{
 						_toastService.ShowSuccess("Sản phẩm đã được thêm vào giỏ hàng của bạn");
@@ -138,14 +143,16 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 						return;
 					}
 				}
-				CartItem_VM cartItems = new CartItem_VM();
-				cartItems.Id = Guid.NewGuid();
-				cartItems.UserId = Guid.Parse("8031befc-4dec-4df3-8387-5f759c253d7d");
-				cartItems.ProductItemId = _pi_S_VM.Id;
-				cartItems.Quantity = _soLuong;
-				cartItems.Status = 1;
+				CartItem_VM cartItems = new CartItem_VM
+				{
+					Id = Guid.NewGuid(),
+					UserId = Guid.Parse("8031befc-4dec-4df3-8387-5f759c253d7d"),
+					ProductItemId = _pi_S_VM.Id,
+					Quantity = _soLuong,
+					Status = 1
+				};
 				_lstCI.Add(cartItems);
-				var luuss2 = SessionServices.SetLstFromSession_LstCI(ss, "_lstCI_Vanglai", _lstCI);
+				var luuss2 = SessionServices.SetLstFromSession_LstCI(_ss, "_lstCI_Vanglai", _lstCI);
 				if (luuss2 == true)
 				{
 					_toastService.ShowSuccess("Sản phẩm đã được thêm vào giỏ hàng của bạn");
