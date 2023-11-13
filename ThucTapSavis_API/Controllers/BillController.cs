@@ -69,7 +69,7 @@ namespace ThucTapSavis_API.Controllers
             bill1.Xa = bill.Xa;
             bill1.Huyen = bill.Huyen;
             bill1.DiaChiCuThe= bill.DiaChiCuThe;
-            bill.Status = bill.Status;
+            bill1.Status = bill.Status;
             var a = await _billServices.AddBill(bill1);
             return Ok(a);
         }

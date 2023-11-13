@@ -4,187 +4,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ThucTapSavis_Client</title>
-    <link rel="stylesheet" href="~/css/TrangChu.css" />
-    <link rel="stylesheet" href="~/css/product.css" />
-    <link rel="stylesheet" href="~/css/detail.css" />
-    <link rel="stylesheet" href="~/css/gioithieu.css" />
-    <link rel="stylesheet" href="~/css/login.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    @* <link rel="stylesheet" href="~/css/ShowInfoUser.css" asp-append-version="true" /> *@
-    <link rel="stylesheet" href="~/ThucTapSavis_Client.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" integrity="sha512-ZnR2wlLbSbr8/c9AgLg3jQPAattCUImNsae6NHYnS9KrIwRdcY9DxFotXhNAKIKbAXlRnujIqUWoXXwqyFOeIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800&display=swap" />
-    <link rel="stylesheet" href="~/css/login.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - ThucTapSavis_Client</title>
+	<link rel="stylesheet" href="~/css/TrangChu.css" />
+	<link rel="stylesheet" href="~/css/product.css" />
+	<link rel="stylesheet" href="~/css/detail.css" />
+	<link rel="stylesheet" href="~/css/gioithieu.css" />
+	<link rel="stylesheet" href="~/css/login.css" />
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	@* <link rel="stylesheet" href="~/css/ShowInfoUser.css" asp-append-version="true" /> *@
+	<link rel="stylesheet" href="~/ThucTapSavis_Client.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" integrity="sha512-ZnR2wlLbSbr8/c9AgLg3jQPAattCUImNsae6NHYnS9KrIwRdcY9DxFotXhNAKIKbAXlRnujIqUWoXXwqyFOeIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800&display=swap" />
+	<link rel="stylesheet" href="~/css/login.css" />
 
-    <link href="~/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="~/css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid container">
-                <a class="navbar-brand"><img src="https://file.hstatic.net/200000312481/file/2222_1790556c641f404aab8dfb038b47eb0e.png" style="width:60%"></a>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item font">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item font">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Promotion" asp-action="Index">Admin</a>
-                        </li>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container-fluid container">
+				<div class="navbar-brand">
+					<a asp-area="Customer" asp-controller="Home" asp-action="Index">
+						<img src="https://file.hstatic.net/200000312481/file/2222_1790556c641f404aab8dfb038b47eb0e.png" style="width:60%">
+					</a>
+				</div>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item font">
+							<a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a>
+						</li>
+						<li class="nav-item font">
+							<a class="nav-link text-dark" asp-area="Admin" asp-controller="Promotion" asp-action="Index">Admin</a>
+						</li>
 
-                        <li class="nav-item font">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="BanOnline" asp-action="ShowProduct">Product</a>
-                        </li>
+						<li class="nav-item font">
+							<a class="nav-link text-dark" asp-area="Customer" asp-controller="BanOnline" asp-action="ShowProduct">Sản phẩm</a>
+						</li>
 
-                        <li class="nav-item font">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Bill">Bill</a>
-                        </li>
-                        <li class="nav-item font">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="About">About</a>
-                        </li>
-                        <li class="nav-item font" style="margin-left: 300px; font-size: 23px;">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="BanOnline" asp-action="ShowCart"><i class="fa-solid fa-cart-shopping"></i></a>
-                        </li>
+						<li class="nav-item font">
+							<a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Bill">Bill</a>
+						</li>
+						<li class="nav-item font">
+							<a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="About">ABOUT US</a>
+						</li>
+						<li class="nav-item font" style="margin-left: 300px; font-size: 23px;">
+							<a class="nav-link text-dark" asp-area="Customer" asp-controller="BanOnline" asp-action="ShowCart"><i class="fa-solid fa-cart-shopping"></i></a>
+						</li>
 
-                        <li class="nav-item font dropdown" style="margin-left: 30px; font-size: 23px;">
-                            <a class="nav-link text-dark dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                                <i class="fa-solid fa-circle-user"></i>
-                                <span class="font">@HomeController._nameUser</span>
-                            </a>
+						<li class="nav-item font dropdown" style="margin-left: 30px; font-size: 23px;">
+							<a class="nav-link text-dark dropdown-toggle" role="button" data-bs-toggle="dropdown">
+								<i class="fa-solid fa-circle-user"></i>
+								<span class="font">@HomeController._nameUser</span>
+							</a>
 
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Login">Login</a></li>
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="SignUp">SignUp</a></li>
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Logout">LogOut</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Login">Login</a></li>
+								<li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="SignUp">SignUp</a></li>
+								<li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Logout">LogOut</a></li>
+							</ul>
+						</li>
+					</ul>
 
-                </div>
-            </div>
-        </nav>
+				</div>
+			</div>
+		</nav>
 
-    </header>
-    <div style="width:80%;margin:auto">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	</header>
+	<div style="width:80%;margin:auto">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
 
-    <div class="footer1" style="margin-top:50px">
-        <div class="text-center text-lg-start bg-light text-muted">
-            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-                <div>
-                    <a href="" class="me-4 text-reset">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset">
-                        <i class="fab fa-google"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                <!-- Right -->
-            </section>
-            <section class="">
-                <div class="container text-center text-md-start mt-5">
-                    <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="fas fa-gem me-3"></i>Company name
-                            </h6>
-                            <p>
-                                Here you can use rows and columns to organize your footer content. Lorem ipsum
-                                dolor sit amet, consectetur adipisicing elit.
-                            </p>
-                        </div>
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                Products
-                            </h6>
-                            <p>
-                                <a href="#!" class="text-reset">HOODIE</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">SWEATER</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">POLO</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">TEE</a>
-                            </p>
-                        </div>
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                Chính sách
-                            </h6>
-                            <p>
-                                <a href="#" class="text-reset">Chính sách đổi trả</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">Chính sách giao hàng</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">Chính sách bảo hành </a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">Hướng dẫn sử dụng</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">Hướng dẫn sử dụng</a>
-                            </p>
-                        </div>
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">Liên hệ</h6>
-                            <p><i class="fas fa-home me-3"></i> Trịnh Văn Bô</p>
-                            <p>
-                                <i class="fas fa-envelope me-3"></i>
-                                thangnvph25980@fpt.edu.vn
-                            </p>
-                            <p><i class="fas fa-phone me-3"></i>0367180646</p>
-                            <p><i class="fas fa-print me-3"></i>0932459037</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2023 Bản quyền thuộc:
-                <a class="text-white" href="">Nguyễn Văn Thắng</a>
-            </div>
+	<div class="footer1" style="margin-top:50px">
+		<div class="text-center text-lg-start bg-light text-muted">
+			<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+				<div>
+					<a href="" class="me-4 text-reset">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+					<a href="" class="me-4 text-reset">
+						<i class="fab fa-twitter"></i>
+					</a>
+					<a href="" class="me-4 text-reset">
+						<i class="fab fa-google"></i>
+					</a>
+					<a href="" class="me-4 text-reset">
+						<i class="fab fa-instagram"></i>
+					</a>
+					<a href="" class="me-4 text-reset">
+						<i class="fab fa-linkedin"></i>
+					</a>
+					<a href="" class="me-4 text-reset">
+						<i class="fab fa-github"></i>
+					</a>
+				</div>
+				<!-- Right -->
+			</section>
+			<section class="">
+				<div class="container text-center text-md-start mt-5">
+					<div class="row mt-3">
+						<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+							<h6 class="text-uppercase fw-bold mb-4">
+								<i class="fas fa-gem me-3"></i>Company name
+							</h6>
+							<p>
+								Here you can use rows and columns to organize your footer content. Lorem ipsum
+								dolor sit amet, consectetur adipisicing elit.
+							</p>
+						</div>
+						<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+							<h6 class="text-uppercase fw-bold mb-4">
+								Products
+							</h6>
+							<p>
+								<a href="#!" class="text-reset">HOODIE</a>
+							</p>
+							<p>
+								<a href="#!" class="text-reset">SWEATER</a>
+							</p>
+							<p>
+								<a href="#!" class="text-reset">POLO</a>
+							</p>
+							<p>
+								<a href="#!" class="text-reset">TEE</a>
+							</p>
+						</div>
+						<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+							<h6 class="text-uppercase fw-bold mb-4">
+								Chính sách
+							</h6>
+							<p>
+								<a href="#" class="text-reset">Chính sách đổi trả</a>
+							</p>
+							<p>
+								<a href="#!" class="text-reset">Chính sách giao hàng</a>
+							</p>
+							<p>
+								<a href="#!" class="text-reset">Chính sách bảo hành </a>
+							</p>
+							<p>
+								<a href="#!" class="text-reset">Hướng dẫn sử dụng</a>
+							</p>
+							<p>
+								<a href="#!" class="text-reset">Hướng dẫn sử dụng</a>
+							</p>
+						</div>
+						<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+							<h6 class="text-uppercase fw-bold mb-4">Liên hệ</h6>
+							<p><i class="fas fa-home me-3"></i> Trịnh Văn Bô</p>
+							<p>
+								<i class="fas fa-envelope me-3"></i>
+								thangnvph25980@fpt.edu.vn
+							</p>
+							<p><i class="fas fa-phone me-3"></i>0367180646</p>
+							<p><i class="fas fa-print me-3"></i>0932459037</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Copyright -->
+			<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+				© 2023 Bản quyền thuộc:
+				<a class="text-white" href="">Nguyễn Văn Thắng</a>
+			</div>
 
-        </div>
-    </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+		</div>
+	</div>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
 
-    <base href="~/" />
-    <script src="_framework/blazor.server.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script>
+	<base href="~/" />
+	<script src="_framework/blazor.server.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script>
 
-        function OnScrollEvent() {
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
+		function OnScrollEvent() {
+			document.documentElement.scrollTop = 0;
+		}
+	</script>
 </body>
 </html>

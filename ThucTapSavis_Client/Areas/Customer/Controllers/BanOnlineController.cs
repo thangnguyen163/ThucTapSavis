@@ -16,7 +16,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 		private Product_VM _P_Show = new Product_VM();
 		public static Guid _idP;
 		public static IPagedList<Product_VM> _pageList;
-		public static MomoExecuteResponseModel _momoExecuteResponseModel;
+		public static MomoExecuteResponseModel _momoExecuteResponseModel = new ();
 		[Route("all-product")]
 		public async Task<IActionResult> ShowProduct(int? page)
 		{
