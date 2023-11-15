@@ -24,6 +24,7 @@ namespace ThucTapSavis_Shared.ViewModel
         public string Xa { get; set; }
         public string? DiaChiCuThe { get; set; }
         public int Status { get; set; }
+        public int PhiShip { get; set; }
 
     }
 }

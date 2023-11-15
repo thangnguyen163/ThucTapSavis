@@ -33,7 +33,7 @@ namespace ThucTapSavis_API.Controllers
             Category category1 = new Category();
             category1.Id=category.Id;
             category1.Name=category.Name;
-            category1.Status=category.Status;
+            category1.Status=1;
             var a = await CategoryServices.AddCategory(category1);
             return Ok(a);
         }

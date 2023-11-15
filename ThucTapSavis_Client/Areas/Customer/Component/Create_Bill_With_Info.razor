@@ -155,7 +155,7 @@
 						<a style="color:#7dccff;cursor:pointer;" @onclick="BackToCart">Giỏ hàng</a>
 					</div>
 					<button class="btnSuccesBill" @onclick="Btn_DatHang">
-						Hoàn tất đơn hàng
+						@_bill_vm.PhuongThucTT
 					</button>
 				</div>
 			</div>
@@ -199,6 +199,10 @@
 			<label>Tạm tính </label>
 			<label>@(_tongTienHang?.ToString("#,##0")) đ</label>
 		</div>
-		<div><h4>Tổng cộng @(_tongTienHang?.ToString("#,##0")) đ</h4> </div>
+		<div class="countPrice">
+			<label>Phí ship </label>
+			<label>@(_bill_vm.PhiShip.ToString("#,##0")) đ</label>
+		</div>
+		<div><h4>Tổng cộng @(_tongTienAll?.ToString("#,##0")) đ</h4> </div>
 	</div>
 </div>

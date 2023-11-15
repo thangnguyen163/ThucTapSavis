@@ -39,7 +39,7 @@ namespace ThucTapSavis_API.Controllers
 			Product.Id = Guid.NewGuid();
 			Product.Name = rvm.Name;
 			Product.CategoryId = rvm.CategoryId;
-			Product.Status = rvm.Status;
+			Product.Status = 1;
 			await _Product.AddProduct(Product);
 			return Ok();
 		}

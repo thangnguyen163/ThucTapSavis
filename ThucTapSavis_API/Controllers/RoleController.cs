@@ -34,7 +34,7 @@ namespace ThucTapSavis_API.Controllers
 			Role role = new Role();
 			role.Id = Guid.NewGuid();
 			role.Name = rvm.RoleName;
-			role.Status = rvm.Status;
+			role.Status = 1;
 			await _role.AddRole(role);
 			return Ok();
 		}
