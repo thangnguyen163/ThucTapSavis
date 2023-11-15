@@ -10,6 +10,7 @@ namespace ThucTapSavis_Shared.ViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string TenKhongDau { get; set; }
         public int Status { get; set; }
     }
 }

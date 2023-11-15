@@ -223,6 +223,8 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 				_toastService.ShowError("Thể loại đã tồn tại");
 				return;
 			}
+			_Cate_VM.Id = Guid.NewGuid();
+			_Cate_VM.TenKhongDau = "";
 			var x = await _client.PostAsJsonAsync("https://localhost:7264/api/category/add_category", _Cate_VM);
 			if (x.IsSuccessStatusCode) _toastService.ShowSuccess("Thêm thành công");
 			_lstCate = await _client.GetFromJsonAsync<List<Category_VM>>("https://localhost:7264/api/category/get_category");
@@ -239,6 +241,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 				_toastService.ShowError("Màu sắc đã tồn tại");
 				return;
 			}
+			_C_VM.Id = Guid.NewGuid();
 			var x = await _client.PostAsJsonAsync("https://localhost:7264/api/color/add_color", _C_VM);
 			if (x.IsSuccessStatusCode) _toastService.ShowSuccess("Thêm thành công");
 			_lstC = await _client.GetFromJsonAsync<List<Color_VM>>("https://localhost:7264/api/color/get_color");
@@ -255,6 +258,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 				_toastService.ShowError("Kích thước đã tồn tại");
 				return;
 			}
+			_S_VM.Id = Guid.NewGuid();
 			var x = await _client.PostAsJsonAsync("https://localhost:7264/api/Size/Add", _S_VM);
 			if (x.IsSuccessStatusCode) _toastService.ShowSuccess("Thêm thành công");
 			_lstS = await _client.GetFromJsonAsync<List<Size_VM>>("https://localhost:7264/api/Size/get_size");

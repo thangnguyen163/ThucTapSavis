@@ -95,6 +95,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				a.Xa = bill.Xa;
 				a.SDTNhan = bill.SDTNhan;
 				a.TenNguoiNhan= bill.TenNguoiNhan;
+				a.PhiShip= bill.PhiShip;
 				context.Bills.Update(a);
 				context.SaveChanges();
 				return a;

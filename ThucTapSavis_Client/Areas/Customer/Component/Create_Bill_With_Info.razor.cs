@@ -14,7 +14,6 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 		[Inject] private NavigationManager _navi { get; set; }
 		[Inject] public IHttpContextAccessor _ihttpcontextaccessor { get; set; }
 		[Inject] Blazored.Toast.Services.IToastService _toastService { get; set; } // Khai báo khi cần gọi ở code-behind
-																				   //private List<User_VM> _lstUser = new 
 		private List<CartItem_VM> _lstCI = new List<CartItem_VM>();
 		private List<Image_Join_ProductItem> _lstImg_PI = new List<Image_Join_ProductItem>();
 		private List<Image_Join_ProductItem> _lstImg_PI_tam = new List<Image_Join_ProductItem>();
@@ -26,6 +25,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 		private ProductItem_VM _pi_vm = new ProductItem_VM();
 		public string _sdt { get; set; }
 		public int? _tongTienHang { get; set; } = 0;
+		public int? _tongTienAll { get; set; } = 0;
 		private List<Province_VM> _lstTinhTp = new List<Province_VM>();
 		private List<District_VM> _lstQuanHuyen = new List<District_VM>();
 		private List<Ward_VM> _lstXaPhuong = new List<Ward_VM>();
@@ -36,7 +36,6 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 		private List<ProductItem_VM> _lstPrI_VM = new List<ProductItem_VM>();
 		public string _TinhTp { get; set; }
 		public string _QuanHuyen { get; set; }
-		public string _XaPhuong { get; set; }
 		public string _ptttbill1 { get; set; }
 		public string _ptttbill2 { get; set; }
 		public int STT { get; set; } = 0;
@@ -77,7 +76,6 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				_bill_vm.Huyen = _user_vm.Huyen;
 				await ChonQuanHuyen();
 				_bill_vm.Xa = _user_vm.Xa;
-				await ChonXaPhuong();
 			}
 			if (_user_vm == null)
 			{
@@ -90,18 +88,13 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			}
 			_bill_vm.PhuongThucTT = "Thanh toán khi nhận hàng (COD)";
 			_bill_vm.Note = ShowCart._note;
-			//_bill_vm.Province = string.Empty;
-			//_bill_vm.District = string.Empty;
-			//_bill_vm.WardName = string.Empty;
-			//_TinhTp = _bill_vm.Province;
-			//_QuanHuyen = _bill_vm.District;
-			//_XaPhuong = _bill_vm.WardName;
-
+			_bill_vm.PhiShip = 30000;
 			foreach (var x in _lstCI)
 			{
 				_pi_s_vm = _lstPrI_show_VM.Where(c => c.Id == x.ProductItemId).FirstOrDefault();
 				_tongTienHang += x.Quantity * _pi_s_vm.CostPrice;
 			}
+			_tongTienAll = _tongTienHang + _bill_vm.PhiShip;
 		}
 
 		//public Guid Id { get; set; }
@@ -135,7 +128,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				//var abc = _bill_vm;
 				// Bill
 				_bill_vm.Id = Guid.NewGuid();
-				_bill_vm.TotalAmount = _tongTienHang;
+				_bill_vm.TotalAmount = _tongTienAll;
 				_bill_vm.Status = 1;
 				if (_bill_vm.Note == string.Empty) _bill_vm.Note = "Không có ghi chú";
 				//_bill_vm.HistoryConsumerPointID = _lstHCP_VM.FirstOrDefault().Id;
@@ -145,7 +138,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				if (_user_vm.FullName == null) _ord.FullName = _bill_vm.TenNguoiNhan;
 				else _ord.FullName = _user_vm.FullName;
 				_ord.OrderInfo = _bill_vm.Note;
-				_ord.Amount = _tongTienHang;
+				_ord.Amount = _tongTienAll;
 				var reponse = await _httpClient.PostAsJsonAsync("https://localhost:7264/api/Momo/CreatePaymentAsync", _ord);
 				var reponse2 = await reponse.Content.ReadFromJsonAsync<MomoCreatePaymentResponseModel>();
 				_navi.NavigateTo($"{reponse2.PayUrl}", true);
@@ -155,7 +148,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				var codeToday = "B" + DateTime.Now.ToString().Substring(0, 10).Replace("/", "") + ".";
 				_lstBill = (await _httpClient.GetFromJsonAsync<List<Bill_VM>>("https://localhost:7264/api/bill/get_all_bill")).Where(c => c.BillCode.StartsWith(codeToday)).ToList();
 				_bill_vm.Id = Guid.NewGuid();
-				_bill_vm.TotalAmount = _tongTienHang;
+				_bill_vm.TotalAmount = _tongTienAll;
 				_bill_vm.Status = 1;
 				if (_bill_vm.Note == string.Empty) _bill_vm.Note = "Không có ghi chú";
 				//_bill_vm.HistoryConsumerPointID = _lstHCP_VM.FirstOrDefault().Id;
@@ -229,11 +222,6 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			District_VM chon = _lstQuanHuyen_Data.FirstOrDefault(c => c.Name == _bill_vm.Huyen);
 			_lstXaPhuong = _lstXaPhuong_Data.Where(c => c.DistrictId == chon.Id).ToList();
 			_QuanHuyen = _bill_vm.Huyen;
-		}
-
-		public async Task ChonXaPhuong()
-		{
-			_XaPhuong = _bill_vm.Xa;
 		}
 	}
 }

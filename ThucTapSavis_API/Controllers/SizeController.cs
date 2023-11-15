@@ -35,9 +35,9 @@ namespace ThucTapSavis_API.Controllers
 		public async Task<ActionResult<Size>> PostSize(Size_VM rvm)
 		{
 			Size Size = new Size();
-			Size.Id = Guid.NewGuid();
+			Size.Id = rvm.Id;
 			Size.Name = rvm.Name;
-			Size.Status = rvm.Status;
+			Size.Status = 1;
 			await _Size.AddSize(Size);
 			return Ok();
 		}

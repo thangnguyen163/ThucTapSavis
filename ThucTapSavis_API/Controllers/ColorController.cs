@@ -33,7 +33,7 @@ namespace ThucTapSavis_API.Controllers
             Color color1 = new Color();
             color1.Id = color.Id;
             color1.Name = color.Name;
-            color1.Status = color.Status;
+            color1.Status = 1;
             var a = await colorServices.AddColor(color1);
             return Ok(a);
         }

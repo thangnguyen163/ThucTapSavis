@@ -24,9 +24,9 @@ namespace ThucTapSavis_Shared.Models
         public string Xa { get; set; }
         public string? DiaChiCuThe { get; set; }
         public int Status { get; set; }
+		public int PhiShip { get; set; }
 
-
-        public User Users { get; set; }
+		public User Users { get; set; }
         public virtual ICollection<BillItem> BillItems { get; set; }
     }
 }
