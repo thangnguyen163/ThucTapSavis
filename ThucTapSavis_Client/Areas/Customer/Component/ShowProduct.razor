@@ -1,4 +1,11 @@
 ﻿@using ThucTapSavis_Client.Areas.Customer.Controllers;
+@using Blazored.Toast.Configuration
+<BlazoredToasts Position="ToastPosition.BottomRight"
+				Timeout="10"
+				IconType="IconType.FontAwesome"
+				SuccessClass="success-toast-override"
+				SuccessIcon="fa-solid fa-check"
+				ErrorIcon="fa-solid fa-triangle-exclamation" />
 <div class="row ">
 	<div class="col-md-3">
 		<hr style="border: 1px solid orangered;">
@@ -19,9 +26,15 @@
 
 	<div class="col-md-9">
 		<div class="row title_tee">
-			<h2>Tất cả sản phẩm</h2>
+			<div class="col-md-8"><h2>Tất cả sản phẩm</h2></div>
+			<div class="col-md-4">
+				<div class="search" style="width:100%">
+					<input placeholder="Search..." type="text" style="width:100%" @bind-value="_searchProduct">
+					<button type="submit" @onclick="SearchPrd">Go</button>
+				</div>
+			</div>
 		</div>
-		<div class="row showsp" >
+		<div class="row showsp">
 
 			@if (_lstPrI_show_VM == null)
 			{
@@ -36,7 +49,7 @@
 					var giamax = _lstPrI_show_VM.Where(c => c.ProductId == x.Id).Max(c => c.CostPrice);
 
 					<div class="col-md-4">
-						<a href="/product-detail?id=@x.Id">
+						<a href="/product-detail/@x.Id">
 							<img class="img-thumbnail" src="/images/@img" alt="" style="width:100%;height:400px">
 						</a>
 						@x.Name <br>

@@ -91,15 +91,23 @@
 				<br />
 				<div style="display:flex">
 					<div class="col-md-3">
+						<h5>Số lượng tồn</h5>
+					</div>
+					<div class="col-md-9">
+						<h5>@_soluongton</h5>
+					</div>
+				</div>
+				<br />
+				<div style="display:flex">
+					<div class="col-md-3">
 						<h5>Màu sắc</h5>
 					</div>
 					<div class="col-md-9">
 						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 							@foreach (var x in _lstColor)
 							{
-								_sttMau++;
-								<input type="radio" class="btn-check" name="btnradio mau" id="btnradio@_sttMau mau" autocomplete="off" @onclick="()=>ChonMau(x)">
-								<label class="btn btn-outline-primary" for="btnradio@_sttMau mau">@x</label>
+								<input type="radio" class="btn-check" name="btnradio mau" id="btnradio @x mau" autocomplete="off" @onclick="()=>ChonMau(x)">
+								<label class="btn btn-outline-primary" for="btnradio @x mau">@x</label>
 							}
 						</div>
 					</div>
@@ -113,9 +121,16 @@
 						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 							@foreach (var x in _lstSize)
 							{
-								_sttSize++;
-								<input type="radio" class="btn-check" name="btnradio size" id="btnradio@_sttSize size" autocomplete="off" @onclick="()=>ChonSize(x)">
-								<label class="btn btn-outline-primary" for="btnradio@_sttSize size">@x</label>
+								@* if (_lstPrI_show_VM.Where(c => c.ColorName == _chonMau).Select(c => c.AvaiableQuantity).FirstOrDefault() > 0)
+								{
+									<input type="radio" class="btn-check" name="btnradio size" id="btnradio @x size" autocomplete="off" @onclick="()=>ChonSize(x)">
+									<label class="btn btn-outline-primary" for="btnradio @x size">@x</label>
+								}
+								else
+								{ *@
+								<input type="radio" class="btn-check" name="btnradio size" id="btnradio @x size" autocomplete="off" @onclick="()=>ChonSize(x)">
+									<label class="btn btn-outline-primary" for="btnradio @x size">@x</label>
+								@* } *@
 							}
 						</div>
 					</div>
