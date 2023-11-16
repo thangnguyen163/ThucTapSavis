@@ -68,10 +68,17 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         {
             var c = _promotion.Id = Guid.NewGuid();
             var a = await _httpClient.PostAsJsonAsync<Promotion_VM>("https://localhost:7264/api/Promotion/Add", _promotion);
-
+            var d = await _httpClient.GetFromJsonAsync<List<PromotionItem_VM>>("https://localhost:7264/api/PromotionItem");
 
             foreach (var item in _lstProductItemSelect)
             {
+                foreach (var ab in d)
+                {
+                    if (ab.ProductItemsId == item)
+                    {
+                        var f = await _httpClient.DeleteAsync($"https://localhost:7264/api/PromotionItem/delete_promotionItem_byId/{ab.Id}");
+                    }
+                }
                 _promotionItem.Id = Guid.NewGuid();
                 _promotionItem.PromotionsId = c;
                 _promotionItem.ProductItemsId = item;
@@ -85,33 +92,6 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
             }
         }
 
-
-        //private async Task ToggleProductSelection(Guid productId)
-        //{
-        //    _lstProductItem = await _httpClient.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
-        //    if (_lstProductSelect.Contains(productId))
-        //    {
-        //        _lstProductSelect.Remove(productId);
-        //    }
-        //    else
-        //    {
-        //        _lstProductSelect.Add(productId);
-        //    }
-        //    _lstProductItem = _lstProductItem.Where(p => _lstProductSelect.Contains(p.ProductId)).ToList();
-        //}
-
-        //private async Task ToggleProductItemSelection(Guid productItemId)
-        //{
-        //    if (_lstProductItemSelect.Contains(productItemId))
-        //    {
-        //        _lstProductItemSelect.Remove(productItemId);
-        //    }
-        //    else
-        //    {
-        //        _lstProductItemSelect.Add(productItemId);
-        //    }
-
-        //}
 
         private async Task ToggleProductSelection(Guid productId)
         {

@@ -1,0 +1,8 @@
+﻿@using ThucTapSavis_Client.Areas.Customer.Component
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Customer/Views/Shared/_UserLayout.cshtml";
+}
+@(await Html.RenderComponentAsync<InforUser>(RenderMode.Server))
+

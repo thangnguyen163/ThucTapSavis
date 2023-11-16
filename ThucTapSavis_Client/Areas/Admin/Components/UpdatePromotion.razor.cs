@@ -68,10 +68,18 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         {
             var a = await _httpClient.PutAsJsonAsync<Promotion_VM>("https://localhost:7264/api/Promotion/Update/", _promotion);
             var c = _promotion.Id;
+            var d = await _httpClient.GetFromJsonAsync<List<PromotionItem_VM>>("https://localhost:7264/api/PromotionItem");
             if (_lstProductItemSelect_Them.Count > 0)
             {
                 foreach (var item in _lstProductItemSelect_Them)
                 {
+                    foreach (var ab in d)
+                    {
+                        if (ab.ProductItemsId == item)
+                        {
+                            var f = await _httpClient.DeleteAsync($"https://localhost:7264/api/PromotionItem/delete_promotionItem_byId/{ab.Id}");
+                        }
+                    }
                     if (!_lstPromotionItem.Any(x => x.ProductItemsId == item) || !_lstPromotionItem.Any(x => x.PromotionsId == c))
                     {
                         _promotionItem.Id = Guid.NewGuid();

@@ -291,7 +291,10 @@
                                         <td>@x.AvaiableQuantity</td>
                                         <td>@x.PurchasePrice</td>
                                         <td>@x.CostPrice</td>
-                                        <td>@(x.Status == 1 ? "Còn hàng" : x.Status == 2 ? "Hết hàng" : "Ngừng kinh doanh")</td>
+                                        <td>
+                                            <span class="@(x.Status==0?"badge bg-danger":x.Status==1?"badge bg-success":"badge bg-warning")">
+                                                @(x.Status == 1 ? "Còn hàng" : x.Status == 2 ? "Hết hàng" : "Ngừng kinh doanh")</span>   
+                                            </td>
                                     </tr>
                                 }
                             </tbody>

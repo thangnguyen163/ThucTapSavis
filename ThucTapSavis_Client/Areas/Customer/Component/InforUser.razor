@@ -1,0 +1,193 @@
+﻿@using Blazored.Toast.Configuration
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fas fa-check-circle"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa-solid fa-check"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />
+<style>
+    .btnTrongSuot {
+        background-color: transparent;
+        color: blue;
+        border: none;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .btnTrongSuot2 {
+        background-color: transparent;
+        border: none;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .btnTrongSuot1 {
+        background-color: transparent;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .btne:disabled {
+        opacity: .7;
+        cursor: not-allowed;
+    }
+
+    .back {
+        background-color: rgba(0,0,0,0.7);
+    }
+</style>
+<div style="background-color:#fff;padding:30px 30px;">
+    <EditForm Model="_user_VM">
+        <div>
+            <label style="font-size:25px;font-weight:450; margin-bottom:20px;">Thông tin tài khoản</label>
+            <div class="nameUser" style="width:70%;margin-bottom:15px;">
+                <label style="width:45% ; font-size:15px;">Tên đăng nhập</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.UserName</label>
+            </div>
+            <div class="nameUser" style="width:70%;margin-bottom:15px;">
+                <label style="width:45%; font-size:15px;">Họ và Tên</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.FullName</label>
+            </div>
+            <div class="nameUser" style="width:70%;margin-bottom:15px;">
+                <label style="width:45%; font-size:15px;">Số điện thoại</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.NumberPhone</label>
+            </div>
+            <div class="nameUser" style="width:70%;margin-bottom:25px;">
+                <label style="width:45% ; font-size:15px;">Email</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.Email</label>
+            </div>
+
+            <div class="nameUser" style="width:70%;margin-bottom:15px;">
+                <label style="width:45% ; font-size:15px;">Địa chỉ cụ thể</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.DiaChiCuThe</label>
+            </div>
+            <div class="nameUser" style="width:70%;margin-bottom:15px;">
+                <label style="width:45%; font-size:15px;">Xã/Phường</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.Xa</label>
+            </div>
+            <div class="nameUser" style="width:70%;margin-bottom:15px;">
+                <label style="width:45%; font-size:15px;">Quận/Huyện</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.Huyen</label>
+            </div>
+            <div class="nameUser" style="width:70%;margin-bottom:25px;">
+                <label style="width:45% ; font-size:15px;">Tỉnh/Thành phố</label>
+                <label style="text-align:left; font-size:15px;" class="col-6">@_user_VM.Tinh</label>
+            </div>
+            <div class="nameUser" style="width:70%;">
+                <button class="btnUpdateInfo" data-bs-toggle="modal" @onclick="()=>LoadUser(_user_VM.Id)" style="font-size:13px;font-weight:450;">
+                    CẬP NHẬT
+                </button>
+            </div>
+        </div>
+    </EditForm>
+
+</div>
+
+
+<EditForm Model="_user_VM">
+    <div class="modal fade @(isModalOpenUpdateUser ? "show back" : "")"
+         id="popupAddAdress" tabindex="-1"
+         aria-hidden="@(isModalOpenUpdateUser ? "" : "true")"
+         style="display: @(isModalOpenUpdateUser ? "block" : "none")"
+         aria-modal="@(isModalOpenUpdateUser ? "true" : "none")"
+         role="@(isModalOpenUpdateUser ? "dialog" : "none")">
+        <DataAnnotationsValidator />
+        <div class="modal-dialog modal-dialog-centered" style="width:150%">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <label style="font-size:22px;font-weight:600;padding:15px 50px 15px 15px">Chỉnh sửa thông tin tài khoản</label>
+                    <div style=" display: flex;flex-direction:column;">
+
+                        <div class="inputName">
+                            <i class="fa-solid fa-user-pen fa-l" style="color: #a1a1a1"></i>
+                            <div style="display:flex;flex-direction:column;margin-left:10px;width:90%">
+                                <InputText class="form_field" name="name" id='name' @bind-Value="@_user_VM.FullName" required placeholder="Tên của bạn" />
+                                <ValidationMessage For="()=>_user_VM.FullName" />
+                            </div>
+                        </div>
+                        <div class="inputName">
+                            <i class="fa-solid fa-phone fa-l" style="color: #a1a1a1"></i>
+                            <div style="display:flex;flex-direction:column;margin-left:10px;width:90%">
+                                <InputText class="form_field" name="name" id='name' @bind-Value="@_user_VM.NumberPhone" required placeholder="Số điện thoại" />
+                                <ValidationMessage For="()=>_user_VM.NumberPhone" />
+                            </div>
+                        </div>
+                        <div class="inputName">
+                            <i class="fa-solid fa-phone fa-l" style="color: #a1a1a1"></i>
+                            <div style="display:flex;flex-direction:column;margin-left:10px;width:90%">
+                                <InputText class="form_field" name="name" id='name' @bind-Value="@_user_VM.Email" required placeholder="Số điện thoại" />
+                                <ValidationMessage For="()=>_user_VM.Email" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="inputName" style="padding-left:15px;">
+                                <div style="display:flex;flex-direction:column;">
+                                    <InputSelect class="form_field" @bind-Value="@_user_VM.Tinh" @onclick="@ChonTinhTP" required>
+                                        <option value="@string.Empty" selected>--Tỉnh/Thành phố--</option>
+                                        @foreach (var x in _lstTinhTp)
+                                        {
+                                            <option value="@x.Name">@x.Name</option>
+                                        }
+                                    </InputSelect>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="inputName" style="padding-left:15px;">
+                                <div style="display:flex;flex-direction:column;">
+                                    <InputSelect class="form_field" @bind-Value="@_user_VM.Huyen" @onclick="@ChonQuanHuyen" required>
+                                        <option value="@string.Empty" selected>--Quận/Huyện--</option>
+                                        @foreach (var x in _lstQuanHuyen)
+                                        {
+                                            <option value="@x.Name">@x.Name</option>
+                                        }
+                                    </InputSelect>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="inputName" style="padding-left:15px;">
+                                <div style="display:flex;flex-direction:column;">
+                                    <InputSelect class="form_field" @bind-Value="@_user_VM.Xa" @onclick="@ChonXaPhuong" required>
+                                        <option value="@string.Empty" selected>--Xã/Phường--</option>
+                                        font              @foreach (var x in _lstXaPhuong)
+                                        {
+                                            <option value="@x.Name">@x.Name</option>
+                                        }
+                                    </InputSelect>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputName" style="width:100%;">
+                        <i class="fa-solid fa-phone fa-l" style="color: #a1a1a1"></i>
+                        <div style="display:flex;flex-direction:column;margin-left:10px; width:90%;">
+                            <InputText class="form_field" name="name" id='name'
+                                       @bind-Value="@_user_VM.DiaChiCuThe" required placeholder="Địa chỉ cụ thể" />
+                        </div>
+                    </div><ValidationMessage For="()=>_user_VM.DiaChiCuThe" style="color:red;margin-top:-15px;margin-left:25px;font-size:11pt;" />
+                    <button class="btnSuccesUpDateInfo" @onclick="UpdateUser">
+                        CẬP NHẬT TÀI KHOẢN
+                        <i class="fa-sharp fa-solid fa-arrow-right-long" style="margin-left:20px;"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</EditForm>
+

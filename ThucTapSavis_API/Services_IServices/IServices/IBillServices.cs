@@ -11,5 +11,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 		public Task<Bill> GetAllBillById(Guid Id);
 		public Task<List<Bill>> GetAllBillByUser(Guid Id);
 		public Task<List<Bill_ShowModel>> GetAllBill();
+		public Task<List<Bill>> GetAllBill_VM();
 	}
 }
