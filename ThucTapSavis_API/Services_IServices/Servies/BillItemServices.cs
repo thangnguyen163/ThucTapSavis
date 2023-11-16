@@ -71,8 +71,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
                         join q in context.Products on c.ProductId equals q.Id
                         join d in context.Colors on c.ColorId equals d.Id
                         join e in context.Sizes on c.SizeId equals e.Id
-                        join f in context.Categories on q.CategoryId equals f.Id
-                        where a.BillId == BillId
+                        join f in context.Categories on q.CategoryId equals f.Id                        
                         select new BillDetailShow()
                         {
                             Id = a.Id,
@@ -89,7 +88,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
                             PriceAfter = a.Price,
                             CostPrice = c.CostPrice,
                             Status = a.Status,
-                        }).ToList();
+                        }).Where(w=>w.BillID == BillId).ToList();
             return _lst;
         }
 

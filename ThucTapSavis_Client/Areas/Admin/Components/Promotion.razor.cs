@@ -84,5 +84,25 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 
          
         }
+
+        public async IAsyncEnumerable<Promotion_VM> SelectOnePromotion()
+        {
+            foreach (var promotion in _lstPromotion)
+            {
+                yield return promotion;
+            }
+        }
+        public async Task AutoChangeStatusPromotion()
+        {
+            await foreach (var promotion in SelectOnePromotion())
+            {
+                if (promotion.EndDate < DateTime.Now)
+                {
+                    promotion.Status = 0;
+                    await _httpClient.PutAsJsonAsync<Promotion_VM>("https://localhost:7264/api/promotion/update", promotion);
+                }
+            }
+
+        }
     }
 }

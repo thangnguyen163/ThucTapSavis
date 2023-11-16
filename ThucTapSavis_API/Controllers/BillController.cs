@@ -21,6 +21,12 @@ namespace ThucTapSavis_API.Controllers
             var a = await _billServices.GetAllBill();
             return Ok(a);
         }
+        [HttpGet("get_bill_VM")]
+        public async Task<IActionResult> GetAllBill_VM()
+        {
+            var a = await _billServices.GetAllBill_VM();
+            return Ok(a);
+        }
         [HttpGet("get_bill_by_user")]
         public async Task<IActionResult> GetBillByUser(Guid UserId)
         {
@@ -78,6 +84,7 @@ namespace ThucTapSavis_API.Controllers
         public async Task<IActionResult> UpdateBill(Bill_VM bill)
         {
             Bill bill1 = new Bill();
+            bill1.Id= bill.Id;
 			bill1.BillCode = bill.BillCode;
 			bill1.UserId = bill.UserId;
 			bill1.CreateDate = bill.CreateDate;

@@ -77,6 +77,14 @@ namespace ThucTapSavis_API.Controllers
 			await _User.UpdateUser(User);
 			return Ok();
 		}
+		[HttpPut("change-password")]
+		public async Task<ActionResult<User>> ChangPassword(User_VM rvm)
+		{
+			User User = await _User.GetUserById(rvm.Id);
+			User.Password = rvm.Password;
+			await _User.UpdateUser(User);
+			return Ok();
+		}
 		[HttpDelete("delete-user")]
 		public async Task<ActionResult<User>> Delete(Guid id)
 		{

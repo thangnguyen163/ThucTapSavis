@@ -1,0 +1,8 @@
+﻿@using ThucTapSavis_Client.Areas.Customer.Component
+
+@{
+    ViewData["Title"] = "BillByUser";
+    Layout = "~/Areas/Customer/Views/Shared/_UserLayout.cshtml";
+}
+@(await Html.RenderComponentAsync<BillByUser>(RenderMode.Server))
+

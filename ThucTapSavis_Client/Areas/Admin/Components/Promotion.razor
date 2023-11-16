@@ -74,6 +74,13 @@
         font-size: 11pt;
     }
 
+        .nav-tabs {
+        position: sticky;
+        top: 60px;
+        background-color: white;
+        z-index: 1;
+    }
+
 </style>
 <div class="card">
     <div class="card-body">
@@ -86,7 +93,7 @@
         else
         {
             <table class="table">
-                <thead>
+                <thead class="nav-tabs">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tên</th>

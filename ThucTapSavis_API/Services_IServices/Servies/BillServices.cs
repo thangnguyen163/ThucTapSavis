@@ -80,7 +80,13 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 			return a;
 		}
 
-		public async Task<Bill> UpdateBill(Bill bill)
+        public async Task<List<Bill>> GetAllBill_VM()
+        {
+			var a = await context.Bills.ToListAsync();
+			return a;
+        }
+
+        public async Task<Bill> UpdateBill(Bill bill)
 		{
 			try
 			{
