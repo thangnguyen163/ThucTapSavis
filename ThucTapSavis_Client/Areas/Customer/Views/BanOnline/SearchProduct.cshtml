@@ -1,0 +1,52 @@
+﻿@using ThucTapSavis_Client.Areas.Customer.Component;
+@using ThucTapSavis_Client.Areas.Customer.Controllers;
+@using ThucTapSavis_Shared.ViewModel;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+@model X.PagedList.IPagedList<Product_VM>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = @"~/Areas/Customer/Views/Shared/_CustomerLayout.cshtml";
+}
+<style>
+	.pagination {
+		/* Các quy tắc CSS tùy chỉnh cho pager */
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+		.pagination li {
+			padding: 5px;
+		}
+
+			.pagination li a {
+				text-decoration: none;
+				color: #000;
+				border: 1px solid #ccc;
+				padding: 5px 10px;
+				border-radius: 3px;
+			}
+
+				.pagination li a:hover {
+					background-color: #f2f2f2;
+				}
+
+		.pagination .active a {
+			background-color: #337ab7;
+			color: #fff;
+		}
+</style>
+@(await Html.RenderComponentAsync<SearchProduct>(RenderMode.Server))
+@if (@BanOnlineController._soKQ > 0)
+{
+	<div class="container">
+		<div class="row">
+			@Html.PagedListPager(Model, page => Url.Action("SearchProduct","BanOnline",new { page }))
+		</div>
+	</div>
+}
+
