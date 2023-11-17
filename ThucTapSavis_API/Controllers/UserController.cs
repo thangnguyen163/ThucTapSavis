@@ -57,6 +57,7 @@ namespace ThucTapSavis_API.Controllers
 			User.Xa = rvm.Xa;
 			User.DiaChiCuThe = rvm.DiaChiCuThe;
 			User.Status = rvm.Status;
+			User.IdRole = Guid.Parse("1001d4d6-ebae-4c35-8332-7d2b1a60fa44");
 			await _User.AddUser(User);
 			return Ok();
 		}
@@ -74,6 +75,7 @@ namespace ThucTapSavis_API.Controllers
 			User.Xa = rvm.Xa;
 			User.DiaChiCuThe = rvm.DiaChiCuThe;
 			User.Status = rvm.Status;
+			User.IdRole=rvm.IdRole;
 			await _User.UpdateUser(User);
 			return Ok();
 		}

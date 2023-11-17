@@ -1,4 +1,21 @@
-﻿@*using ThucTapSavis_Shared.ViewModel.User_VM;*@
+﻿@using Blazored.Toast.Configuration
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fas fa-check-circle"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa-solid fa-check"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />
+
+
+
 <div class="Login full fullsign" style="width:600px;margin: 0 auto;  margin-top: 250px;
   margin-bottom: 170px;">
     <div class="container container1">
@@ -9,37 +26,37 @@
                 <DataAnnotationsValidator />
                 <div class="input-field">
                     <InputText placeholder="Họ và tên" @bind-Value="user.FullName"  />
-                    <i class="fa-regular fa-user"></i>
-                    <ValidationMessage style="color:red;" For="()=>user.FullName"></ValidationMessage>
+                    <i class="fa-regular fa-user"></i>                  
                 </div>
+                <span><ValidationMessage style="color:red;font-size:12pt;" For="()=>user.FullName"></ValidationMessage></span>
                 <div class="input-field">
                     <InputText placeholder="UserName" @bind-Value="user.UserName" />
-                    <i class="fa-regular fa-user"></i>
-                    <ValidationMessage For="()=>user.UserName" />
+                    <i class="fa-regular fa-user"></i>                 
                 </div>
+                <span><ValidationMessage style="color:red;font-size:12pt;" For="()=>user.UserName" /></span>
                 <div class="input-field">
                     <InputText placeholder="Email" asp-for="Email"@bind-Value="user.Email"/>
-                    <i class="fa-regular fa-envelope icon"></i>
-                    <ValidationMessage For="()=>user.Email" />
+                    <i class="fa-regular fa-envelope icon"></i>             
                 </div>
+                <span><ValidationMessage style="color:red;font-size:12pt;" For="()=>user.Email" /></span>
                 <div class="input-field">
-                    <InputText placeholder="Số điện thoại" @bind-Value="user.NumberPhone" />
-                    <i class="fa-regular fa-envelope icon"></i>
-                    <ValidationMessage For="()=>user.NumberPhone" />
+                    <InputText placeholder="Số điện thoại" @bind-Value="user.NumberPhone"  />
+                    <i class="fa-regular fa-envelope icon"></i>               
+                </div>
+                <span><ValidationMessage style="color:red;font-size:12pt;" For="()=>user.NumberPhone" /></span>
 
-                </div>
-
                 <div class="input-field">
-                    <input type="password" placeholder="Mật khẩu" @bind-value="user.Password" required />
+                    <input type="password" placeholder="Mật khẩu" @bind-value="user.NewPassword"  />
                     <i class="fa-solid fa-lock icon"></i>
-                    <i class="fa-regular fa-eye-slash showHidePW"></i>
-                    <ValidationMessage For="()=>user.Password" />
+                    <i class="fa-regular fa-eye-slash showHidePW"></i>                  
                 </div>
+                <span><ValidationMessage style="color:red;font-size:12pt;" For="()=>user.NewPassword" /></span>
                 <div class="input-field">
-                    <input type="password" placeholder="Xác nhận mật khẩu">
+                    <input type="password" placeholder="Xác nhận mật khẩu" @bind-value="user.ConfirmNewPassword" />
                     <i class="fa-solid fa-lock icon"></i>
-                    <i class="fa-regular fa-eye-slash showHidePW"></i>
+                    <i class="fa-regular fa-eye-slash showHidePW"></i>         
                 </div>
+                <span><ValidationMessage style="color:red;font-size:12pt;" For="()=>user.ConfirmNewPassword" /></span>
 
                 <div class="checkbox-text">
                     <div class="checkbox-content">

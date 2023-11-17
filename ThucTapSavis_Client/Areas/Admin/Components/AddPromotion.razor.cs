@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using ThucTapSavis_Client.SessionService;
 using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_Client.Areas.Admin.Components
@@ -27,40 +28,53 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 
         public bool SelectAllCheckboxProductItem { get; set; } = false;
         public bool SelectAllCheckboxProduct = false;
+
+        [Inject] public IHttpContextAccessor _ihttpcontextaccessor { get; set; }
+        User_VM _user_VM = new User_VM();
+        [Inject] Blazored.Toast.Services.IToastService _toastService { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            _lstProduct = await _httpClient.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
-            _lstImg = await _httpClient.GetFromJsonAsync<List<Image_VM>>("https://localhost:7264/api/Image/get_Image");
-            _lstPromotionItem = await _httpClient.GetFromJsonAsync<List<PromotionItem_VM>>($"https://localhost:7264/api/PromotionItem/PromotionItem_By_Promotion/{_promotion.Id}");
-            _lstPrI_show_VM = await _httpClient.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
-            _lstProductItem = await _httpClient.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
-
-            foreach (var a in _lstPromotionItem)
+            _user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
+            if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
             {
-                _lstProductItemSelect.Add(a.ProductItemsId);
-
-            }
-            foreach (var a in _lstPrI_show_VM)
-            {
-                foreach (var b in _lstProductItemSelect)
-                {
-                    if (a.Id == b)
-                    {
-                        _lstProductSelect.Add(a.ProductId);
-                    }
-                }
-            }
-            _lstProductSelect = _lstProductSelect.Distinct().ToList();
-            _lstProductItem = _lstProductItem.Where(p => _lstProductSelect.Contains(p.ProductId)).ToList();
-
-            if (_lstProductItemSelect.Count == _lstProductItem.Select(x => x.Id).ToList().Count && _lstProductItem.Select(x => x.Id).ToList().Count != 0)
-            {
-                SelectAllCheckboxProductItem = true;
+                _toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
+                _navigationManager.NavigateTo("https://localhost:7022/login", true);
             }
             else
             {
-                SelectAllCheckboxProductItem = false;
-            }
+                _lstProduct = await _httpClient.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
+                _lstImg = await _httpClient.GetFromJsonAsync<List<Image_VM>>("https://localhost:7264/api/Image/get_Image");
+                _lstPromotionItem = await _httpClient.GetFromJsonAsync<List<PromotionItem_VM>>($"https://localhost:7264/api/PromotionItem/PromotionItem_By_Promotion/{_promotion.Id}");
+                _lstPrI_show_VM = await _httpClient.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
+                _lstProductItem = await _httpClient.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
+
+                foreach (var a in _lstPromotionItem)
+                {
+                    _lstProductItemSelect.Add(a.ProductItemsId);
+
+                }
+                foreach (var a in _lstPrI_show_VM)
+                {
+                    foreach (var b in _lstProductItemSelect)
+                    {
+                        if (a.Id == b)
+                        {
+                            _lstProductSelect.Add(a.ProductId);
+                        }
+                    }
+                }
+                _lstProductSelect = _lstProductSelect.Distinct().ToList();
+                _lstProductItem = _lstProductItem.Where(p => _lstProductSelect.Contains(p.ProductId)).ToList();
+
+                if (_lstProductItemSelect.Count == _lstProductItem.Select(x => x.Id).ToList().Count && _lstProductItem.Select(x => x.Id).ToList().Count != 0)
+                {
+                    SelectAllCheckboxProductItem = true;
+                }
+                else
+                {
+                    SelectAllCheckboxProductItem = false;
+                }
+          }
         }
 
 

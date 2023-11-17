@@ -70,11 +70,15 @@
                 </tbody>
             </table>
             <div class="row">
-                <h5 class="card-title col-md-10">Địa chỉ nhận hàng</h5>
+                <h5 class="card-title col-md-9">Địa chỉ nhận hàng</h5>
                 @if(_bill_ShowModel.Status==1)
                 {
-                    <button type="button" @onclick="()=>CancelOrder(_bill_ShowModel.BillCode)" class="btn btn-outline-danger col-md-2" style="float:right;width:140px;height:40px;">Huỷ đơn hàng</button>
-                }       
+                    <button type="button" @onclick="()=>CancelOrder(_bill_ShowModel.BillCode)" class="btn btn-outline-danger col-md-2" style="float:right;width:140px;height:40px;margin-left:60px;">Huỷ đơn hàng</button>
+                }  
+                @if(_bill_ShowModel.Status==2)
+                {
+                    <button type="button" @onclick="()=>DoneOrder(_bill_ShowModel.BillCode)" class="btn btn-outline-success col-md-3" style="float:right;width:190px;height:40px;">Đã nhận được hàng</button>
+                } 
             </div>
             <div class="row">
                 <div class="row col-md-5">

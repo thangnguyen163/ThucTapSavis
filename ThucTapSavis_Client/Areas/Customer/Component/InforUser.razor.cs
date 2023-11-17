@@ -57,7 +57,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
         public async Task LoadUser(Guid Id)
         {
             OpenPopup("UpdateUser");
-            var a = await _client.GetFromJsonAsync<User>($"https://localhost:7264/api/User/{Id}");
+            var a = await _client.GetFromJsonAsync<User_VM>($"https://localhost:7264/api/User/{Id}");
             _user_VM.Id = a.Id;
             _user_VM.FullName = a.FullName;
             _user_VM.Email = a.Email;
@@ -65,8 +65,11 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
             _user_VM.UserName = a.UserName;
             _user_VM.DiaChiCuThe = a.DiaChiCuThe;
             _user_VM.Tinh = a.Tinh;
+            await ChonTinhTP();
             _user_VM.Huyen = a.Huyen;
+            await ChonQuanHuyen();
             _user_VM.Xa = a.Xa;
+            await ChonXaPhuong();
         }
 
         public async Task ChonTinhTP()

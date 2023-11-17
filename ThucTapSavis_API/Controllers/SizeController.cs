@@ -44,13 +44,14 @@ namespace ThucTapSavis_API.Controllers
 		[HttpPut("update")]
 		public async Task<ActionResult<Size>> PutSize(Size_VM rvm)
 		{
-			Size Size = await _Size.GetSizeById(rvm.Id);
+			Size Size = new Size();
+			Size.Id=rvm.Id;
 			Size.Name = rvm.Name;
 			Size.Status = rvm.Status;
 			await _Size.UpdateSize(Size);
 			return Ok();
 		}
-		[HttpDelete("Id")]
+		[HttpDelete("delete/{Id}")]
 		public async Task<ActionResult<Size>> Delete(Guid id)
 		{
 			await _Size.DeleteSize(id);

@@ -63,13 +63,21 @@
                                 <i class="fa-solid fa-circle-user"></i>
                                 <span class="font">@HomeController._nameUser</span>
                             </a>
-
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="User" asp-action="Index">Tài khoản của bạn</a></li>
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Login">Login</a></li>
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="SignUp">SignUp</a></li>
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Logout">LogOut</a></li>
-                            </ul>
+  </a>
+                            @if (HomeController._nameUser == null || HomeController._nameUser == string.Empty||HomeController._nameUser=="")
+                            {                               
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="Login">Login</a></li>
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="SignUp">SignUp</a></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="User" asp-action="Index">Tài khoản của bạn</a></li>
+                                    <li><a class="dropdown-item" asp-area="Customer" asp-controller="Home" asp-action="LogOut">LogOut</a></li>
+                                </ul>
+                            }
                         </li>
                     </ul>
 

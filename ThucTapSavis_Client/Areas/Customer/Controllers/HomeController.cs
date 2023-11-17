@@ -13,6 +13,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
         [Route("home")]
         public IActionResult Index()
         {
+            //_nameUser=String.Empty;
             return View();
         }
         [Route("about")]
@@ -69,6 +70,11 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
         {
             return View();
         }
-        
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("User");
+            _nameUser = null;
+            return RedirectToAction("Index");
+        }
     }
 }

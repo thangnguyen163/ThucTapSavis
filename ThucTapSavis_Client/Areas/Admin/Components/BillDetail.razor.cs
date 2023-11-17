@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using ThucTapSavis_Client.SessionService;
 using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_Client.Areas.Admin.Components
@@ -22,21 +23,33 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         public bool displayButton { get; set; }
         public string CheckFee { get; set; }
         public string CheckNote { get; set; }
+        [Inject] Blazored.Toast.Services.IToastService _toastService { get; set; } // Khai báo khi cần gọi ở code-behind
 
-
+        [Inject] public IHttpContextAccessor _ihttpcontextaccessor { get; set; }
+        User_VM _user_VM = new User_VM();
 
         protected override async Task OnInitializedAsync()
         {
-            _billModel = Bill._billModel;
-            _billModel.Id=Bill._billModel.Id;
-            _lstBillDetail = await _client.GetFromJsonAsync<List<BillDetailShow>>($"https://localhost:7264/api/billitem/get_billitem_by_BillId/{_billModel.Id}");
-
-            foreach (var item in _lstBillDetail)
+            _user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
+            if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
             {
-                _tongtien += item.Quantity * item.PriceAfter;
+                _toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
+                nav.NavigateTo("https://localhost:7022/login", true);
             }
-            texttongtien = NumberToText(Convert.ToDouble(_tongtien));
-            displayButton = false;
+            else
+            {
+                _billModel = Bill._billModel;
+                _billModel.Id = Bill._billModel.Id;
+                _lstBillDetail = await _client.GetFromJsonAsync<List<BillDetailShow>>($"https://localhost:7264/api/billitem/get_billitem_by_BillId/{_billModel.Id}");
+
+                foreach (var item in _lstBillDetail)
+                {
+                    _tongtien += item.Quantity * item.PriceAfter;
+                }
+                texttongtien = NumberToText(Convert.ToDouble(_tongtien));
+                displayButton = false;
+            }
+           
         }
         public void ReturnBill()
         {
@@ -61,47 +74,29 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
                 }
             }
         }
-        public async Task CancelOrder()
+        public async Task CancelBill(Guid BillID)
         {
-            Bill_VM b = await _client.GetFromJsonAsync<Bill_VM>($"https://localhost:7264/api/billitem/get_billitem_by_id/{_billModel.Id}");
+            Bill_VM b = await _client.GetFromJsonAsync<Bill_VM>($"https://localhost:7264/api/bill/get_bill_by_id/{BillID}");
 
             b.Status = 0;
             var status = await _client.PutAsJsonAsync("https://localhost:7264/api/bill/update_bill", b);
             if (status.IsSuccessStatusCode)
             {
-                nav.NavigateTo("https://localhost:7022/Admin/Bill/BillDetail", true);
+                _toastService.ShowSuccess("Đơn hàng đã bị huỷ");
+                nav.NavigateTo("https://localhost:7022/Admin/Bill", true);
             }
         }
-        private void HandleInput(ChangeEventArgs e)
+        public async Task ConfirmBill(Guid BillID)
         {
-            var Phiship1 = e.Value.ToString();
+            Bill_VM b = await _client.GetFromJsonAsync<Bill_VM>($"https://localhost:7264/api/bill/get_bill_by_id/{BillID}");
 
-            if (Phiship1 == null || Phiship1 == string.Empty)
+            b.Status = 2;
+            var status = await _client.PutAsJsonAsync("https://localhost:7264/api/bill/update_bill", b);
+            if (status.IsSuccessStatusCode)
             {
-                HideButton();
-                CheckFee = "Không được để trống số tiền";
+                _toastService.ShowSuccess("Đơn hàng đã được xác nhận");
+                nav.NavigateTo("https://localhost:7022/Admin/Bill", true);
             }
-            else if (Convert.ToInt32(Phiship1) < 0)
-            {
-                CheckFee = "Vui lòng nhập số lớn hơn 0";
-            }
-            else if (Phiship1 != string.Empty)
-            {
-                CheckFee = null;
-                Phiship = Convert.ToInt32(Phiship1);
-                if (Phiship < 999)
-                {
-                    displayButton = true;
-                    Suggest_number_1 = RoundToNearestPowerOfTen(Phiship, 100);
-                    Suggest_number_2 = RoundToNearestPowerOfTen(Phiship, 1000);
-                }
-            }
-            else
-            {
-                displayButton = false;
-            }
-
-            // Thực hiện các xử lý ngay khi giá trị thay đổi
         }
         private void CheckNoteNull(ChangeEventArgs e)
         {
@@ -115,24 +110,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
                 CheckNote = null;
             }
         }
-        private void HideButton()
-        {
-            displayButton = false;
-        }
-        private void SubmitFeeShip_1()
-        {
-            Phiship = Convert.ToInt32(Suggest_number_1);
-        }
-        private void SubmitFeeShip_2()
-        {
-            Phiship = Convert.ToInt32(Suggest_number_2);
-        }
-        private string RoundToNearestPowerOfTen(int number, int chiso)
-        {
-            int roundedNumber = number * chiso;
-            var Suggest_number1 = roundedNumber.ToString();
-            return Suggest_number1;
-        }
+
         static string NumberToText(double inputNumber, bool suffix = true)
         {
             string[] unitNumbers = new string[] { "không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín" };
