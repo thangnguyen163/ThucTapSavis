@@ -15,6 +15,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         PromotionItem_VM _promotionItem = new PromotionItem_VM();
         List<Guid> _lstProductSelect = new List<Guid>();
         List<Guid> _lstProductItemSelect = new List<Guid>();
+        
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         //public DateTime StartDateView = DateTime + Time;
@@ -34,14 +35,6 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         [Inject] Blazored.Toast.Services.IToastService _toastService { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            _user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
-            if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
-            {
-                _toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
-                _navigationManager.NavigateTo("https://localhost:7022/login", true);
-            }
-            else
-            {
                 _lstProduct = await _httpClient.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
                 _lstImg = await _httpClient.GetFromJsonAsync<List<Image_VM>>("https://localhost:7264/api/Image/get_Image");
                 _lstPromotionItem = await _httpClient.GetFromJsonAsync<List<PromotionItem_VM>>($"https://localhost:7264/api/PromotionItem/PromotionItem_By_Promotion/{_promotion.Id}");
@@ -73,8 +66,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
                 else
                 {
                     SelectAllCheckboxProductItem = false;
-                }
-          }
+                }          
         }
 
 
@@ -97,8 +89,12 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
                 _promotionItem.PromotionsId = c;
                 _promotionItem.ProductItemsId = item;
                 _promotionItem.Status = 1;
-
                 var b = await _httpClient.PostAsJsonAsync("https://localhost:7264/api/PromotionItem/Add", _promotionItem);
+
+                var productItem = await _httpClient.GetFromJsonAsync<ProductItem_VM>($"https://localhost:7264/api/ProductItem/{item}");
+                productItem.PriceAfterReduction =productItem.CostPrice - (productItem.CostPrice*_promotion.Percent) / 100;
+                var t = await _httpClient.PutAsJsonAsync("https://localhost:7264/api/ProductItem/update", productItem);
+               
             }
             if (a.IsSuccessStatusCode)
             {
