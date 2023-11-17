@@ -53,7 +53,7 @@ namespace ThucTapSavis_API.Controllers
 			await _Product.UpdateProduct(Product);
 			return Ok();
 		}
-		[HttpDelete("Id")]
+		[HttpDelete("delete/{Id}")]
 		public async Task<ActionResult<Product>> Delete(Guid id)
 		{
 			await _Product.DeleteProduct(id);

@@ -4,18 +4,32 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Quản lý màu</h5>
-                <EditForm Model="color_VM">
+                <EditForm Model="product_VM">
+                    <DataAnnotationsValidator/>
                     <div class="row mb-3">
                         <label for="inputText" class="col-sm-4 col-form-label">Màu sắc: </label>
                         <div class="col-sm-8">
-                            <InputText class="form-control" @bind-Value="@color_VM.Name" />
+                            <InputText class="form-control" @bind-Value="@product_VM.Name" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputText" class="col-sm-4 col-form-label">Thể loại</label>
+                        <div class="row col-sm-8">
+                            <InputSelect class="form-select" aria-label="Default select example" @bind-Value="@product_VM.CategoryId">
+                                <option selected>Open this select menu</option>
+                                @foreach(var a in category)
+                                {
+                                    <option value="@a.Id">@a.Name</option>
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="()=>product_VM.CategoryId"/>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">Trạng thái: </label>
                         <div class="col-sm-8">
                             <div class="row">
-                                <InputRadioGroup @bind-Value="@color_VM.Status" class="form-control">
+                                <InputRadioGroup @bind-Value="@product_VM.Status" class="form-control">
                                     <div class="col-sm-6">
                                         <InputRadio Value="1" /> Hoạt động
                                     </div>
@@ -45,7 +59,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" @onclick="AddColor">Save changes</button>
+                                            <button type="button" class="btn btn-primary" @onclick="AddProduct">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +77,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" @onclick="()=>UpdateColor(color_VM)">Update</button>
+                                            <button type="button" class="btn btn-primary" @onclick="()=>UpdateProduct(product_VM)">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -80,10 +94,10 @@
         }
         <div class="card">
             <div class="card-body">
-                <h4 style="margin-top:20px">List Color</h4>
+                <h4 style="margin-top:20px">List Product</h4>
                 <div class="pagetitle">
                 </div>
-                @if (color == null)
+                @if (product == null)
                 {
                     <p><em>Loading...</em></p>
                 }
@@ -94,17 +108,20 @@
                             <thead>
                                 <tr style="position: sticky;top:0">
                                     <th scope="col">#</th>
-                                    <th scope="col">Màu</th>
+                                    <th scope="col">Sản phẩm</th>
+                                    <th scope="col">Thể loại</th>
                                     <th scope="col">Trạng Thái</th>
                                     <th scope="col">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var x in color)
+                                @foreach (var x in product)
                                 {
+                                        string a = category.FirstOrDefault(a => a.Id == @x.CategoryId).Name;
                                     <tr>
                                         <td>@(count++)</td>
                                         <td>@x.Name</td>
+                                        <td>@a</td>
                                         <td>@(x.Status == 1 ? "Hoạt động" : "Ngừng hoạt động")</td>
                                         <td><button type="button" class="btn btn-outline-success" style="float:center" @onclick="()=>LoadForm(x)">Apply</button> </td>
                                     </tr>
