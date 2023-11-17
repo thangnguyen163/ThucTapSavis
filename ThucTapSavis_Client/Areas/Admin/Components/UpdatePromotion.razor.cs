@@ -32,14 +32,6 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         User_VM _user_VM = new User_VM();
         protected override async Task OnInitializedAsync()
         {
-            _user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
-            if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
-            {
-                _toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
-                _navigationManager.NavigateTo("https://localhost:7022/login", true);
-            }
-            else
-            {
                 _lstProduct = await _httpClient.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
                 _lstImg = await _httpClient.GetFromJsonAsync<List<Image_VM>>("https://localhost:7264/api/Image/get_Image");
                 _promotion = Promotion._promotion_VM;
@@ -74,7 +66,6 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
                 {
                     SelectAllCheckboxProductItem = false;
                 }
-            }
             
         }
 
@@ -101,7 +92,11 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
                         _promotionItem.ProductItemsId = item;
                         _promotionItem.Status = 1;
                         var b = await _httpClient.PostAsJsonAsync("https://localhost:7264/api/PromotionItem/Add", _promotionItem);
-                    }                  
+                        var productItem = await _httpClient.GetFromJsonAsync<ProductItem_VM>($"https://localhost:7264/api/ProductItem/{item}");
+                        productItem.PriceAfterReduction = productItem.CostPrice - (productItem.CostPrice * _promotion.Percent) / 100;
+                        var t = await _httpClient.PutAsJsonAsync("https://localhost:7264/api/ProductItem/update", productItem);
+                    }  
+                    
                 }
             }
             if (_lstProductItemSelect_Xoa.Count > 0)
@@ -109,6 +104,13 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
                 foreach (var item in _lstProductItemSelect_Xoa)
                 {
                     var b = await _httpClient.DeleteAsync($"https://localhost:7264/api/PromotionItem/PromotionItemByProductItem/{item}");
+                }
+                var e = await _httpClient.GetFromJsonAsync<List<ProductItem_VM>>($"https://localhost:7264/api/ProductItem/ProductItem_By_PromotionId/{_promotion.Id}");
+                foreach (var item in e)
+                {
+                    var productItem = await _httpClient.GetFromJsonAsync<ProductItem_VM>($"https://localhost:7264/api/ProductItem/{item}");
+                    productItem.PriceAfterReduction = productItem.CostPrice;
+                    var t = await _httpClient.PutAsJsonAsync("https://localhost:7264/api/ProductItem/update", productItem);
                 }
             }
             _navigationManager.NavigateTo("https://localhost:7022/Admin/Promotion", true);

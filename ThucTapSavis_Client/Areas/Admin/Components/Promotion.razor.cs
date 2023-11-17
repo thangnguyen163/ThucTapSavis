@@ -26,17 +26,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 
         protected override async Task OnInitializedAsync()
         {
-            _user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
-            if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
-            {
-                _toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
-                _navigationManager.NavigateTo("https://localhost:7022/login", true);
-            }
-            else
-            {
-                _lstPromotion = await _httpClient.GetFromJsonAsync<List<Promotion_VM>>("https://localhost:7264/api/Promotion");
-            }
-            
+                _lstPromotion = await _httpClient.GetFromJsonAsync<List<Promotion_VM>>("https://localhost:7264/api/Promotion");  
         }
 
         public async Task NavigationAddPromotion()
@@ -56,6 +46,13 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
             _promotion_VM.Status = 0;
             var a = await _httpClient.PutAsJsonAsync<Promotion_VM>("https://localhost:7264/api/Promotion/Update/", _promotion_VM);
             _navigationManager.NavigateTo("https://localhost:7022/Admin/Promotion", true);
+            var d = await _httpClient.GetFromJsonAsync<List<ProductItem_VM>>($"https://localhost:7264/api/ProductItem/ProductItem_By_PromotionId/{promotionVM.Id}");
+            foreach (var item in d)
+            {
+                var productItem = await _httpClient.GetFromJsonAsync<ProductItem_VM>($"https://localhost:7264/api/ProductItem/{item}");
+                productItem.PriceAfterReduction = productItem.CostPrice;
+                var t = await _httpClient.PutAsJsonAsync("https://localhost:7264/api/ProductItem/update", productItem);
+            }      
         }
 
         public async Task Search()

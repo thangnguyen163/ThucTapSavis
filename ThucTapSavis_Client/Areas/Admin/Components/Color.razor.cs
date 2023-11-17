@@ -18,17 +18,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 		User_VM _user_VM = new User_VM();
 		protected override async Task OnInitializedAsync()
 		{
-			_user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
-			if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
-			{
-				_toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
-				navigationManager.NavigateTo("https://localhost:7022/login", true);
-			}
-			else
-			{
 				color = await _httpClient.GetFromJsonAsync<List<Color_VM>>("https://localhost:7264/api/color/get_color");
-			}
-			
 		}
 		public async Task AddColor()
 		{

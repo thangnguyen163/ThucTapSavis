@@ -25,21 +25,11 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         User_VM _user_VM = new User_VM();
         protected override async Task OnInitializedAsync()
         {
-            _user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
-            if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
-            {
-                _toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
-                _navigationManager.NavigateTo("https://localhost:7022/login", true);
-            }
-            else
-            {
                 _lstBill = await _httpClient.GetFromJsonAsync<List<Bill_ShowModel>>("https://localhost:7264/api/bill/get_all_bill");
                 await Sale(0);
                 await Revenue(0);
                 await Products(0);
                 await TopSale(0);
-            }
-            
         }
         public async Task Sale(int option)
         {
