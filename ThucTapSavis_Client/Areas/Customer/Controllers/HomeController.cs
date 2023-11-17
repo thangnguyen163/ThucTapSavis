@@ -13,7 +13,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
         [Route("home")]
         public IActionResult Index()
         {
-            //_nameUser=String.Empty;
+            HttpContext.Session.SetString($"{Guid.NewGuid()}", JsonConvert.SerializeObject(Guid.NewGuid()));
             return View();
         }
         [Route("about")]

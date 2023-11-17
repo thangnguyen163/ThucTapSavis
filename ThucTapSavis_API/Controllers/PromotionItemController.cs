@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
 using ThucTapSavis_Shared.ViewModel;
@@ -11,6 +10,7 @@ namespace ThucTapSavis_API.Controllers
 	public class PromotionItemController : ControllerBase
 	{
 		private readonly IPromotionItemServices _PromotionItem;
+
 		public PromotionItemController(IPromotionItemServices PromotionItem)
 		{
 			_PromotionItem = PromotionItem;
@@ -22,6 +22,14 @@ namespace ThucTapSavis_API.Controllers
 			var PromotionItem = await _PromotionItem.GetAllPromotionItem();
 			return PromotionItem;
 		}
+
+		[HttpGet("getPromotionItem_Percent_by_productItemID/{id}")]
+		public async Task<PromotionItem_VM> GetAllPromotion(Guid id)
+		{
+			var x = await _PromotionItem.GetPercentPromotionItem(id);
+			return x;
+		}
+
 		[HttpGet("{Id}")]
 		public async Task<PromotionItem> GetPromotionItemById(Guid Id)
 		{
@@ -35,6 +43,7 @@ namespace ThucTapSavis_API.Controllers
 			var x = await _PromotionItem.GetAllPromotionItemById(Id);
 			return x;
 		}
+
 		//public Guid Id { get; set; }
 		//public Guid PromotionsId { get; set; }
 		//public Guid ProductItemsId { get; set; }
@@ -50,6 +59,7 @@ namespace ThucTapSavis_API.Controllers
 			await _PromotionItem.AddPromotionItem(PromotionItem);
 			return Ok();
 		}
+
 		[HttpPut("update")]
 		public async Task<ActionResult<PromotionItem>> PutPromotionItem(PromotionItem_VM rvm)
 		{
@@ -60,19 +70,20 @@ namespace ThucTapSavis_API.Controllers
 			await _PromotionItem.UpdatePromotionItem(PromotionItem);
 			return Ok();
 		}
+
 		[HttpDelete("delete_promotionItem_byId/{Id}")]
 		public async Task<ActionResult<PromotionItem>> Delete(Guid Id)
 		{
 			await _PromotionItem.DeletePromotionItem(Id);
 			return Ok();
 		}
+
 		[HttpDelete("PromotionItemByProductItem/{Id}")]
 		public async Task<ActionResult<PromotionItem>> DeletePromotionItemByProductItemId(Guid Id)
 		{
 			await _PromotionItem.DeletePromotionItemByProductItemId(Id);
 			return Ok();
 		}
-
 
 		[HttpDelete("PromotionItemByPromotionId/{Id}")]
 		public async Task<ActionResult<PromotionItem>> DeletePromotionItemByPomotionId(Guid Id)
