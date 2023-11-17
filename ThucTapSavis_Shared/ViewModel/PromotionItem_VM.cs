@@ -12,5 +12,6 @@ namespace ThucTapSavis_Shared.ViewModel
 		public Guid PromotionsId { get; set; }
 		public Guid ProductItemsId { get; set; }
 		public int Status { get; set; }
+		public int Percent { get; set; }
 	}
 }
