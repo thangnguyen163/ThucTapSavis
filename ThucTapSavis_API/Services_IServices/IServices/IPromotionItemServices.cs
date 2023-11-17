@@ -1,4 +1,5 @@
 ﻿using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Services_IServices.IServices
 {
@@ -13,5 +14,6 @@ namespace ThucTapSavis_API.Services_IServices.IServices
 
 		public Task<bool> DeletePromotionItemByProductItemId(Guid Id);
 		public Task<bool> DeletePromotionItemByPomotionId(Guid Id);
+		public Task<PromotionItem_VM> GetPercentPromotionItem(Guid id);
 	}
 }

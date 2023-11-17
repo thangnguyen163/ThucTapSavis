@@ -2,6 +2,7 @@
 using ThucTapSavis_API.Data;
 using ThucTapSavis_API.Services_IServices.IServices;
 using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Services_IServices.Servies
 {
@@ -109,5 +110,20 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				return false;
 			}
 		}
+
+        public async Task<PromotionItem_VM> GetPercentPromotionItem(Guid id)
+        {
+			var _lst = await (from a in context.PromotionsItem
+						join b in context.Promotions on a.PromotionsId equals b.Id
+						select new PromotionItem_VM
+						{
+							Id = a.Id,
+							ProductItemsId=a.ProductItemsId,
+							Percent=b.Percent,
+							PromotionsId=a.Id,
+							Status=a.Status,
+						}).FirstOrDefaultAsync(a=>a.ProductItemsId==id);
+			return _lst;
+        }
     }
 }
