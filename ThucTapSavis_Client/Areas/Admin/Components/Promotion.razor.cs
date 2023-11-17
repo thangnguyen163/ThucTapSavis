@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using ThucTapSavis_Client.Areas.Admin.Controllers;
+using ThucTapSavis_Client.SessionService;
 using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_Client.Areas.Admin.Components
@@ -19,11 +20,23 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
         private DateTime StartDateValue = new DateTime(2000, 1, 1);
         private DateTime EndDateValue = new DateTime(2000, 1, 1);
         private string? _promotionName = null;
-
+        [Inject] public IHttpContextAccessor _ihttpcontextaccessor { get; set; }
+        User_VM _user_VM=new User_VM();
+        [Inject] Blazored.Toast.Services.IToastService _toastService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            _lstPromotion = await _httpClient.GetFromJsonAsync<List<Promotion_VM>>("https://localhost:7264/api/Promotion");
+            _user_VM = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
+            if (_user_VM.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
+            {
+                _toastService.ShowError("Bạn không có quyền truy cập trang web này. Vui lòng đăng nhập với tư cách Admin");
+                _navigationManager.NavigateTo("https://localhost:7022/login", true);
+            }
+            else
+            {
+                _lstPromotion = await _httpClient.GetFromJsonAsync<List<Promotion_VM>>("https://localhost:7264/api/Promotion");
+            }
+            
         }
 
         public async Task NavigationAddPromotion()

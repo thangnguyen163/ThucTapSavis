@@ -41,12 +41,13 @@ namespace ThucTapSavis_API.Controllers
         public async Task<IActionResult> UpdateColor(Color_VM color)
         {
             Color color1 = new Color();
+            color1.Id = color.Id;
             color1.Name = color.Name;
             color1.Status = color.Status;
             var a = await colorServices.UpdateColor(color1);
             return Ok(a);
         }
-        [HttpDelete("delete_color")]
+        [HttpDelete("delete_color/{Id}")]
         public async Task<IActionResult> DeleteColor(Guid Id)
         {
             var a = await colorServices.DeleteColor(Id);

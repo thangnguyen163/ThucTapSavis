@@ -1,4 +1,23 @@
-﻿<div class="card">
+﻿@using Blazored.Toast.Configuration
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fas fa-check-circle"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa-solid fa-check"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />
+
+
+
+
+<div class="card">
     <div class="card-body">
         <h1 style="margin-top:20px">Promotion</h1>
         <div class="pagetitle">

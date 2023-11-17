@@ -41,12 +41,13 @@ namespace ThucTapSavis_API.Controllers
         public async Task<IActionResult> UpdateCategory(Category_VM category)
         {
             Category category1 = new Category();
+            category1.Id = category.Id;
             category1.Name = category.Name;
             category1.Status = category.Status;
             var a = await CategoryServices.UpdateCategory(category1);
             return Ok(a);
         }
-        [HttpDelete("delete_category")]
+        [HttpDelete("delete_category/{Id}")]
         public async Task<IActionResult> DeleteCategory(Guid Id)
         {
             var a = await CategoryServices.DeleteCategory(Id);

@@ -38,5 +38,21 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
                 _toastService.ShowError("Huỷ đơn hàng thất bại");
             }
         }
+        public async Task DoneOrder(string billCode)
+        {
+            var b = await _httpClient.GetFromJsonAsync<List<Bill_VM>>("https://localhost:7264/api/bill/get_bill_VM");
+            Bill_VM bill = b.FirstOrDefault(x => x.BillCode == billCode);
+            bill.Status = 3;
+            var a = await _httpClient.PutAsJsonAsync<Bill_VM>("https://localhost:7264/api/bill/update_bill", bill);
+            if (a.IsSuccessStatusCode)
+            {
+                _navigationManager.NavigateTo("https://localhost:7022/Customer/User/BillItemByBill", true);
+                _toastService.ShowSuccess("Huỷ đơn hàng thành công");
+            }
+            else
+            {
+                _toastService.ShowError("Huỷ đơn hàng thất bại");
+            }
+        }
     }
 }

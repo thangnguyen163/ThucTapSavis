@@ -33,7 +33,7 @@ namespace ThucTapSavis_API.Controllers
             var a = await _billServices.GetAllBillByUser(UserId);
             return Ok(a);
         }
-        [HttpGet("get_bill_by_id")]
+        [HttpGet("get_bill_by_id/{Id}")]
         public async Task<IActionResult> GetBillById(Guid Id)
         {
             var a = await _billServices.GetAllBillById(Id);

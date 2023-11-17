@@ -1,4 +1,5 @@
 ﻿using ThucTapSavis_Shared.Models;
+using ThucTapSavis_Shared.ViewModel;
 
 namespace ThucTapSavis_API.Services_IServices.IServices
 {

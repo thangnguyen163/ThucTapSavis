@@ -57,7 +57,9 @@
                         <td>@x.TotalAmount</td>
                         @*<td>@x.Reduced_Value</td>*@
                         <td></td>
-                        <td>@(x.Status == 1 ? "Chưa xác nhận" : x.Status == 2 ? "Đang giao hàng" : "Hoàn thành")</td>
+                        <td><span class="@(x.Status==0?"badge bg-danger":x.Status==1?"badge bg-warning":x.Status==2?"badge bg-info":"badge bg-success")">
+                            @(x.Status==0?"Đã huỷ":x.Status==1?"Chờ xác nhận":x.Status==2?"Đang vận chuyển":"Hoàn thành")</span>   
+                        </td>
                         <td>
                             <button style="padding: 5px 12px 5px 12px;display:flex;justify-content:center;align-items:center;cursor:pointer" class="button_details" @onclick="()=>ClickDetailBill(x)">
                                 <label style="cursor:pointer"> Chi tiết</label>
@@ -83,3 +85,20 @@
     
    
 </style>
+
+
+@using Blazored.Toast.Configuration
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fas fa-check-circle"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa-solid fa-check"
+                ErrorIcon="fa-solid fa-triangle-exclamation" />

@@ -70,7 +70,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 
         public async Task<Bill> GetAllBillById(Guid Id)
         {
-			var a = await context.Bills.FirstOrDefaultAsync(a => Id == Id);
+			var a = await context.Bills.FindAsync(Id);
 			return a;
 		}
 
