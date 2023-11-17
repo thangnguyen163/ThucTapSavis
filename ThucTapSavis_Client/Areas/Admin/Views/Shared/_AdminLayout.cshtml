@@ -29,9 +29,9 @@
 
     <link href="~/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-@*    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ThucTapSavis_Client.styles.css" asp-append-version="true" />*@
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/ThucTapSavis_Client.styles.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 
@@ -303,8 +303,8 @@
                 </a>
                 <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a asp-area="Admin" asp-controller="ThuocTinh" asp-action="Color">
-                            <i class="bi bi-circle"></i><span>Color</span>
+                        <a asp-area="Admin" asp-controller="ThuocTinh" asp-action="Product">
+                            <i class="bi bi-circle"></i><span>Product</span>
                         </a>
                     </li>
                     <li>
@@ -315,6 +315,11 @@
                     <li>
                         <a asp-area="Admin" asp-controller="ThuocTinh" asp-action="Category">
                             <i class="bi bi-circle"></i><span>Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="Admin" asp-controller="ThuocTinh" asp-action="Color">
+                            <i class="bi bi-circle"></i><span>Color</span>
                         </a>
                     </li>
                 </ul>

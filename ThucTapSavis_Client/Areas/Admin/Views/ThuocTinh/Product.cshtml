@@ -1,0 +1,8 @@
+﻿@using ThucTapSavis_Client.Areas.Admin.Components
+
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@(await Html.RenderComponentAsync<Product>(RenderMode.Server))
+
