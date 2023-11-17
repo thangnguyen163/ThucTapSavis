@@ -180,8 +180,8 @@
                                     <th>Màu sắc</th>
                                     <th>Size</th>
                                     <th>Số lượng tồn</th>
-                                    <th>Giá nhập</th>
                                     <th>Giá bán</th>
+                                    <th>Giá sau giảm</th>
                                     <th>Trạng thái</th>
                                     <th></th>
                                 </tr>
@@ -211,8 +211,8 @@
                                         <td>@x.ColorName</td>
                                         <td>@x.SizeName</td>
                                         <td>@x.AvaiableQuantity</td>
-                                        <td>@x.PurchasePrice</td>
                                         <td>@x.CostPrice</td>
+                                        <td>@x.PriceAfterReduction</td>
                                         <td>
                                             <span class="@(x.Status==0?"badge bg-danger":x.Status==1?"badge bg-success":"badge bg-warning")">
                                                 @(x.Status == 1 ? "Còn hàng" : x.Status == 2 ? "Hết hàng" : "Ngừng kinh doanh")</span>   

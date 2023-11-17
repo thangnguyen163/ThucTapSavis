@@ -69,3 +69,19 @@
 		</div>
 	</div>
 </div>
+@inject IJSRuntime JSRuntime
+<h3>Open New Tab</h3>
+
+<button @onclick="OpenNewTab">Open New Tab</button>
+
+@code {
+	private async Task OpenNewTab()
+	{
+		// Đường dẫn của trang muốn mở
+		string urlToOpen = "https://example.com";
+
+		// Sử dụng JavaScript để mở một tab mới
+		await JSRuntime.InvokeVoidAsync("open", urlToOpen, "_blank");
+	}
+}
+

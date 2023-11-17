@@ -58,7 +58,7 @@ namespace ThucTapSavis_API.Controllers
 			ProductItem.ColorId = rvm.ColorId;
 			ProductItem.SizeId = rvm.SizeId;
 			ProductItem.AvaiableQuantity = rvm.AvaiableQuantity;
-			ProductItem.PurchasePrice = rvm.PurchasePrice;
+			ProductItem.PriceAfterReduction = rvm.CostPrice;
 			ProductItem.CostPrice = rvm.CostPrice;
 			ProductItem.Status = rvm.Status;
 			await _ProductItem.AddProductItem(ProductItem);
@@ -72,7 +72,7 @@ namespace ThucTapSavis_API.Controllers
 			ProductItem.ColorId = rvm.ColorId;
 			ProductItem.SizeId = rvm.SizeId;
 			ProductItem.AvaiableQuantity = rvm.AvaiableQuantity;
-			ProductItem.PurchasePrice = rvm.PurchasePrice;
+			ProductItem.PriceAfterReduction = rvm.PriceAfterReduction;
 			ProductItem.CostPrice = rvm.CostPrice;
 			ProductItem.Status = rvm.Status;
 			await _ProductItem.UpdateProductItem(ProductItem);
