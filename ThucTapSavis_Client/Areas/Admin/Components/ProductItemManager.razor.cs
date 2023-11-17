@@ -40,26 +40,42 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 		public Guid _idPI_Tam { get; set; }
 		public Guid _idImg_Tam { get; set; }
 		ProductItem_Show_VM _PM_S_VM = new ProductItem_Show_VM();
-		//public Guid Id { get; set; }
-		//public Guid ProductId { get; set; }
-		//public Guid ColorId { get; set; }
-		//public Guid SizeId { get; set; }
-		//public int AvaiableQuantity { get; set; }
-		//public int PurchasePrice { get; set; }
-		//public int CostPrice { get; set; }
-		//public int Status { get; set; }
-		protected override async Task OnInitializedAsync()
+        //public Guid Id { get; set; }
+        //public Guid ProductId { get; set; }
+        //public Guid ColorId { get; set; }
+        //public Guid SizeId { get; set; }
+        //public int AvaiableQuantity { get; set; }
+        //public int PurchasePrice { get; set; }
+        //public int CostPrice { get; set; }
+        //public int Status { get; set; }
+        List<string> _lstSizeSample = new List<string> { "XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL" };
+
+        private void SapXepSize<T>(List<T> listToSort, List<T> referenceList)
+        {
+            // Sắp xếp danh sách để giống với danh sách tham chiếu
+            listToSort.Sort((a, b) =>
+            {
+                int indexA = referenceList.IndexOf(a);
+                int indexB = referenceList.IndexOf(b);
+                return indexA.CompareTo(indexB);
+            });
+        }
+        protected override async Task OnInitializedAsync()
 		{
 			_lstP = await _client.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
-			_lstCate = await _client.GetFromJsonAsync<List<Category_VM>>("https://localhost:7264/api/category/get_category");
+            _lstP = _lstP.OrderBy(c => c.Name).ToList();
+            _lstCate = await _client.GetFromJsonAsync<List<Category_VM>>("https://localhost:7264/api/category/get_category");
+			_lstCate = _lstCate.OrderBy(c => c.Name).ToList();
 			_lstC = await _client.GetFromJsonAsync<List<Color_VM>>("https://localhost:7264/api/color/get_color");
+			_lstC = _lstC.OrderBy(c=>c.Name).ToList();
 			_lstS = await _client.GetFromJsonAsync<List<Size_VM>>("https://localhost:7264/api/Size/get_size");
-			_lstImg = await _client.GetFromJsonAsync<List<Image_VM>>("https://localhost:7264/api/Image/get_Image");
+            _lstS = _lstS.OrderBy(c=>_lstSizeSample.IndexOf(c.Name)).ToList();
+            _lstImg = await _client.GetFromJsonAsync<List<Image_VM>>("https://localhost:7264/api/Image/get_Image");
 			_lstImg_PI = await _client.GetFromJsonAsync<List<Image_Join_ProductItem>>("https://localhost:7264/api/image/get_Image_Join_PI");
 			_lstPrI_show_VM = await _client.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
 			_idPI_Tam = Guid.NewGuid();
-
-		}
+			
+        }
 		public async Task ChangeEv(InputFileChangeEventArgs e)
 		{
 			Image_VM imgTam = new Image_VM();
@@ -145,7 +161,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 				{
 					await _client.PostAsJsonAsync("https://localhost:7264/api/image/add_Image", x);
 				}
-				_navigation.NavigateTo("https://localhost:7022/", true);
+				_navigation.NavigateTo("product-item-manager", true);
 			}
 		}
 		public async Task Update_PI()
@@ -187,7 +203,6 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 			_PI_VM.ColorId = pi.ColorId;
 			_PI_VM.SizeId = pi.SizeId;
 			_PI_VM.AvaiableQuantity = pi.AvaiableQuantity;
-			_PI_VM.PurchasePrice = pi.PurchasePrice;
 			_PI_VM.CostPrice = pi.CostPrice;
 			_PI_VM.Status = pi.Status;
 			var lst_chonmau = _lstPrI_show_VM.Where(c => c.ColorId == _PI_VM.ColorId && c.ProductId == _PI_VM.ProductId).ToList();

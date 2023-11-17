@@ -90,7 +90,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 							CategoryID = pr.CategoryId,
 							CategoryName = cate.Name,
 							AvaiableQuantity = prI.AvaiableQuantity,
-							PurchasePrice = prI.PurchasePrice,
+							PriceAfterReduction = prI.PriceAfterReduction,
 							CostPrice = prI.CostPrice,
 							Status = prI.Status,
 						}).ToList();
@@ -119,7 +119,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 							CategoryID = pr.CategoryId,
 							CategoryName = cate.Name,
 							AvaiableQuantity = prI.AvaiableQuantity,
-							PurchasePrice = prI.PurchasePrice,
+							PriceAfterReduction = prI.PriceAfterReduction,
 							CostPrice = prI.CostPrice,
 							Status = prI.Status,
 							PromotionItemId = h.PromotionsId,
@@ -151,7 +151,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 				a.ColorId = ProductItem.ColorId;
 				a.SizeId = ProductItem.SizeId;
 				a.AvaiableQuantity = ProductItem.AvaiableQuantity;
-				a.PurchasePrice = ProductItem.PurchasePrice;
+				a.PriceAfterReduction = ProductItem.PriceAfterReduction;
 				a.CostPrice = ProductItem.CostPrice;
 				a.Status = ProductItem.Status;
 				context.ProductItems.Update(a);
