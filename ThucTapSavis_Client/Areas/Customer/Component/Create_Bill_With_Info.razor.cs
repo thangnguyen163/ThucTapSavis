@@ -92,7 +92,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			foreach (var x in _lstCI)
 			{
 				_pi_s_vm = _lstPrI_show_VM.Where(c => c.Id == x.ProductItemId).FirstOrDefault();
-				_tongTienHang += x.Quantity * _pi_s_vm.CostPrice;
+				_tongTienHang += x.Quantity * _pi_s_vm.PriceAfterReduction;
 			}
 			_tongTienAll = _tongTienHang + _bill_vm.PhiShip;
 		}

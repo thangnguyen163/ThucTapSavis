@@ -26,8 +26,10 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 		public int? _giaMin { get; set; }
 		public int? _giaMax { get; set; }
 		public string _gia { get; set; }
+		public string _giaBanDau { get; set; }
 		public int _soLuong { get; set; } = 1;
 		public int? _soluongton { get; set; } = 0;
+		public int _percent { get; set; } = 0;
 		public string _chonMau { get; set; } = string.Empty;
 		public string _chonSize { get; set; } = string.Empty;
 		private User_VM? _user_vm { get; set; }
@@ -60,8 +62,8 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			_lstImg_PI_tam = _lstImg_PI; // Ảnh tạm
 			_path_Tam = _lstImg_PI_tam.OrderBy(c => c.STT).Select(c => c.PathImage).FirstOrDefault();
 			_nameCate = (await _client.GetFromJsonAsync<Category_VM>($"https://localhost:7264/api/category/get_category_by_id/{_p_vm.CategoryId}")).Name;
-			_giaMin = _lstPrI_show_VM.Min(c => c.CostPrice);
-			_giaMax = _lstPrI_show_VM.Max(c => c.CostPrice);
+			_giaMin = _lstPrI_show_VM.Min(c => c.PriceAfterReduction);
+			_giaMax = _lstPrI_show_VM.Max(c => c.PriceAfterReduction);
 			_gia = _giaMin < _giaMax ? _giaMin?.ToString("#,##0") + "đ - " + _giaMax?.ToString("#,##0") + "đ" : _giaMax?.ToString("#,##0") + "đ";
 			_lstColor = _lstPrI_show_VM.Select(c => c.ColorName).Distinct().ToList();
 			_lstSize = _lstPrI_show_VM.Select(c => c.SizeName).Distinct().ToList();
@@ -90,8 +92,9 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			_soLuong -= 1;
 		}
 
-		public void ChonMau(string mau)
+		public async void ChonMau(string mau)
 		{
+			if (_chonMau == mau) return;
 			if (_chonSize == string.Empty)
 			{
 				_chonMau = mau;
@@ -129,7 +132,9 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 					_toastService.ShowError("Biến thể không tồn tại, vui lòng chọn biến thể khác");
 					return;
 				}
-				_gia = _pi_S_VM.CostPrice?.ToString("#,##0") + "đ";
+				_percent = (await _client.GetFromJsonAsync<PromotionItem_VM>($"https://localhost:7264/api/PromotionItem/getPromotionItem_Percent_by_productItemID/{_pi_S_VM.Id}")).Percent;
+				_gia = _pi_S_VM.PriceAfterReduction?.ToString("#,##0") + "đ";
+				_giaBanDau = _pi_S_VM.CostPrice?.ToString("#,##0") + "đ";
 				_soluongton = 0;
 				_soluongton = _pi_S_VM.AvaiableQuantity;
 			}
@@ -149,7 +154,9 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				_toastService.ShowError("Biến thể không tồn tại, vui lòng chọn biến thể khác");
 				return;
 			}
-			_gia = _pi_S_VM.CostPrice?.ToString("#,##0") + "đ";
+			_percent = (await _client.GetFromJsonAsync<PromotionItem_VM>($"https://localhost:7264/api/PromotionItem/getPromotionItem_Percent_by_productItemID/{_pi_S_VM.Id}")).Percent;
+			_gia = _pi_S_VM.PriceAfterReduction?.ToString("#,##0") + "đ";
+			_giaBanDau = _pi_S_VM.CostPrice?.ToString("#,##0") + "đ";
 			_soluongton = 0;
 			_soluongton = _pi_S_VM.AvaiableQuantity;
 		}

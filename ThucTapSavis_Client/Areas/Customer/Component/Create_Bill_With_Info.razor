@@ -188,20 +188,20 @@
 					</div>
 				</div>
 				<div style="margin-top:auto;margin-bottom:auto;font-size:14px;margin-left:80px">
-					@((x.Quantity * _pi_s_vm.CostPrice)?.ToString("#,##0")) đ
+					@((x.Quantity * _pi_s_vm.PriceAfterReduction)?.ToString("#,##0"))đ<br>
+					<del style="color:grey">@((x.Quantity * _pi_s_vm.CostPrice)?.ToString("#,##0"))đ</del>
 				</div>
 			</div>
 			<div style="width:70%;height:1px;background-color:#000;margin-top:10px ">
 			</div>
-
 		}
 		<div class="countPrice">
 			<label>Tạm tính </label>
-			<label>@(_tongTienHang?.ToString("#,##0")) đ</label>
+			<label>@(_tongTienHang?.ToString("#,##0"))đ</label>
 		</div>
 		<div class="countPrice">
 			<label>Phí ship </label>
-			<label>@(_bill_vm.PhiShip.ToString("#,##0")) đ</label>
+			<label>@(_bill_vm.PhiShip.ToString("#,##0"))đ</label>
 		</div>
 		<div><h4>Tổng cộng @(_tongTienAll?.ToString("#,##0")) đ</h4> </div>
 	</div>

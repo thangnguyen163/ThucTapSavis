@@ -59,7 +59,7 @@
 				{
 					<div style="margin-bottom:30px;margin-top:30px">
 						<a @onclick="()=>LoadAnh(x.Id)">
-							<img class="img-thumbnail" src="/images/@x.PathImage" alt="" style="width: 100px;height: 110px;" />
+							<img class="img-thumbnail" src="images/@x.PathImage" alt="" style="width: 100px;height: 110px;" />
 						</a>
 					</div>
 				}
@@ -67,7 +67,7 @@
 			<div class="col-md-10">
 				<center>
 					<a data-toggle="modal" data-target="#Add_P">
-						<img class="img-thumbnail" src="/images/@_path_Tam" alt="" style="width:500px;height:650px;margin-top:8.5px" />
+						<img class="img-thumbnail" src="images/@_path_Tam" alt="" style="width:500px;height:650px;margin-top:8.5px" />
 					</a>
 				</center>
 			</div>
@@ -85,7 +85,14 @@
 						<h5>Giá bán</h5>
 					</div>
 					<div class="col-md-9">
-						<h5>@_gia</h5>
+						@if (_percent>0)
+						{
+							<h4><b>@_gia <del style="color:grey; margin-left:10px">@_giaBanDau</del></b> <span style="color:red;font-size:80%;margin-left:5px">-@_percent%</span></h4>
+						}
+						else
+						{
+							<h4><b>@_gia</b></h4>
+						}
 					</div>
 				</div>
 				<br />
@@ -167,7 +174,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- Nội dung của popup -->
-			<img src="/images/@_path_Tam" style="width:600px;height:850px" />
+			<img src="images/@_path_Tam" style="width:600px;height:850px" />
 		</div>
 	</div>
 </div>
