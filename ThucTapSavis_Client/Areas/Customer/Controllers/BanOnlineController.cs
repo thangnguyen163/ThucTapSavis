@@ -16,6 +16,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 		private List<Product_VM> _lstP = new List<Product_VM>();
 		private List<Product_VM> _lstP_Tam1 = new List<Product_VM>();
 		private List<Category_VM> _lstCate = new List<Category_VM>();
+		public static List<PromotionItem_VM> _lstpi_Percent = new List<PromotionItem_VM>();
 		private Product_VM _P_Show = new Product_VM();
 		public static Guid _idP;
 		public static string? _mau;
@@ -70,6 +71,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 		public async Task<IActionResult> ShowProduct(int? page)
 		{
 			_lstPrI_show_VM = await _client.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
+			_lstpi_Percent = await _client.GetFromJsonAsync<List<PromotionItem_VM>>($"https://localhost:7264/api/PromotionItem/getLstPromotionItem_Percent_by_productItemID");
 			_lstP = await _client.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
 			// Lấy list sp ko có spct
 			foreach (var a in _lstP)
@@ -132,6 +134,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 		public async Task<IActionResult> ShowDanhMuc(int? page,string? danhmuc)
 		{
 			_lstPrI_show_VM = await _client.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
+			_lstpi_Percent = await _client.GetFromJsonAsync<List<PromotionItem_VM>>($"https://localhost:7264/api/PromotionItem/getLstPromotionItem_Percent_by_productItemID");
 			_lstP = await _client.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
 			_lstCate = await _client.GetFromJsonAsync<List<Category_VM>>("https://localhost:7264/api/category/get_category");
 			SetTenKhongDau(_lstCate);
@@ -174,6 +177,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 		public async Task<IActionResult> SearchProduct(int? page, string? search)
 		{
 			_lstPrI_show_VM = await _client.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
+			_lstpi_Percent = await _client.GetFromJsonAsync<List<PromotionItem_VM>>($"https://localhost:7264/api/PromotionItem/getLstPromotionItem_Percent_by_productItemID");
 			_lstP = await _client.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
 			if (search.ToLower() != XoaDau(search))
 			{

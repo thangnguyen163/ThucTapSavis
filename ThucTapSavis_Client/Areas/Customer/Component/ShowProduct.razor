@@ -1,11 +1,26 @@
 ﻿@using ThucTapSavis_Client.Areas.Customer.Controllers;
-@using Blazored.Toast.Configuration
-<BlazoredToasts Position="ToastPosition.BottomRight"
-				Timeout="10"
+@using Blazored.Toast.Configuration;
+@using ThucTapSavis_Shared.ViewModel;
+<BlazoredToasts Position="ToastPosition.TopRight"
+				Timeout="5"
 				IconType="IconType.FontAwesome"
 				SuccessClass="success-toast-override"
 				SuccessIcon="fa-solid fa-check"
 				ErrorIcon="fa-solid fa-triangle-exclamation" />
+<style>
+	.discount-label {
+		position: absolute;
+		top: 0;
+		right: 10px;
+		width: 40px;
+		height: 20px;
+		background-color: red;
+		color: white;
+		text-align: center;
+		line-height: 20px;
+		font-size: 12px;
+	}
+</style>
 <div class="row ">
 	<div class="col-md-3">
 		<hr style="border: 1px solid orangered;">
@@ -22,21 +37,6 @@
 			</ul>
 		</div>
 	</div>
-	<style>
-	.discount-label {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  width: 40px;
-  height: 20px;
-  background-color: red;
-  color: white;
-  text-align: center;
-  line-height: 20px;
-  font-size: 12px;
-}
-</style>
-
 
 	<div class="col-md-9">
 		<div class="row title_tee">
@@ -61,11 +61,11 @@
 					string img = _lstImg_PI.Where(c => c.ProductId == x.Id).OrderBy(c => c.STT).Select(c => c.PathImage).FirstOrDefault();
 					var giamin = _lstPrI_show_VM.Where(c => c.ProductId == x.Id).Min(c => c.PriceAfterReduction);
 					var giamax = _lstPrI_show_VM.Where(c => c.ProductId == x.Id).Max(c => c.PriceAfterReduction);
-
-					<div class="col-md-4" style="  position: relative;">
+					var percentMax = BanOnlineController._lstpi_Percent.Where(c=>c.ProductId==x.Id).Max(c => c.Percent);
+					<div class="col-md-3" style="  position: relative;">
 						<a href="/product-detail/@x.Id">
 							<img class="img-thumbnail" src="/images/@img" alt="" style="width:100%;height:400px">
-							<div class="discount-label">20%</div>
+							<div class="discount-label">-@(percentMax)%</div>
 						</a>
 						@x.Name <br>
 						@{

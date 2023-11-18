@@ -5,6 +5,7 @@ using ThucTapSavis_Shared.ViewModel.Momo;
 using ThucTapSavis_Shared.ViewModel.Momo.Order;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 
 namespace ThucTapSavis_Client.Areas.Customer.Component
 {
@@ -119,6 +120,9 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 		//public int? ShippingFee { get; set; }
 		public async Task Btn_DatHang()
 		{
+			Regex phoneNumberRegex = new Regex(@"^0\d{9}$");
+			if (_bill_vm.TenNguoiNhan == string.Empty || _bill_vm.SDTNhan == string.Empty || _bill_vm.DiaChiCuThe == string.Empty || _bill_vm.Tinh == string.Empty || _bill_vm.Huyen == string.Empty || _bill_vm.Xa == string.Empty || !phoneNumberRegex.IsMatch(_bill_vm.SDTNhan))
+				return;
 			if (_bill_vm.PhuongThucTT == "Thanh toán Momo")
 			{
 				//var abc = _bill_vm;

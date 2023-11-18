@@ -36,7 +36,12 @@ namespace ThucTapSavis_API.Controllers
 			var x = await _PromotionItem.GetPromotionItemById(Id);
 			return x;
 		}
-
+		[HttpGet("getLstPromotionItem_Percent_by_productItemID")]
+		public async Task<List<PromotionItem_VM>> GetLstPercentPromotionItem()
+		{
+			var x = await _PromotionItem.GetLstPercentPromotionItem();
+			return x;
+		}
 		[HttpGet("PromotionItem_By_Promotion/{Id}")]
 		public async Task<List<PromotionItem>> GetAllPromotionItemById(Guid Id)
 		{

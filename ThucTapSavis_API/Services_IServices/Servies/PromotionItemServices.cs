@@ -115,6 +115,7 @@ namespace ThucTapSavis_API.Services_IServices.Servies
         {
 			var _lst = await (from a in context.PromotionsItem
 						join b in context.Promotions on a.PromotionsId equals b.Id
+						join c in context.ProductItems on a.ProductItemsId equals c.Id
 						select new PromotionItem_VM
 						{
 							Id = a.Id,
@@ -122,8 +123,26 @@ namespace ThucTapSavis_API.Services_IServices.Servies
 							Percent=b.Percent,
 							PromotionsId=a.Id,
 							Status=a.Status,
-						}).FirstOrDefaultAsync(a=>a.ProductItemsId==id);
+							ProductId = c.ProductId
+						}).FirstOrDefaultAsync(a=>a.ProductItemsId==id||a.ProductId==id);
 			return _lst;
         }
-    }
+
+		public async Task<List<PromotionItem_VM>> GetLstPercentPromotionItem()
+		{
+			var _lst = await(from a in context.PromotionsItem
+							 join b in context.Promotions on a.PromotionsId equals b.Id
+							 join c in context.ProductItems on a.ProductItemsId equals c.Id
+							 select new PromotionItem_VM
+							 {
+								 Id = a.Id,
+								 ProductItemsId = a.ProductItemsId,
+								 Percent = b.Percent,
+								 PromotionsId = a.Id,
+								 Status = a.Status,
+								 ProductId = c.ProductId
+							 }).ToListAsync();
+			return _lst;
+		}
+	}
 }
