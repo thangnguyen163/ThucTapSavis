@@ -1,6 +1,6 @@
 ﻿@using Blazored.Toast.Configuration
-<BlazoredToasts Position="ToastPosition.BottomRight"
-				Timeout="10"
+<BlazoredToasts Position="ToastPosition.TopRight"
+				Timeout="5"
 				IconType="IconType.FontAwesome"
 				SuccessClass="success-toast-override"
 				SuccessIcon="fa-solid fa-check"
@@ -70,6 +70,7 @@
 	<div class="col-md-7">
 		<h4 style="padding-left:100px">Thông tin giao hàng</h4>
 		<EditForm Model="_bill_vm">
+			<DataAnnotationsValidator/>
 			<div class="col-12" style="padding-left:100px;margin-top:20px">
 				<div style="display:flex;">
 					<img src="/img/avartar_user.png" style="width:8%;margin-right:20px" />
@@ -87,15 +88,21 @@
 					}
 				</div>
 				<div style="margin-top:15px">
-					<input type="text" class="form-control" @bind-value="_bill_vm.TenNguoiNhan" placeholder="Tên người nhận" />
+					<div class="row">
+						<div class="col-md-8">
+							<input type="text" class="form-control" @bind-value="_bill_vm.TenNguoiNhan" placeholder="Tên người nhận" />
+							<ValidationMessage For="()=>_bill_vm.TenNguoiNhan" style="color:red;font-family:none" />
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" @bind-value="_bill_vm.SDTNhan" placeholder="Số điện thoại" maxlength="10" />
+							<ValidationMessage For="()=>_bill_vm.SDTNhan" style="color:red;font-family:none" />
+						</div>
+					</div>
 				</div>
 
-				<div style="margin-top:15px">
-					<input type="text" class="form-control" @bind-value="_bill_vm.SDTNhan" placeholder="Số điện thoại" />
-				</div>
-
-				<div class="col-12" style="margin-top:15px;display:flex">
+				<div style="margin-top:15px;">
 					<input type="text" class="form-control" @bind-value="_bill_vm.DiaChiCuThe" placeholder="Địa chỉ chi tiết" />
+					<ValidationMessage For="()=>_bill_vm.DiaChiCuThe" style="color:red;font-family:none" />
 				</div>
 				<div class="row" style="margin-top:15px">
 					<div class="col-4">
@@ -106,6 +113,7 @@
 								<option value="@x.Name">@x.Name</option>
 							}
 						</InputSelect>
+						<ValidationMessage For="()=>_bill_vm.Tinh" style="color:red;font-family:none" />
 					</div>
 					<div class="col-4">
 						<InputSelect class="form-select" @bind-Value="@_bill_vm.Huyen" @onclick="@ChonQuanHuyen">
@@ -115,6 +123,7 @@
 								<option value="@x.Name">@x.Name</option>
 							}
 						</InputSelect>
+						<ValidationMessage For="()=>_bill_vm.Huyen" style="color:red;font-family:none" />
 					</div>
 					<div class="col-4">
 						<InputSelect class="form-select" @bind-Value="@_bill_vm.Xa">
@@ -124,6 +133,7 @@
 								<option value="@x.Name">@x.Name</option>
 							}
 						</InputSelect>
+						<ValidationMessage For="()=>_bill_vm.Xa" style="color:red;font-family:none" />
 					</div>
 
 				</div>

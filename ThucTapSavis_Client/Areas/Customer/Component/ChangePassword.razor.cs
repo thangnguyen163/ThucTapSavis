@@ -42,7 +42,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
             }
             else
             {
-                _toastService.ShowSuccess("Đổi mật khẩu thất bại");
+                _toastService.ShowError("Đổi mật khẩu thất bại");
             }
         }
 
