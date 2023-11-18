@@ -22,30 +22,6 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
             return View();
         }
 
-        public IActionResult Bill()
-        {
-            return View();
-        }
-
-        public IActionResult BillDetail()
-        {
-            return View();
-        }
-
-        public IActionResult Cart()
-        {
-            return View();
-        }
-
-        public IActionResult ProductDetail()
-        {
-            return View();
-        }
-
-        public IActionResult ShowAllProduct()
-        {
-            return View();
-        }
         [Route("login")]
         public IActionResult Login()
         {
@@ -70,7 +46,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 
             return View();
         }
-
+        [Route("signup")]
         public IActionResult SignUp()
         {
             return View();

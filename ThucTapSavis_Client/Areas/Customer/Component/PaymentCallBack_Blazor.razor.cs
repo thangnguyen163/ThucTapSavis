@@ -20,7 +20,8 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 		private User_VM _user_vm = new User_VM();
 		[Inject] Blazored.Toast.Services.IToastService _toastService { get; set; } // Khai báo khi cần gọi ở code-behind
 		[Inject] public IHttpContextAccessor _ihttpcontextaccessor { get; set; }
-		public string? _iduser { get; set; }
+        [Inject] private NavigationManager _navi { get; set; }
+        public string? _iduser { get; set; }
 		protected override async Task OnInitializedAsync()
 		{
 			_user_vm = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
@@ -68,5 +69,13 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				_toastService.ShowError("Tạo đơn hàng thất bại");
 			}
 		}
-	}
+        public async Task BackToHome()
+        {
+            _navi.NavigateTo("/home", true);
+        }
+        public async Task Bill()
+        {
+            _navi.NavigateTo("https://localhost:7022/Customer/Home/Bill", true);
+        }
+    }
 }

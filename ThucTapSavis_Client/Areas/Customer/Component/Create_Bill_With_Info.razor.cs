@@ -45,19 +45,10 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			_user_vm = SessionServices.GetUserFromSession_User_VM(_ihttpcontextaccessor.HttpContext.Session, "User");
 			_iduser = _user_vm.Id.ToString();
 			if (_iduser == "00000000-0000-0000-0000-000000000000") _iduser = null;
+
 			_bill_vm = new Bill_VM();
 			_lstPrI_show_VM = await _httpClient.GetFromJsonAsync<List<ProductItem_Show_VM>>("https://localhost:7264/api/ProductItem/show");
-			if (_iduser == null)
-			{
-				_bill_vm.UserId = Guid.Parse("8031befc-4dec-4df3-8387-5f759c253d7d");
-				_lstCI = SessionServices.GetLstFromSession_LstCI(_ihttpcontextaccessor.HttpContext.Session, "_lstCI_Vanglai");
-			}
-			else
-			{
-				_bill_vm.UserId = Guid.Parse(_iduser);
-				_user_vm = await _httpClient.GetFromJsonAsync<User_VM>($"https://localhost:7264/api/User/{_iduser}");
-				_lstCI = await _httpClient.GetFromJsonAsync<List<CartItem_VM>>($"https://localhost:7264/api/cartitem/get_cartitem_by_userid/{_bill_vm.UserId}");
-			}
+
 
 			_lstImg_PI = (await _httpClient.GetFromJsonAsync<List<Image_Join_ProductItem>>("https://localhost:7264/api/image/get_Image_Join_PI")).OrderBy(c => c.STT).ToList();
 			_lstTinhTp_Data = await _httpClient.GetFromJsonAsync<List<Province_VM>>("https://api.npoint.io/ac646cb54b295b9555be"); // api tỉnh tp
@@ -65,8 +56,22 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 			_lstQuanHuyen_Data = await _httpClient.GetFromJsonAsync<List<District_VM>>("https://api.npoint.io/34608ea16bebc5cffd42");
 			_lstXaPhuong_Data = await _httpClient.GetFromJsonAsync<List<Ward_VM>>("https://api.npoint.io/dd278dc276e65c68cdf5");
 			_lstPrI_VM = await _httpClient.GetFromJsonAsync<List<ProductItem_VM>>("https://localhost:7264/api/ProductItem");
-			if (_user_vm != null)
+			if (_iduser == null)
 			{
+				_bill_vm.UserId = Guid.Parse("8031befc-4dec-4df3-8387-5f759c253d7d");
+				_lstCI = SessionServices.GetLstFromSession_LstCI(_ihttpcontextaccessor.HttpContext.Session, "_lstCI_Vanglai");
+				_bill_vm.SDTNhan = string.Empty;
+				_bill_vm.TenNguoiNhan = string.Empty;
+				_bill_vm.DiaChiCuThe = string.Empty;
+				_bill_vm.Tinh = string.Empty;
+				_bill_vm.Huyen = string.Empty;
+				_bill_vm.Xa = string.Empty;
+			}
+			else
+			{
+				_bill_vm.UserId = Guid.Parse(_iduser);
+				_user_vm = await _httpClient.GetFromJsonAsync<User_VM>($"https://localhost:7264/api/User/{_iduser}");
+				_lstCI = await _httpClient.GetFromJsonAsync<List<CartItem_VM>>($"https://localhost:7264/api/cartitem/get_cartitem_by_userid/{_bill_vm.UserId}");
 				_bill_vm.SDTNhan = _user_vm.NumberPhone;
 				_bill_vm.TenNguoiNhan = _user_vm.FullName;
 				_bill_vm.DiaChiCuThe = _user_vm.DiaChiCuThe;
@@ -76,15 +81,6 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 				_bill_vm.Huyen = _user_vm.Huyen;
 				await ChonQuanHuyen();
 				_bill_vm.Xa = _user_vm.Xa;
-			}
-			if (_user_vm == null)
-			{
-				_bill_vm.SDTNhan = string.Empty;
-				_bill_vm.TenNguoiNhan = string.Empty;
-				_bill_vm.DiaChiCuThe = string.Empty;
-				_bill_vm.Tinh = string.Empty;
-				_bill_vm.Huyen = string.Empty;
-				_bill_vm.Xa = string.Empty;
 			}
 			_bill_vm.PhuongThucTT = "Thanh toán khi nhận hàng (COD)";
 			_bill_vm.Note = ShowCart._note;
@@ -170,7 +166,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 						billItem_VM.BillId = _bill_vm.Id;
 						billItem_VM.ProductItemsId = x.ProductItemId;
 						billItem_VM.Quantity = x.Quantity;
-						billItem_VM.Price = _pi_vm.CostPrice;
+						billItem_VM.Price = _pi_vm.PriceAfterReduction;
 						billItem_VM.Status = 1;
 						_pi_vm.AvaiableQuantity -= x.Quantity;
 						var a = await _httpClient.PostAsJsonAsync("https://localhost:7264/api/billitem/add_billitem", billItem_VM);
@@ -179,6 +175,9 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
 					}
 					_ihttpcontextaccessor.HttpContext.Session.Remove("_lstCI_Vanglai");
 					_toastService.ShowSuccess("Đơn hàng đã được tạo thành công, để theo dõi đơn hàng hãy vào mục Lịch sử đơn hàng");
+					_toastService.ShowSuccess("Sau 5 giây bạn sẽ được đưa vè trang chủ");
+					await Task.Delay(5000);
+					_navi.NavigateTo("/home", true);
 					return;
 					//_navi.NavigateTo("https://localhost:7022/home",true);
 				}
