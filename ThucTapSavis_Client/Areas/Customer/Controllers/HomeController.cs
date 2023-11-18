@@ -59,10 +59,15 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
             User b = a.FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
             _nameUser = b.FullName;
             HttpContext.Session.SetString("User", JsonConvert.SerializeObject(b));
-            if (b != null)
+            if (b != null && b.IdRole != Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
             {
                 return RedirectToAction("Index", "Home", new { Area = "Customer" });
             }
+            else if (b != null && b.IdRole == Guid.Parse("c2fc9b7a-1e45-4de5-b2ed-7cb4e84397cf"))
+            {
+                return RedirectToAction("Index", "ThongKe", new { Area = "Admin" });
+            }
+
             return View();
         }
 
