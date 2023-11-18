@@ -17,7 +17,7 @@ Hướng dẫn chạy:
 Thay đổi ConnectionStrings bằng dòng Scaffolding SqlServer của bạn
 Ở thanh menu của Visual studio chọn Tool - NuGet Packega Manager - Packega Manager Console chạy câu lệnh " update-database "
 Sau khi chạy dòng lệnh trên thành công thì mở file InsertData.sql bằng SqlServer chạy dữ liệu mẫu
-Sau khi insert dữ liệu thành công thì --> Mời bạn trải nghiệm sản phẩm. 
+Sau khi insert dữ liệu thành công thì --> Mời bạn trải nghiệm sản phẩm :)
 
 
            
