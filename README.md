@@ -1,4 +1,4 @@
-![image](https://github.com/thangnguyen163/ThucTapSavis/assets/105345963/5d0da488-92bb-4709-bb00-832ad8a856a7)# ThucTapSavis
+# ThucTapSavis
 Project được thực hiện từ ngày 11/9/2023 đến ngày 19/11/2023.
 Được thực hiện bởi 2 thành viên: Nguyễn Văn Thắng ( PH25980 ) và Nguyễn Duy Tuấn ( PH25862 )
 
