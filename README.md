@@ -7,15 +7,11 @@ Mô tả sản phẩm:
 Sản phẩm gồm 2 phân vùng: 
 Website: cho phép người dùng thao tác xem sản phẩm, mua hàng, quản lý đơn hàng và thông tin cá nhân của người dùng 
 Dasdboard: - Thống kê số lượng sản phẩm được bán, số lượng hoá đơn, doanh thu và sảm phẩm bán chạy
-
-           - Quản lý Sản phẩm và các thuộc tính của sản phẩm
-           
+           - Quản lý Sản phẩm và các thuộc tính của sản phẩm      
            - Quản lý sản phẩm chi tiết
-           
            - Quản lý khuyến mãi 
-           
            - Quản lý hoá đơn, xác nhận và huỷ đơn hàng
-
+           
 Hướng dẫn chạy: 
 
   Máy phải có Visual Studio và SqlServer
