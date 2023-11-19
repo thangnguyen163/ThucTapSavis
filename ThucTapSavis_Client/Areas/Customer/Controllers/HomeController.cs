@@ -55,7 +55,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
         {
             HttpContext.Session.Remove("User");
             _nameUser = null;
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home", new { Area = "Customer" });
         }
     }
 }

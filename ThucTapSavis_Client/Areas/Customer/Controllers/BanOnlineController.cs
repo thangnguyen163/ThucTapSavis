@@ -16,7 +16,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 		private List<Product_VM> _lstP = new List<Product_VM>();
 		private List<Product_VM> _lstP_Tam1 = new List<Product_VM>();
 		private List<Category_VM> _lstCate = new List<Category_VM>();
-		public static List<PromotionItem_VM> _lstpi_Percent = new List<PromotionItem_VM>();
+		public static List<PromotionItem_VM>? _lstpi_Percent = new List<PromotionItem_VM>();
 		private Product_VM _P_Show = new Product_VM();
 		public static Guid _idP;
 		public static string? _mau;
@@ -90,7 +90,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 			// theo BookID mới có thể phân trang.
 			var pr = _lstP_Tam1.OrderBy(c => c.Name);
 			// 4. Tạo kích thước trang (pageSize) hay là số Link hiển thị trên 1 trang
-			int pageSize = 3;
+			int pageSize = 8;
 
 			// 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
 			// nếu page = null thì lấy giá trị 1 cho biến pageNumber.
@@ -163,7 +163,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 			// theo BookID mới có thể phân trang.
 			var pr = _lstP_Tam1.OrderBy(c => c.Name);
 			// 4. Tạo kích thước trang (pageSize) hay là số Link hiển thị trên 1 trang
-			int pageSize = 3;
+			int pageSize = 8;
 
 			// 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
 			// nếu page = null thì lấy giá trị 1 cho biến pageNumber.
@@ -181,7 +181,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 			_lstP = await _client.GetFromJsonAsync<List<Product_VM>>("https://localhost:7264/api/Product/get_product");
 			if (search.ToLower() != XoaDau(search))
 			{
-				_lstPrI_show_VM = _lstPrI_show_VM.Where(c => c.Name.Contains(search)).ToList();
+				_lstPrI_show_VM = _lstPrI_show_VM.Where(c => c.Name.ToLower().Contains(search.ToLower())).ToList();
 			}
 			else
 			{
@@ -206,7 +206,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Controllers
 			// theo BookID mới có thể phân trang.
 			var pr = _lstP_Tam1.OrderBy(c => c.Name);
 			// 4. Tạo kích thước trang (pageSize) hay là số Link hiển thị trên 1 trang
-			int pageSize = 8;
+			int pageSize = 12;
 
 			// 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
 			// nếu page = null thì lấy giá trị 1 cho biến pageNumber.
