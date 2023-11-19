@@ -89,12 +89,12 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 					// Thực hiện copy ảnh vừa chọn sang thư mục mới (wwwroot)
 					try
 					{
-						await _file.OpenReadStream(2048 * 1024).CopyToAsync(stream);
+						await _file.OpenReadStream(3072 * 1024).CopyToAsync(stream);
 					}
 					catch (Exception)
 					{
 
-						_toastService.ShowError("Ảnh có kích thước quá lớn, vui lòng chọn ảnh khác");
+						_toastService.ShowError("Ảnh không hợp lệ hoặc có kích thước quá lớn, vui lòng chọn ảnh khác");
 						return;
 					}
 				}
@@ -133,12 +133,12 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 					// Thực hiện copy ảnh vừa chọn sang thư mục mới (wwwroot)
 					try
 					{
-						await _file.OpenReadStream(2048 * 1024).CopyToAsync(stream);
+						await _file.OpenReadStream(3072 * 1024).CopyToAsync(stream);
 					}
 					catch (Exception)
 					{
 
-						_toastService.ShowError("Ảnh có kích thước quá lớn, vui lòng chọn ảnh khác");
+						_toastService.ShowError("Ảnh không hợp lệ hoặc có kích thước quá lớn, vui lòng chọn ảnh khác");
 						return;
 					}
 				}
@@ -191,7 +191,7 @@ namespace ThucTapSavis_Client.Areas.Admin.Components
 						await _client.PutAsJsonAsync($"https://localhost:7264/api/image/update_Image", x);
 					}
 				}
-				_navigation.NavigateTo("https://localhost:7022/Admin/ProductItem", true);
+				_navigation.NavigateTo("/product-item-manager", true);
 			}
 		}
 		public async Task LoadUpdate(ProductItem_Show_VM pi)

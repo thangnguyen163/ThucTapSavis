@@ -51,7 +51,7 @@ namespace ThucTapSavis_Client.Areas.Customer.Component
             }
             else
             {
-                _toastService.ShowSuccess("Cập nhật thông tin người dùng thành công");
+                _toastService.ShowError("Cập nhật thông tin người dùng thât bái");
             }
         }
         public async Task LoadUser(Guid Id)
